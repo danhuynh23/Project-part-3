@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Commission</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #4a0575;
+        }
+        .info {
+            margin: 20px 0;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+        .info p {
+            margin: 10px 0;
+        }
+        .chart-container {
+            margin-top: 30px;
+        }
+        canvas {
+            max-width: 100%;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4a0575;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Commission</h1>
+        <div class="info">
+            <p><strong>Total Tickets Sold:</strong> {{ total_tickets }}</p>
+            <p><strong>Commission Rate:</strong> {{ commission_percentage }}%</p>
+            <p><strong>Total Commission Earned:</strong> ${{ "%.2f" | format(total_commission) }}</p>
+        </div>
+
+        <!-- Chart Section -->
+        <div class="chart-container">
+            <canvas id="commissionChart"></canvas>
+        </div>
+
+        <a href="{{ url_for('booking_agent_dashboard') }}" class="back-button">Back to Dashboard</a>
+    </div>
+
+    <script>
+        // Prepare data for the chart
+        const labels = {{ chart_data | map(attribute=0) | list | tojson }};
+        const data = {{ chart_data | map(attribute=1) | list | tojson }};
+
+        // Configure and render the chart
+        const ctx = document.getElementById('commissionChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line', // Line chart for trends
+            data: {
+                labels: labels, // Dates
+                datasets: [{
+                    label: 'Commission Earned ($)',
+                    data: data, // Commission amounts
+                    backgroundColor: 'rgba(74, 5, 117, 0.2)', // Light purple for the area
+                    borderColor: '#4a0575', // Purple line
+                    borderWidth: 2,
+                    fill: true, // Fill under the line
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Commission ($)'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

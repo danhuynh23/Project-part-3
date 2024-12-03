@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Basic Styling */
+        body {
+            background-image: url('{{ url_for("static", filename="technology-wire-mesh-network-connection-digital-background/19187761.jpg") }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Flash Message Styling */
+        .flash-messages {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* Header Styling */
+        .header {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: white;
+            padding: 20px;
+            background-color: rgba(87, 6, 140, 0.8);
+        }
+
+        .header h1 {
+            margin: 10px 0;
+            font-size: 2em;
+            color: white;
+        }
+
+        .header .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .button {
+            background-color: #57068c;
+            color: white;
+            padding: 10px 20px;
+            font-size: 1rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: #4a0575;
+        }
+
+        /* Container Styling for Form Section */
+        .search-container {
+            background-color: white;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .search-container h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        form label {
+            font-weight: bold;
+            display: block;
+            margin: 10px 0 5px;
+            text-align: left;
+            color: #333;
+        }
+
+        form input, form select {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        form button[type="submit"] {
+            background-color: #57068c;
+            color: white;
+            padding: 12px;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #4a0575;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+            .search-container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section -->
+    <header class="header">
+        {% if logged_in %}
+            <!-- Header for Logged-In Users -->
+            <h1>Welcome back, {{ name }}!</h1>
+            <div class="button-group">
+                <a href="{{ url_for('logout') }}" class="button">Logout</a>
+                <!-- User-Specific Dashboard Link -->
+                {% if user_type == 'customer' %}
+                    <a href="{{ url_for('customer_dashboard') }}" class="button">Customer Dashboard</a>
+                {% elif user_type == 'booking_agent' %}
+                    <a href="{{ url_for('booking_agent_dashboard') }}" class="button">Agent Dashboard</a>
+                {% elif user_type == 'airline_staff' %}
+                    <a href="{{ url_for('airline_dashboard') }}" class="button">Staff Dashboard</a>
+                {% endif %}
+            </div>
+        {% else %}
+            <!-- Header for Guests (Not Logged In) -->
+            <h1>Welcome to the NYU-Air Ticket Reservation System</h1>
+            <p>Find the best deals on flights to your favorite destinations.</p>
+            <div class="button-group">
+                <a href="{{ url_for('login', next=request.path) }}" class="button" aria-label="Login to NYU-Air Ticket Reservation System">Login</a>
+                <a href="{{ url_for('signup') }}" class="button" aria-label="Register on NYU-Air Ticket Reservation System">Register</a>
+            </div>
+        {% endif %}
+    </header>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="flash-messages">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <!-- Main Content -->
+    <div class="search-container">
+        <h2>Book a Flight</h2>
+        <form action="{{ url_for('show_flights') }}" method="GET">
+            <label for="from">From</label>
+            <input type="text" id="from" name="from" placeholder="City or Airport" required>
+
+            <label for="to">To</label>
+            <input type="text" id="to" name="to" placeholder="City or Airport" required>
+
+            <label for="depart">Depart</label>
+            <input type="date" id="depart" name="depart" required>
+
+            <label for="return">Return</label>
+            <input type="date" id="return" name="return">
+
+            <label for="passengers">Passengers</label>
+            <select id="passengers" name="passengers">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+
+            <button type="submit" class="button">Show Flights</button>
+        </form>
+    </div>
+</body>
+</html>

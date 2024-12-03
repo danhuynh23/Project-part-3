@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Original Login Page Styling */
+        body {
+            background-image: url('{{ url_for('static', filename='technology-wire-mesh-network-connection-digital-background/19187761.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        select {
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button[type="submit"] {
+            padding: 12px;
+            background-color: #57068c;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #37004c;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+
+        .modal-body {
+            font-size: 1rem;
+        }
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .alert-error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+           <!-- Flash Messages -->
+           {% with messages = get_flashed_messages(with_categories=true) %}
+           {% if messages %}
+               <div>
+                   {% for category, message in messages %}
+                       <div class="alert alert-{{ category }}">{{ message }}</div>
+                   {% endfor %}
+               </div>
+           {% endif %}
+           {% endwith %}
+           <!-- End of Flash Messages -->
+        <h2>Login</h2>
+        <form method="POST" action="{{ url_for('login', next=next) }}">
+            <label for="user_type">User Type:</label>
+            <select id="user_type" name="user_type" required onchange="updateInputField()">
+                <option value="customer">Customer</option>
+                <option value="booking_agent">Booking Agent</option>
+                <option value="airline_staff">Airline Staff</option>
+            </select>
+
+            <label for="login_field" id="login_label">Email/Username:</label>
+            <input type="text" id="login_field" name="login_field" required placeholder="Email">
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" minlength="8" required>
+
+            <!-- Hidden field to pass the next parameter -->
+            <input type="hidden" name="next" value="{{ next }}">
+
+            <button type="submit">Login</button>
+        </form>
+
+        <p class="center-text">Don't have an account? <a href="{{ url_for('signup') }}">Sign up here</a></p>
+    </div>
+
+    <!-- Modal for error messages -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" aria-live="assertive">
+                {% for category, message in get_flashed_messages(with_categories=true) %}
+                    {% if category == "error" %}
+                        <p>{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <script>
+        $(document).ready(function() {
+            // Check if there are any error messages and show the modal if true
+            {% if get_flashed_messages(category_filter=["error"]) %}
+                $('#errorModal').modal('show');
+            {% endif %}
+
+            // Allow modal to be dismissible
+            $('#errorModal').on('hidden.bs.modal', function () {
+                $(this).removeClass('show').hide();
+            });
+        });
+    </script>
+    <script>
+        function updateInputField() {
+            var userType = document.getElementById('user_type').value;
+            var loginField = document.getElementById('login_field');
+            var loginLabel = document.getElementById('login_label');
+
+            if (userType === 'airline_staff') {
+                loginField.setAttribute('placeholder', 'Username');
+                loginLabel.innerText = 'Username:';
+            } else {
+                loginField.setAttribute('placeholder', 'Email');
+                loginLabel.innerText = 'Email:';
+            }
+        }
+
+
+    </script>
+
+    <script>
+        // Automatically hide flash messages after 5 seconds
+        setTimeout(() => {
+            const flashMessage = document.getElementById('flash-message');
+            if (flashMessage) {
+                flashMessage.classList.add('fade-out');
+                setTimeout(() => flashMessage.remove(), 1000); // Remove from DOM after fade-out
+            }
+        }, 5000);
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

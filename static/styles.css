@@ -1,0 +1,682 @@
+/* General styling */
+
+body {
+    background-image: url('static/technology-wire-mesh-network-connection-digital-background/19187761.jpg');
+    background-size: cover;           /* Ensures the image covers the entire viewport */
+    background-position: center;      /* Centers the image */
+    background-attachment: fixed;     /* Keeps the image fixed during scroll */
+    background-repeat: no-repeat;     /* Prevents the image from tiling */
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+/* Hero Section */
+.hero {
+    background: linear-gradient(to bottom, #57068c, #8b00ff); /* NYU Purple gradient */
+    color: white;
+    text-align: center;
+    padding: 25px 10px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+}
+
+.hero .button {
+    background-color: #57068c; /* NYU Purple */
+    color: white;
+    padding: 15px 30px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.hero .button:hover {
+    background-color: #37004c; /* Darker purple for hover */
+}
+
+/* Search container styling */
+.search-container {
+    max-width: 600px;
+    margin: 30px auto; /* Center-align the container */
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.search-container h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.search-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.search-container label {
+    font-weight: bold;
+    margin-top: 15px;
+    text-align: left;
+    width: 100%;
+    color: #333;
+}
+
+.search-container input[type="text"],
+.search-container input[type="date"],
+.search-container select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.search-container button.button {
+    background-color: #57068c; /* NYU Purple */
+    color: white;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    width: 100%;
+}
+
+.search-container button.button:hover {
+    background-color: #37004c;
+}
+
+/* Buttons */
+button, .search-container .button, .more-dates, .login-button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+button, .search-container .button {
+    color: #57068c;
+    background-color: white;
+    border: 2px solid #57068c;
+    cursor: pointer;
+}
+
+button:hover, .search-container .button:hover {
+    background-color: #37004c;
+}
+
+/* Error Message */
+.error {
+    color: #dc3545;
+    font-weight: bold;
+    text-align: center;
+}
+
+/* Header */
+.header, .top-nav {
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+.header h1, .top-nav .route-info {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+/* Date Options */
+.date-options-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+    background-color: #f4f4f4;
+    border-radius: 15px;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.date-options {
+    display: flex;
+    justify-content: space-around;
+    width: 90%;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 10px;
+    gap: 5px;
+}
+
+/* Default Date Item Style */
+.date-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px 20px;
+    text-align: center;
+    border-radius: 20px;
+    min-width: 100px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    color: #333; /* Default text color */
+    background-color: #f9f9f9; /* Default background */
+    border: 1px solid #ddd;
+}
+
+/* Hover Effect */
+.date-item:hover {
+    background-color: #4a0575; /* Dark purple */
+    color: #fff; /* White text */
+    transform: translateY(-5px); /* Lift the element slightly */
+    box-shadow: 0 6px 12px rgba(74, 5, 117, 0.3);
+}
+
+/* Selected State */
+.date-item.selected {
+    background-color: #37004c; /* Darker purple */
+    color: #fff; /* White text */
+    box-shadow: 0 4px 10px rgba(55, 0, 76, 0.3);
+    border: 2px solid #57068c; /* Purple border for selected */
+}
+
+
+.date-item .date {
+    font-size: 1.2rem;
+    color: #333;
+}
+
+/* Hover Effect */
+.date-item:hover .date {
+    color: #fff; /* White text on hover */
+}
+
+/* Selected State */
+.date-item.selected .date {
+    color: #fff; /* White text when selected */
+}
+
+.date-item .price {
+    color: #57068c;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.date-item:hover .price {
+    color: #fff; /* White text on hover */
+}
+/* Selected State */
+.date-item.selected .price {
+    color: #fff; /* White text when selected */
+}
+
+.date-item .no-flight {
+    color: #dc3545;
+    font-size: 1rem;
+    margin-top: 5px;
+}
+
+.date-item.selected {
+    color: #57068c;
+    font-weight: bold;
+}
+
+.date-item.selected::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #57068c;
+    border-radius: 2px;
+}
+
+/* Divider between dates */
+.date-options > .date-item:not(:last-child)::after {
+    content: "";
+    width: 1px;
+    height: 30px;
+    background-color: #ddd;
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* See More Button */
+.see-more-container {
+    display: flex;
+    justify-content: center;
+    padding: 10px 20px;
+}
+
+.more-dates {
+    color: #57068c;
+    background-color: white;
+    border: 2px solid #57068c;
+    padding: 8px 16px;
+    font-size: 14px;
+}
+
+.more-dates:hover {
+    background-color: #37004c;
+    color: white;
+}
+
+/* Flight Options */
+.flight-options {
+    max-width: 90%;
+    margin: 10px auto;
+   
+}
+
+.flight-options h2 {
+    font-size: 20px;
+    color: #4c007d;
+    text-align: left;
+}
+
+.flight-options p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.flight-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px; /* Adjust padding for a more spacious look */
+    border-radius: 15px; /* Rounded corners */
+    background-color: white; /* Background color for the flight item */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Optional: Adds a slight shadow for depth */
+    margin-bottom: 15px; /* Adds some space between flight items */
+}
+
+.flight-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.flight-info .airline, .details-link {
+    color: #4c007d;
+    font-weight: bold;
+}
+.flight-info .route {
+    font-size: 30px; /* Increase font size for the route */
+    font-weight: bold;
+    color: #4c007d;
+    display: inline;
+}
+
+.flight-info .time {
+    font-size: 26px; /* Increase font size for the times */
+    font-weight: bold;
+    color: #4c007d;
+    margin-right: 10px; /* Add spacing around times */
+}
+
+.flight-info .arrow {
+    font-size: 50px; /* Increase arrow size */
+    color: #4c007d;
+    margin: 10 30px; /* Add extra spacing to lengthen the arrow visually */
+}
+.flight-info .duration {
+    color: #666;
+    font-size: 14px;
+}
+
+.details-link:hover {
+    text-decoration: underline;
+}
+
+/* Fare Options */
+.fares {
+    display: flex;
+    gap: 20px;
+    text-align: center;
+}
+
+.fare {
+    text-decoration: none; /* Remove underline */
+
+    padding: 20px 30px; /* Increase padding for a button-like feel */
+    border-radius: 20px; /* Make the corners more rounded */
+    border: 2px solid #ddd; /* Slightly thicker border */
+    flex: 1;
+    width: 250px; /* Set a width for a longer appearance */
+    transition: background-color 0.3s, border-color 0.3s;
+    text-align: left;
+    font-size: 20px;
+}
+.fare:hover {
+    color: white; /* White text on hover */
+    border-color: #57068c; /* Purple border on hover */
+}
+
+.price {
+    font-size: 2.5rem; /* Increase font size */
+    color: #4c007d; /* Keep the same purple color */
+}
+
+.special {
+    font-size: 12px;
+    color: #28a745;
+}
+
+/* Navigation Links */
+.modify-search {
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    color: #57068c;
+
+    text-decoration: none;
+    top: 20px;
+    left: 20px;
+    z-index: 1;
+    border-radius: 4px;
+}
+
+ .login-button {
+    color: #57068c;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.modify-search:hover, .login-button:hover {
+    text-decoration: underline;
+}
+
+.login-button {
+    border: 1px solid #57068c;
+    padding: 8px 15px;
+    border-radius: 20px;
+}
+
+.login-button:hover {
+    background-color: #57068c;
+    color: white;
+}
+
+/* Top navigation styling */
+.top-nav {
+    top: 0;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    z-index: 1; /* Ensure it's above other elements */
+    justify-content: space-between;
+    padding: 20px ;
+    background-color: white;
+    border-bottom: 1px solid #ddd;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: 90px; /* Limit the height of the top nav */
+    width: 98%;
+
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Reduce gap to keep it compact */
+}
+
+.right-section {
+    margin-left: auto;
+}
+
+.back-arrow {
+    font-size: 20px; /* Increase size */
+    color: #57068c; /* NYU Purple */
+    text-decoration: none;
+    padding: 5px 10px; /* Add padding for clickable area */
+    transition: color 0.3s;
+}
+
+.back-arrow:hover {
+    color: #37004c; /* Darker purple for hover */
+}
+
+/* Logo styling */
+.logo {
+    height: 50px; /* Set a smaller height for the logo */
+    width: auto; /* Keep the aspect ratio */
+    margin-right: 8px;
+}
+
+/* Container for results info and filter options */
+.results-filter-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #f4f4f4;
+    max-width: 90%;
+    margin: 5px auto;
+}
+
+/* Align results info to the left */
+.results-info {
+    flex: 1;
+}
+
+/* Align filter buttons to the right */
+.filter-options {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.filter-options button {
+    padding: 8px 16px;
+    background-color: white;
+    color: #57068c;
+    border: 2px solid #57068c;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    text-align: center;
+}
+
+.filter-options button:hover {
+    background-color: #37004c;
+    color: white;
+}
+
+/* Button to open the sidebar */
+.open-btn {
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: #57068c;
+    color: white;
+    border: none;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1;
+}
+
+/* Sidebar styling */
+.sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #333;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    color: white;
+    z-index: 1000;
+}
+
+.sidebar form {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1000;
+
+}
+
+.sidebar label, .sidebar input, .sidebar select, .sidebar button {
+    margin-bottom: 15px;
+    color: white;
+}
+
+.sidebar input, .sidebar select, .sidebar button {
+    padding: 10px;
+    font-size: 16px;
+    color: black;
+
+}
+
+.sidebar button {
+    background-color: #57068c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 36px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+/* Overlay for dimming the background */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+    z-index: 2; /* Below sidebar, above main content */
+    display: none; /* Hidden by default */
+    transition: 0.5s;
+}
+
+/* Container for the departure info */
+.departure-info {
+    margin-top: 100px;
+    text-align: left;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    color: #555; /* General text color */
+}
+
+/* Date style */
+.departure-date {
+    font-size: 16px;
+    color: #777; /* Date text color */
+    margin-bottom: 5px;
+}
+
+/* Main heading */
+.flight-selection {
+    font-size: 32px;
+    color: #555; /* Main heading color */
+    font-weight: 300; /* Light font weight for the main text */
+}
+
+/* Origin and destination styles */
+.origin, .destination {
+    color: #57068c; /* Highlight color for cities */
+    font-weight: bold;
+}
+
+.flight-selection .highlight {
+    color: #57068c; /* NYU Purple */
+    font-weight: bold;
+}
+
+/* Fare Container */
+.fare-container {
+    transform: scale(2); /* Slight zoom effect on hover */
+    transform: translateY(20px); /* Adjust the value as needed */
+
+    display: flex;
+    gap: 20px;
+    flex: 1;
+    justify-content: space-between;
+}
+
+/* Fare Card */
+.fare-card {
+    display: flex;
+    text-decoration: none; /* Removes underline */
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    width: 40%;
+    height: 40%;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    text-align: center;
+    font-family: Arial, sans-serif;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.fare-card .fare-type {
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.fare-card .price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.fare-card.business .price {
+    color: #28a745; /* Green for Business */
+}
+
+.fare-card .not-available {
+    font-size: 0.9rem;
+    color: #dc3545; /* Red for "Not available" */
+}
+
+/* Hover Effect for Fare Cards */
+.fare-card:hover {
+    background-color: #f1f1f1;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Top Customers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            text-align: center;
+            color: #4a0575;
+        }
+        .chart-container {
+            margin-top: 30px;
+        }
+        canvas {
+            max-width: 100%;
+            margin: 0 auto;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4a0575;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Top Customers</h1>
+
+        <div class="chart-container">
+            <h2>Top 5 Customers by Tickets Bought</h2>
+            <canvas id="ticketChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h2>Top 5 Customers by Commission</h2>
+            <canvas id="commissionChart"></canvas>
+        </div>
+
+        <a href="{{ url_for('home') }}" class="back-button">Back to Home</a>
+    </div>
+
+    <script>
+        // Data for Tickets Bought Chart
+        const ticketLabels = {{ ticket_chart_data['labels'] | tojson }};
+        const ticketValues = {{ ticket_chart_data['values'] | tojson }};
+
+        const ticketCtx = document.getElementById('ticketChart').getContext('2d');
+        new Chart(ticketCtx, {
+            type: 'bar',
+            data: {
+                labels: ticketLabels,
+                datasets: [{
+                    label: 'Tickets Bought',
+                    data: ticketValues,
+                    backgroundColor: 'rgba(74, 5, 117, 0.5)',
+                    borderColor: '#4a0575',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Data for Commission Chart
+        const commissionLabels = {{ commission_chart_data['labels'] | tojson }};
+        const commissionValues = {{ commission_chart_data['values'] | tojson }};
+
+        const commissionCtx = document.getElementById('commissionChart').getContext('2d');
+        new Chart(commissionCtx, {
+            type: 'bar',
+            data: {
+                labels: commissionLabels,
+                datasets: [{
+                    label: 'Total Commission ($)',
+                    data: commissionValues,
+                    backgroundColor: 'rgba(74, 5, 117, 0.5)',
+                    borderColor: '#4a0575',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

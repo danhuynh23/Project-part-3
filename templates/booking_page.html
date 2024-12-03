@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Booking</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),url('static/technology-wire-mesh-network-connection-digital-background/19187761.jpg');
+            background-size: cover;
+            background-position: center;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 50%;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a0575;
+            margin-bottom: 20px;
+        }
+
+        .flight-details {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .flight-details p {
+            margin-bottom: 8px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        select {
+            width: 95%;
+            padding: 12px 12px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="tel"]:focus,
+        select:focus {
+            border-color: #4a0575;
+            outline: none;
+            box-shadow: 0 0 8px rgba(74, 5, 117, 0.3);
+        }
+
+        input::placeholder {
+            color: #999;
+        }
+
+        select {
+            appearance: none;
+            background: #fff url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="%234a0575"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg>') no-repeat right 15px center;
+            background-size: 1.5rem;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        .form-section .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-section .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        button[type="submit"] {
+            padding: 15px;
+            background-color: #4a0575;
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #37004c;
+            transform: translateY(-3px);
+        }
+        .back-button {
+            top:0;
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 15px;
+            background-color: #4a0575;
+            color: white;
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            position: fixed;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .back-button:hover {
+            background-color: #37004c;
+            transform: translateY(-3px);
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 90%;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <a href="{{ url_for('show_flights') }}" class="back-button">&#8592; Back to Flights</a>
+
+    <div class="container">
+
+        <h1>Flight Booking</h1>
+
+        <!-- Flight Details Section -->
+        <div class="flight-details">
+            <p><strong>Flight Number:</strong> {{ flight.flight_number }}</p>
+            <p><strong>Departure:</strong> {{ flight.name_depart }} at {{ flight.depart_time }}</p>
+            <p><strong>Arrival:</strong> {{ flight.name_arrive }} at {{ flight.arrive_time }}</p>
+            <p><strong>Fare Type:</strong> {{ fare_type.capitalize() }}</p>
+            <p><strong>Price:</strong> ${{ flight.price }}</p>
+        </div>
+
+        <!-- Booking Form Section -->
+        <form action="{{ url_for('confirm_booking') }}" method="POST">
+            <h2 style="text-align: center; color: #4a0575;">Passenger Information</h2>
+
+            <div class="form-section">
+                <div class="form-group">
+                    <label for="name">Full Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required value="{{ user_details.name if user_details else '' }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" placeholder="Enter your email address" required value="{{ user_details.email if user_details else '' }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required value="{{ user_details.phone_number if user_details else '' }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="passenger_count">Number of Passengers:</label>
+                    <select id="passenger_count" name="passenger_count" required>
+                        {% for i in range(1, 5) %}
+                            <option value="{{ i }}">{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <!-- Hidden fields for flight details -->
+            <input type="hidden" name="flight_id" value="{{ flight_id }}">
+            <input type="hidden" name="fare_type" value="{{ fare_type }}">
+            <input type="hidden" name="name_airline" value="{{ name_airline }}">
+            <input type="hidden" name="flight_number" value="{{ flight_number }}">
+
+            <!-- Add booking_agent_id if the logged-in user is a booking agent -->
+            {% if booking_agent_id %}
+            <input type="hidden" name="booking_agent_id" value="{{ booking_agent_id }}">
+            {% endif %}
+
+            <button type="submit">Confirm Booking</button>
+        </form>
+
+    </div>
+</body>
+</html>

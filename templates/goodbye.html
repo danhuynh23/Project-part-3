@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goodbye</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            color: #4a0575;
+        }
+        p {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        .buttons a {
+            display: inline-block;
+            margin: 5px;
+            padding: 10px 20px;
+            background-color: #4a0575;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .buttons a:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Goodbye!</h1>
+        <p>You have successfully logged out. We hope to see you again soon!</p>
+        <div class="buttons">
+            <a href="{{ url_for('login') }}">Return to Login</a>
+            <a href="{{ url_for('home') }}">Return to Home Page</a>
+        </div>
+    </div>
+</body>
+</html>

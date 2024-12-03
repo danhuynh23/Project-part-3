@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flag-icon-css/3.5.0/css/flag-icon.min.css">
+
+    <style>
+        /* Your styles here */
+        body {
+            background-image: url('static/technology-wire-mesh-network-connection-digital-background/19187761.jpg');
+            background-size: cover;           /* Ensures the image covers the entire viewport */
+            background-position: center;      /* Centers the image */
+            background-attachment: fixed;     /* Keeps the image fixed during scroll */
+            background-repeat: no-repeat;     /* Prevents the image from tiling */
+        }
+        .container {
+            max-width: 800px;
+            margin: 70px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            background-color: #57068c;
+            color: white;
+            font-size: 1rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button[type="submit"]:hover {
+            background-color: #37004c;
+        }
+        .center-text {
+            text-align: center;
+        }
+        .modal-body {
+            font-size: 1rem;
+        }
+        input[type="text"], input[type="email"], input[type="password"], input[type="date"], select {
+            width: 100%;
+            max-width: 800px;
+            padding: 10px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .phone-number-container {
+            display: flex;
+            gap: 10px;
+            max-width: 800px;
+            margin-bottom: 10px;
+        }
+        select#area_code {
+            width: 200px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        input#phone_number {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Sign Up</h2>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div id="flash-message">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <!-- End of Flash Messages -->
+        
+        <form method="POST">
+            <label for="user_type">User Type:</label>
+            <select id="user_type" name="user_type" required>
+                <option value="customer">Customer</option>
+                <option value="booking_agent">Booking Agent</option>
+                <option value="airline_staff">Airline Staff</option>
+            </select>
+
+            <!-- Customer SignUp -->
+            <div id="customer-fields">
+                <label for="customer-email">Email:</label>
+                <input type="email" id="customer-email" name="customer-email" placeholder="Your email" required>
+                <label for="customer-password">Password:</label>
+                <input type="password" id="customer-password" name="customer-password" placeholder="Your password" required>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required>
+                <label for="building_number">Building Number:</label>
+                <input type="text" id="building_number" name="building_number" placeholder="(Optional) Your building number">
+                <label for="street">Street:</label>
+                <input type="text" id="street" name="street" placeholder="Your street" required>
+                <label for="city">City:</label>
+                <input type="text" id="city" name="city" placeholder="Your city" required>
+                <label for="state">State:</label>
+                <input type="text" id="state" name="state" placeholder="Your State" required>
+                <label for="phone_number">Phone Number:</label>
+                <div class="phone-number-container">
+                    <select id="area_code" name="area_code" required>
+                        <option value="+1">+1 (USA/Canada)</option>
+                        <option value="+7">+7 (Russia/Kazakhstan)</option>
+                        <!-- Add other area codes as needed -->
+                    </select>
+                    <input type="text" id="phone_number" name="phone_number" placeholder="Your phone number" required>
+                </div>
+                <label for="passport_number">Passport Number:</label>
+                <input type="text" id="passport_number" name="passport_number" placeholder="Your passport number" required>
+                <label for="passport_expiration">Passport Expiration:</label>
+                <input type="date" id="passport_expiration" name="passport_expiration" required>
+                <label for="passport_country">Passport Country:</label>
+                <input type="text" id="passport_country" name="passport_country" placeholder="Your passport issuing country" required>
+                <label for="customer_date_of_birth">Date of Birth:</label>
+                <input type="date" id="customer_date_of_birth" name="customer_date_of_birth" required>
+            </div>
+
+            <!-- Booking Agent SignUp -->
+            <div id="agent-fields" style="display: none;">
+                <label for="agent-email">Email:</label>
+                <input type="email" id="agent-email" name="agent-email">
+                <label for="agent-password">Password:</label>
+                <input type="password" id="agent-password" name="agent-password">
+                <label for="name">Booking Agent Name:</label>
+                <input type="text" id="agency-name" name="agency_name">
+                <label for="airline_name">Airline:</label>
+                <select name="name" id="airline-name" required>
+                    <option value="">Select Airline</option>
+                    {% for airline in airlines %}
+                        <option value="{{ airline.name }}">{{ airline.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <!-- Airline Staff SignUp -->
+            <div id="staff-fields" style="display: none;">
+                <label for="airline">Airline:</label>
+                <input type="text" id="airline" name="airline" required>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+                <label for="staff-password">Password:</label>
+                <input type="password" id="staff-password" name="staff-password" required>
+                <label for="first_name">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required>
+                <label for="last_name">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required>
+                <label for="staff_date_of_birth">Date of Birth:</label>
+                <input type="date" id="staff_date_of_birth" name="staff_date_of_birth" required>
+            </div>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="center-text">
+            <p>Already have an account?</p>
+            <a href="{{ url_for('login') }}" class="button">Back to Login</a>
+        </div>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+    </div>
+
+    <script>
+        document.getElementById('user_type').addEventListener('change', function () {
+            const userType = this.value;
+
+            // Hide all field groups and disable their inputs
+            ['agent-fields', 'staff-fields', 'customer-fields'].forEach((section) => {
+                const sectionDiv = document.getElementById(section);
+                sectionDiv.style.display = 'none';
+                sectionDiv.querySelectorAll('input').forEach((input) => {
+                    input.required = false;
+                    input.disabled = true; // Disable inputs for hidden sections
+                });
+            });
+
+            // Show and enable the selected section
+            const activeSection =
+                userType === 'booking_agent' ? 'agent-fields' :
+                userType === 'airline_staff' ? 'staff-fields' : 'customer-fields';
+
+            const activeDiv = document.getElementById(activeSection);
+            activeDiv.style.display = 'block';
+            activeDiv.querySelectorAll('input').forEach((input) => {
+                input.required = true;
+                input.disabled = false; // Enable inputs for the visible section
+            });
+        });
+
+        // Initialize the form to show the correct user type fields
+        document.querySelector('[name="user_type"]').dispatchEvent(new Event('change'));
+    </script>
+</body>
+</html>

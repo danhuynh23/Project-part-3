@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flights</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+        .back-button a {
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF;
+            padding: 10px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .back-button a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>Available Flights</h1>
+    <table>
+        <tr>
+            <th>Flight Number</th>
+            <th>Airline</th>
+            <th>Departure</th>
+            <th>Arrival</th>
+            <th>Duration</th>
+        </tr>
+        {% for flight in flights %}
+        <tr>
+            <td>{{ flight.flight_number }}</td>
+            <td>{{ flight.airline }}</td>
+            <td>{{ flight.departure_time }}</td>
+            <td>{{ flight.arrival_time }}</td>
+            <td>{{ flight.duration }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div class="back-button">
+        <a href="/">Back to Frontpage</a>
+
+    </div>
+</body>
+</html>

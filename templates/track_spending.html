@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Spending</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #4a0575;
+        }
+        canvas {
+            margin-top: 20px;
+            max-width: 100%;
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #4a0575;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .back-btn:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Track Spending</h1>
+        <canvas id="spendingChart"></canvas>
+        <a href="{{ url_for('customer_dashboard') }}" class="back-btn">Return to Customer Dashboard</a>
+    </div>
+
+    <script>
+        // Pass data from Flask to JavaScript
+        const dates = {{ dates | tojson }};
+        const spending = {{ spending | tojson }};
+
+        // Create the chart
+        const ctx = document.getElementById('spendingChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: dates,
+                datasets: [{
+                    label: 'Total Spending ($)',
+                    data: spending,
+                    backgroundColor: 'rgba(74, 5, 117, 0.1)',
+                    borderColor: '#4a0575',
+                    borderWidth: 2,
+                    pointBackgroundColor: '#4a0575',
+                    tension: 0.3
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Date',
+                            color: '#333'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Spending ($)',
+                            color: '#333'
+                        },
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flights Operated by My Airline</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #4a0575;
+        }
+
+        form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        form input, form select, form button {
+            flex: 1;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        form button {
+            background-color: #4a0575;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #37004c;
+        }
+
+        .flight-card {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .flight-details {
+            flex: 2;
+            margin-right: 10px;
+        }
+
+        .status-box {
+            flex: 1;
+            text-align: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 10px;
+            background-color: #fefefe;
+        }
+
+        .status-box h3 {
+            margin: 0 0 5px;
+            color: #4a0575;
+        }
+
+        .status-box form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .details-btn, .customers-btn {
+            display: inline-block;
+            margin-top: 10px;
+            background-color: #4a0575;
+            color: white;
+            padding: 8px 15px;
+            text-align: center;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .details-btn:hover, .customers-btn:hover {
+            background-color: #37004c;
+        }
+
+        .back-btn {
+            display: inline-block;
+            text-align: center;
+            background-color: #4a0575;
+            color: white;
+            font-weight: bold;
+            padding: 10px 20px;
+            margin-top: 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .back-btn:hover {
+            background-color: #37004c;
+        }
+
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #4a0575;
+        }
+
+        .modal-body {
+            font-size: 16px;
+            color: #333;
+        }
+
+        .close-btn {
+            background-color: #4a0575;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 15px;
+            float: right;
+        }
+
+        .close-btn:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Flights Operated by My Airline</h1>
+
+        <!-- Filter Form -->
+        <form method="POST">
+            <input type="date" name="start_date" value="{{ start_date }}" placeholder="Start Date">
+            <input type="date" name="end_date" value="{{ end_date }}" placeholder="End Date">
+            <input type="text" name="source" value="{{ source }}" placeholder="Source Airport/City">
+            <input type="text" name="destination" value="{{ destination }}" placeholder="Destination Airport/City">
+            <button type="submit">Filter</button>
+        </form>
+
+        <!-- Flights List -->
+        {% if flights %}
+            {% for flight in flights %}
+            <div class="flight-card">
+                <div class="flight-details">
+                    <h3>{{ flight.name_airline }}</h3>
+                    <p><strong>Flight Number: {{ flight.flight_number }}</strong></p>
+                    <p>{{ flight.name_depart }} → {{ flight.name_arrive }}</p>
+                    <p>Departure: {{ flight.depart_time }}</p>
+                    <p>Arrival: {{ flight.arrive_time }}</p>
+                    <p>Duration: {{ flight.duration }}</p>
+                </div>
+                <div class="status-box">
+                    <h3>Status</h3>
+                    <form method="POST">
+                        <input type="hidden" name="flight_number" value="{{ flight.flight_number }}">
+                        <select name="new_status" required>
+                            <option value="Scheduled" {% if flight.status == "Scheduled" %}selected{% endif %}>Scheduled</option>
+                            <option value="In Progress" {% if flight.status == "In Progress" %}selected{% endif %}>In Progress</option>
+                            <option value="Delayed" {% if flight.status == "Delayed" %}selected{% endif %}>Delayed</option>
+                            <option value="Completed" {% if flight.status == "Completed" %}selected{% endif %}>Completed</option>
+                            <option value="Cancelled" {% if flight.status == "Cancelled" %}selected{% endif %}>Cancelled</option>
+                        </select>
+                        <button type="submit" name="update_status">Update Status</button>
+                    </form>
+                    <a class="details-btn" data-flight-number="{{ flight.flight_number }}" data-depart-time="{{ flight.depart_time }}">View Flight Details</a>
+                    <a class="customers-btn" data-flight-number="{{ flight.flight_number }}" data-depart-time="{{ flight.depart_time }}">View Customers</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+        <p>No flights found for the selected filters.</p>
+        {% endif %}
+        <a href="{{ url_for('airline_dashboard') }}" class="back-btn">Back to Dashboard</a>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="flightModal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalTitle">Details</div>
+            <div class="modal-body" id="modalBody">Loading...</div>
+            <button class="close-btn" id="closeModal">Close</button>
+        </div>
+    </div>
+
+    <script>
+        const modal = document.getElementById('flightModal');
+        const modalBody = document.getElementById('modalBody');
+        const modalTitle = document.getElementById('modalTitle');
+        const closeModal = document.getElementById('closeModal');
+
+        document.querySelectorAll('.details-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const flightNumber = button.getAttribute('data-flight-number');
+                const departTime = button.getAttribute('data-depart-time');
+                fetch(`/get_flight_details?flight_number=${flightNumber}&depart_time=${encodeURIComponent(departTime)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        modalTitle.textContent = 'Flight Details';
+                        if (data.error) {
+                            modalBody.textContent = data.error;
+                        } else {
+                            const airplane = data.airplane;
+                            modalBody.innerHTML = airplane 
+                                ? `<p><strong>Airplane Model:</strong> ${airplane.model}</p>
+                                <p><strong>Capacity:</strong> ${airplane.capacity}</p>`
+                                : 'No airplane assigned to this flight.';
+                        }
+                        modal.style.display = 'flex';
+                    });
+            });
+        });
+
+        document.querySelectorAll('.customers-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const flightNumber = button.getAttribute('data-flight-number');
+                const departTime = button.getAttribute('data-depart-time');
+                fetch(`/get_customers?flight_number=${flightNumber}&depart_time=${encodeURIComponent(departTime)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        modalTitle.textContent = 'Customers on Flight';
+                        if (data.error) {
+                            modalBody.textContent = data.error;
+                        } else {
+                            const customers = data.customers;
+                            modalBody.innerHTML = customers.length
+                                ? `<ul>${customers.map(c => `<li><a href="/customer_profile?email=${c.email}" target="_blank">${c.name} (${c.email})</a></li>`).join('')}</ul>`
+                                : 'No customers booked for this flight.';
+                        }
+                        modal.style.display = 'flex';
+                    })
+                    .catch(error => {
+                        modalBody.textContent = `Error fetching customer data: ${error}`;
+                        modal.style.display = 'flex';
+                    });
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', event => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

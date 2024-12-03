@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Selection</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+
+    <!-- Top Navigation with Route and Login -->
+    <div class="top-nav">
+        <div class="left-section">
+            <a href="/" class="back-arrow">&#8592;</a> <!-- Left arrow for navigation -->
+            <img src="{{ url_for('static', filename='NYU_Shanghai_logo.svg.png') }}" alt="Logo" class="logo">
+            <div class="route-info">
+                <span class="airport-code">{{ origin or 'Fetching...' }}</span>
+                <span class="arrow">&#8644;</span>
+                <span class="airport-code">{{ destination or 'Everywhere' }}</span>
+            </div>
+            <div class="date-passenger-info">
+                <span class="date-icon">&#128197; {{ depart_date or 'Date not found' }}</span>
+                <span class="passenger-icon">&#128101; {{ passengers }} passenger{{ 's' if passengers > 1 else '' }}</span>
+            </div>
+            <a href="#" class="modify-search" onclick="openSidebar()">Modify search</a>
+        </div>
+        <div class="right-section">
+            {% if logged_in %}
+                <span class="welcome-message">Welcome, {{ user }}!</span>
+                <a href="{{ url_for('logout') }}" class="logout-button">Logout</a>
+            {% else %}
+                <a href="{{ url_for('login', next=request.path) }}" class="login-button">Log in</a>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Sidebar for Modifying Search -->
+    <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
+    <div id="mySidebar" class="sidebar">
+        <button class="close-btn" onclick="closeSidebar()">&times;</button>
+        <form id="searchForm" action="{{ url_for('show_flights') }}" method="GET">
+            <label for="from">From</label>
+            <input type="text" id="from" name="from" placeholder="City or Airport" value="{{ origin }}" required>
+
+            <label for="to">To</label>
+            <input type="text" id="to" name="to" placeholder="City or Airport (Optional)" value="{{ destination }}">
+
+            <label for="depart">Depart</label>
+            <input type="date" id="depart" name="depart" value="{{ depart_date }}" required>
+
+            <label for="return">Return</label>
+            <input type="date" id="return" name="return">
+
+            <label for="passengers">Passengers</label>
+            <select id="passengers" name="passengers">
+                <option value="1" {% if passengers == 1 %}selected{% endif %}>1</option>
+                <option value="2" {% if passengers == 2 %}selected{% endif %}>2</option>
+                <option value="3" {% if passengers == 3 %}selected{% endif %}>3</option>
+                <option value="4" {% if passengers == 4 %}selected{% endif %}>4</option>
+                <option value="5" {% if passengers == 5 %}selected{% endif %}>5</option>
+            </select>
+
+            <button type="button" class="gps-button" onclick="fetchLocation()">Use GPS Location</button>
+            <button type="submit" class="button">Search Flights</button>
+        </form>
+    </div>
+    <div class="departure-info">
+        <div class="departure-date">
+            <p>{{ depart_date or 'Date not available' }}</p>
+        </div>
+        <div class="flight-selection">
+            <h2>Select your departure flight</h2>
+            <p>from <span class="highlight">{{ origin_city or 'Unknown' }}</span> to <span class="highlight">{{ destination_city or 'Everywhere' }}</span></p>
+        </div>
+    </div>
+    
+    <!-- Date Options -->
+    <div class="date-options-container">
+        <div class="date-options" id="date-options">
+            {% for date in date_options %}
+                <div class="date-item {% if date.strftime('%Y-%m-%d') == depart_date %}selected{% endif %}" 
+                     data-date="{{ date.strftime('%Y-%m-%d') }}">
+                    <div class="date">{{ date.strftime("%a, %d %b") }}</div>
+                    {% if date_prices.get(date) is not none %}
+                        <div class="price">${{ date_prices[date] }}</div>
+                    {% else %}
+                        <div class="no-flight">No Flight</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-filter-container">
+        <div class="results-info">
+            <h2>{{ flights | length }} results</h2>
+            <p class="fares-info">Fares displayed are for {{ passengers }} passenger{{ 's' if passengers > 1 else '' }}.</p>
+        </div>
+    </div>
+
+    <!-- Flights Display -->
+    <div class="flight-options">
+        <div class="flight-listings">
+            {% for flight in flights %}
+                <div class="flight-item">
+                    <div class="flight-info">
+                        <p class="airline">{{ flight.name_airline }}</p>
+                        <p class="route">
+                            {{ flight.flight_number }} <br>
+                            <span class="time">{{ flight.depart_time.strftime('%H:%M') }}</span> {{ flight.name_depart }}
+                            &rarr; <span class="time">{{ flight.arrive_time.strftime('%H:%M') }}</span> {{ flight.name_arrive }}
+                        </p>
+                        <p class="duration">{{ flight.stops }} stops | {{ flight.duration }}</p>
+                    </div>
+                    <!-- Fares for Economy and Business -->
+                    <div class="fare-container">
+                        <!-- Economy Fare -->
+                        <a href="{{ url_for('booking_page', flight_id=flight['id'], fare_type='Economy') }}" class="fare-card economy">
+                            <p class="fare-type">Economy</p>
+                            <p class="price">${{ flight.economy_price }}</p>
+                        </a>
+                        <!-- Business Fare -->
+                        <a href="{{ url_for('booking_page', flight_id=flight['id'], fare_type='Business') }}" class="fare-card business">
+
+                            <p class="fare-type">Business</p>
+                            {% if flight.business_price %}
+                                <p class="price">${{ flight.business_price }}</p>
+                            {% else %}
+                                <p class="not-available">Not available</p>
+                            {% endif %}
+                        </a>
+                    </div>
+                    
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const dateItems = document.querySelectorAll(".date-item");
+
+            // Handle date selection
+            dateItems.forEach(item => {
+                item.addEventListener("click", () => {
+                    const selectedDate = item.getAttribute("data-date");
+                    const queryParams = new URLSearchParams(window.location.search);
+                    
+                    queryParams.set("depart", selectedDate);
+                    window.location.href = `/show_flights?${queryParams.toString()}`;
+                });
+            });
+        });
+
+        document.addEventListener("DOMContentLoaded", () => {
+                if (!localStorage.getItem('default_origin')) {
+                    fetchLocation();
+                }
+            });
+
+            function fetchLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(
+                        (position) => {
+                            const lat = position.coords.latitude;
+                            const lng = position.coords.longitude;
+
+                            fetch('/get_location', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ latitude: lat, longitude: lng }),
+                            })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                if (data.success) {
+                                    localStorage.setItem('default_origin', data.nearest_airport);
+                                    document.getElementById("from").value = data.nearest_airport;
+                                } else {
+                                    console.error("Failed to fetch location:", data.error);
+                                }
+                            })
+                            .catch((error) => console.error("Error fetching location:", error));
+                        },
+                        (error) => {
+                            console.error("Error getting location:", error);
+                        }
+                    );
+                } else {
+                    console.error("Geolocation is not supported by this browser.");
+                }
+            }
+
+        function openSidebar() {
+            document.getElementById("mySidebar").style.width = "425px";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closeSidebar() {
+            document.getElementById("mySidebar").style.width = "0";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>

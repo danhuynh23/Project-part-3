@@ -1,0 +1,27 @@
+// Flask Route Diagram
+digraph {
+	home [label="Home Page (/home)"]
+	login [label="Login Page (/login)"]
+	logout [label="Logout (/logout)"]
+	signup [label="Signup Page (/signup)"]
+	dashboard [label="Dashboard (/dashboard)"]
+	manage_flights [label="Manage Flights (/manage_flights)"]
+	view_flights [label="View Flights (/view_flights)"]
+	track_spending [label="Track Spending (/track_spending)"]
+	create_flight [label="Create Flight (/create_flight)"]
+	grant_permissions [label="Grant Permissions (/grant_permissions)"]
+	update_booking_agent_airline [label="Update Booking Agent Airline (/update_booking_agent_airline)"]
+	view_commission [label="View Commission (/view_commission)"]
+	view_top_customers [label="View Top Customers (/view_top_customers)"]
+	home -> login
+	login -> dashboard
+	dashboard -> logout
+	dashboard -> manage_flights
+	dashboard -> view_flights
+	dashboard -> track_spending
+	dashboard -> create_flight
+	dashboard -> grant_permissions
+	grant_permissions -> update_booking_agent_airline
+	dashboard -> view_commission
+	dashboard -> view_top_customers
+}

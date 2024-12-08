@@ -136,6 +136,7 @@ def home():
         return render_template('index.html', logged_in=logged_in, user_type=user_type, user=user,name=user)
     else: 
         return render_template('index.html', logged_in=logged_in, user_type=user_type, user=user,name=name)
+    
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     next_url = request.args.get('next')  # Capture the next URL

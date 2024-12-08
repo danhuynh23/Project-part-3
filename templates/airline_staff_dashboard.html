@@ -5,17 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Airline Staff Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
     <link rel="icon" href="/static/A_sleek_and_modern_logo_for_an_NYU-themed_airline.ico">
 
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             color: #333;
+            background-image: url('{{ url_for('static', filename='technology-wire-mesh-network-connection-digital-background/19187761.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
         header {
+            position: relative;
             background-color: #4a0575;
             color: white;
             text-align: center;
@@ -38,6 +44,16 @@
         .logout a:hover {
             background-color: #4a0575;
         }
+        .clock {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 10px 15px;
+            border-radius: 5px;
+        }
         .container {
             max-width: 1200px;
             margin: 50px auto;
@@ -47,6 +63,10 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         }
         h1 {
+            text-align: center;
+            color: white;
+        }
+        h2 {
             text-align: center;
             color: #4a0575;
         }
@@ -93,6 +113,7 @@
 </head>
 <body>
     <header>
+        <div class="clock" id="clock">Loading...</div>
         <h1>Airline Staff Dashboard</h1>
         <div class="logout">
             <a href="{{ url_for('logout') }}">Logout</a>
@@ -113,41 +134,56 @@
         {% endif %}
         {% endwith %}
         <!-- End of Flash Messages -->
-        <h1>Hello, {{ user }}!</h1>
+        <h2>Hello, {{ user }}!</h2>
         <p>Welcome back! Here are your available actions:</p>
         <div class="grid">
             <div class="button-card">
+                <i class="fas fa-plane"></i>
                 <a href="{{ url_for('view_flights') }}">View My Flights</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-plus-circle"></i>
                 <a href="{{ url_for('create_flight') }}">Create New Flight</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-edit"></i>
                 <a href="{{ url_for('view_flights') }}">Change Flight Status</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-plane-departure"></i>
                 <a href="{{ url_for('add_airplane') }}">Add Airplane</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-map-marker-alt"></i>
                 <a href="{{ url_for('add_airport') }}">Add Airport</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-book"></i>
                 <a href="{{ url_for('view_all_bookings') }}">View All Bookings</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-users"></i>
                 <a href="{{ url_for('view_frequent_customers') }}">View Frequent Customers</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-chart-bar"></i>
                 <a href="{{ url_for('view_reports') }}">View Reports</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-coins"></i>
                 <a href="{{ url_for('compare_revenue') }}">Compare Revenue</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-map-signs"></i>
                 <a href="{{ url_for('view_top_destinations') }}">View Top Destinations</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-user-shield"></i>
                 <a href="{{ url_for('grant_permissions') }}">Grant Permissions</a>
+            </div>
+            <div class="button-card">
+                <i class="fas fa-user-plus"></i>
+                <a href="{{ url_for('update_booking_agent_airline') }}">Add Agents</a>
             </div>
         </div>
     </div>
@@ -160,6 +196,15 @@
                 setTimeout(() => flashMessage.remove(), 1000); // Remove from DOM after fade-out
             }
         }, 5000);
+
+        // Update the clock every second
+        function updateClock() {
+            const clock = document.getElementById('clock');
+            const now = new Date();
+            clock.textContent = now.toLocaleTimeString();
+        }
+        setInterval(updateClock, 1000);
+        updateClock(); // Initialize the clock immediately
     </script>
 </body>
 </html>

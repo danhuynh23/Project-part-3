@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Bookings</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/static/A_sleek_and_modern_logo_for_an_NYU-themed_airline.ico">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4a0575;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table th, table td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        table th {
+            background-color: #4a0575;
+            color: white;
+        }
+        table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4a0575;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+            width: 200px;
+            text-align: center;
+        }
+        .back-button:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>All Bookings</h1>
+
+        {% if success %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer Email</th>
+                        <th>Ticket ID</th>
+                        <th>Flight Number</th>
+                        <th>Departure</th>
+                        <th>Arrival</th>
+                        <th>Depart Time</th>
+                        <th>Arrive Time</th>
+                        <th>Booking Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                        <tr>
+                            <td>{{ booking.customer_email }}</td>
+                            <td>{{ booking.ticket_id }}</td>
+                            <td>{{ booking.flight_number }}</td>
+                            <td>{{ booking.name_depart }}</td>
+                            <td>{{ booking.name_arrive }}</td>
+                            <td>{{ booking.depart_time }}</td>
+                            <td>{{ booking.arrive_time }}</td>
+                            <td>{{ booking.purchase_date }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No bookings found.</p>
+        {% endif %}
+
+        <a href="{{ url_for('airline_dashboard') }}" class="back-button">Back to Dashboard</a>
+    </div>
+</body>
+</html>

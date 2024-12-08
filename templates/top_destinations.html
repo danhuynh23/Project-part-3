@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Destinations</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-image: url('{{ url_for('static', filename='technology-wire-mesh-network-connection-digital-background/19187761.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4a0575;
+        }
+        .chart-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        .chart-wrapper {
+            width: 100%;
+            max-width: 600px;
+            height: 450px;
+            margin: 20px auto;
+        }
+        canvas {
+            display: block;
+            width: 100% !important;
+            height: 100% !important; 
+        }
+        .back-button {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #4a0575;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Top Destinations</h1>
+
+        <div class="chart-container">
+            <!-- Last 3 Months Chart -->
+            <div class="chart-wrapper">
+                <h2>Last 3 Months</h2>
+                <canvas id="chart3Months"></canvas>
+            </div>
+
+            <!-- Last Year Chart -->
+            <div class="chart-wrapper">
+                <h2>Last Year</h2>
+                <canvas id="chartYear"></canvas>
+            </div>
+        </div>
+
+        <a href="{{ url_for('airline_dashboard') }}" class="back-button">Back to Dashboard</a>
+    </div>
+
+    <script>
+        // Data for Last 3 Months Chart
+        const labels3Months = {{ top_destinations_3_months | map(attribute='destination') | list | tojson }};
+        const values3Months = {{ top_destinations_3_months | map(attribute='trip_count') | list | tojson }};
+
+        const config3Months = {
+            type: 'bar',
+            data: {
+                labels: labels3Months,
+                datasets: [{
+                    label: 'Trips',
+                    data: values3Months,
+                    backgroundColor: ['#4a0575', '#8c43c3', '#b992e7'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        top: 40, 
+                        bottom: 40
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Trips'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Destinations'
+                        },
+                        ticks: {
+                            maxRotation: 45, 
+                            minRotation: 45
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(document.getElementById('chart3Months'), config3Months);
+
+        // Data for Last Year Chart
+        const labelsYear = {{ top_destinations_year | map(attribute='destination') | list | tojson }};
+        const valuesYear = {{ top_destinations_year | map(attribute='trip_count') | list | tojson }};
+
+        const configYear = {
+            type: 'bar',
+            data: {
+                labels: labelsYear,
+                datasets: [{
+                    label: 'Trips',
+                    data: valuesYear,
+                    backgroundColor: ['#4a0575', '#8c43c3', '#b992e7'],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: {
+                        top: 40, 
+                        bottom: 40
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Trips'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Destinations'
+                        },
+                        ticks: {
+                            maxRotation: 45,
+                            minRotation: 45
+                        }
+                    }
+                }
+            }
+        };
+
+        new Chart(document.getElementById('chartYear'), configYear);
+    </script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Reports</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="/static/A_sleek_and_modern_logo_for_an_NYU-themed_airline.ico">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-image: url('{{ url_for('static', filename='technology-wire-mesh-network-connection-digital-background/19187761.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4a0575;
+        }
+        form {
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+        form input, form select, form button {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .chart-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        canvas {
+            max-width: 800px;
+            height: 400px;
+        }
+        .back-button {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            background-color: #4a0575;
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Reports</h1>
+
+        <form method="POST" action="{{ url_for('view_reports') }}">
+            <select name="report_type">
+                <option value="last_year" {% if report_type == 'last_year' %}selected{% endif %}>Last Year</option>
+                <option value="last_month" {% if report_type == 'last_month' %}selected{% endif %}>Last Month</option>
+                <option value="custom" {% if report_type == 'custom' %}selected{% endif %}>Custom Range</option>
+            </select>
+            <input type="date" name="start_date" placeholder="Start Date" {% if report_type == 'custom' %}required{% endif %}>
+            <input type="date" name="end_date" placeholder="End Date" {% if report_type == 'custom' %}required{% endif %}>
+            <button type="submit">Generate Report</button>
+        </form>
+
+        <p>Total Tickets Sold: <strong>{{ total_tickets }}</strong></p>
+
+        <div class="chart-container">
+            <canvas id="ticketChart"></canvas>
+        </div>
+
+        <a href="{{ url_for('airline_dashboard') }}" class="back-button">Back to Dashboard</a>
+    </div>
+
+    <script>
+        // Data for Ticket Sales Chart
+        const labels = {{ chart_data['labels'] | tojson }};
+        const values = {{ chart_data['values'] | tojson }};
+
+        const ctx = document.getElementById('ticketChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Tickets Sold',
+                    data: values,
+                    backgroundColor: 'rgba(74, 5, 117, 0.5)',
+                    borderColor: '#4a0575',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Tickets'
+                        }
+                    },
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Months'
+                        }
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

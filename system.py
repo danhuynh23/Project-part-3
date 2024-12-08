@@ -457,14 +457,9 @@ def signup():
                             # Handle signup for booking agents
             elif user_type == 'booking_agent':
                     email = request.form['agent-email']
-                    name = request.form['name']  # Airline name (foreign key)
                     booking_agent_id=request.form['agency_name']
 
-                    # Check if airline exists
-                    cursor.execute("SELECT name FROM airline WHERE name = %s", (name,))
-                    if not cursor.fetchone():
-                        flash('Invalid airline name provided.', 'error')
-                        return render_template('signup.html')
+              
 
                     # Check for email uniqueness
                     cursor.execute("""
@@ -478,9 +473,9 @@ def signup():
 
                     # Insert booking agent data
                     cursor.execute("""
-                        INSERT INTO booking_agent (email, password, name, booking_agent_id)
-                        VALUES (%s, %s, %s, %s)
-                    """, (email, hashed_password, name, booking_agent_id))
+                        INSERT INTO booking_agent (email, password, booking_agent_id)
+                        VALUES (%s, %s, %s)
+                    """, (email, hashed_password, booking_agent_id))
 
             elif user_type == 'airline_staff':
                 cursor.execute("""
@@ -535,15 +530,20 @@ def booking_page():
 
     if 'user' in session:
         with connection.cursor() as cursor:
+            # Check if the user is a customer
             cursor.execute("SELECT * FROM customer WHERE email = %s", (session['user'],))
             user_details = cursor.fetchone()
 
             # Check if the logged-in user is a booking agent
-            cursor.execute("SELECT booking_agent_id FROM booking_agent WHERE email = %s", (session['user'],))
+            cursor.execute("SELECT booking_agent_id, name FROM booking_agent WHERE email = %s", (session['user'],))
             booking_agent = cursor.fetchone()
 
             if booking_agent:
                 booking_agent_id = booking_agent['booking_agent_id']
+                # Check if the booking agent has an assigned airline
+                if not booking_agent['name']:
+                    flash("Booking agent does not have an assigned airline. Please contact your administrator.", "error")
+                    return redirect(url_for('home'))
 
     # Render the booking page
     return render_template(
@@ -915,6 +915,8 @@ def track_spending():
     spending = [row['total_spending'] for row in spending_data]
     
     return render_template('track_spending.html', dates=dates, spending=spending)
+
+
 #<--------------------------------------------------Staff section>
 @app.route('/create_flight', methods=['GET', 'POST'])
 def create_flight():
@@ -1217,29 +1219,473 @@ def add_airport():
 
 
 
-@app.route('/view_all_bookings')
+@app.route('/view_all_bookings', methods=['GET'])
 def view_all_bookings():
-    return "View All Bookings - Placeholder"
+    # Ensure the user is logged in and has the necessary permissions
+    if 'user' not in session or session.get('user_type') != 'airline_staff':
+        flash("Access denied: Only airline staff can view all bookings.", "error")
+        return redirect(url_for('home'))
 
-@app.route('/view_frequent_customers')
+    connection = get_db_connection()
+
+    try:
+        # Query to get all bookings for the airline
+        query = """
+            SELECT p.customer_email, t.ticket_id, f.name_airline, f.flight_number, 
+                   f.name_depart, f.name_arrive, f.depart_time, f.arrive_time, 
+                   p.purchase_date
+            FROM purchases p
+            JOIN ticket t ON p.ticket_id = t.ticket_id
+            JOIN flight f ON t.flight_number = f.flight_number AND t.depart_time = f.depart_time
+            WHERE f.name_airline = (
+                SELECT name FROM airline_staff WHERE username = %s
+            )
+            ORDER BY p.purchase_date DESC
+        """
+        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(query, (session['user'],))
+            bookings = cursor.fetchall()
+
+        if not bookings:
+            flash("No bookings found.", "info")
+            return render_template('all_bookings.html', bookings=[], success=False)
+
+        return render_template('all_bookings.html', bookings=bookings, success=True)
+
+    except pymysql.MySQLError as e:
+        flash(f"Database error: {e}", "error")
+        return redirect(url_for('airline_dashboard'))
+
+    finally:
+        connection.close()
+
+
+@app.route('/view_frequent_customers', methods=['GET'])
 def view_frequent_customers():
-    return "View Frequent Customers - Placeholder"
+    if 'user' not in session or session.get('user_type') != 'airline_staff':
+        flash("Access denied: Only airline staff can view frequent customers.", "error")
+        return redirect(url_for('home'))
 
-@app.route('/view_reports')
+    connection = get_db_connection()
+
+    try:
+        # Query for the top 5 frequent customers
+        query = """
+            SELECT p.customer_email, COUNT(p.ticket_id) AS ticket_count
+            FROM purchases p
+            JOIN ticket t ON p.ticket_id = t.ticket_id
+            JOIN flight f ON t.flight_number = f.flight_number AND t.depart_time = f.depart_time
+            WHERE f.name_airline = (
+                SELECT name FROM airline_staff WHERE username = %s
+            )
+            AND p.purchase_date >= DATE_SUB(CURDATE(), INTERVAL 6 MONTH)
+            GROUP BY p.customer_email
+            ORDER BY ticket_count DESC
+            LIMIT 5
+        """
+        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+            cursor.execute(query, (session['user'],))
+            frequent_customers = cursor.fetchall()
+
+        # Prepare chart data
+        chart_data = {
+            "labels": [customer["customer_email"] for customer in frequent_customers],
+            "values": [customer["ticket_count"] for customer in frequent_customers],
+        }
+
+        return render_template('frequent_customers.html', chart_data=chart_data)
+
+    except pymysql.MySQLError as e:
+        flash(f"Database error: {e}", "error")
+        return redirect(url_for('airline_dashboard'))
+
+    finally:
+        connection.close()
+
+
+@app.route('/view_reports', methods=['GET', 'POST'])
 def view_reports():
-    return "View Reports - Placeholder"
+    # Ensure the user is logged in and has the necessary permissions
+    if 'user' not in session or session.get('user_type') != 'airline_staff':
+        flash("Access denied: Only airline staff can view reports.", "error")
+        return redirect(url_for('home'))
 
-@app.route('/compare_revenue')
+    # Initialize variables for the report
+    total_tickets = 0
+    ticket_sales = []
+    chart_data = {"labels": [], "values": []}
+    report_type = "last_year"
+    start_date = None
+    end_date = None
+
+    try:
+        # Handle date range and report type selection
+        if request.method == 'POST':
+            report_type = request.form.get('report_type', 'last_year')
+
+            # Determine the date range based on the report type
+            if report_type == 'custom':
+                start_date = request.form.get('start_date')
+                end_date = request.form.get('end_date')
+                if not start_date or not end_date:
+                    flash("Please provide both start and end dates for a custom report.", "warning")
+                    return redirect(url_for('view_reports'))
+            elif report_type == 'last_year':
+                start_date = (datetime.now() - timedelta(days=365)).strftime('%Y-%m-%d')
+                end_date = datetime.now().strftime('%Y-%m-%d')
+            elif report_type == 'last_month':
+                today = datetime.now()
+                first_day_last_month = (today.replace(day=1) - timedelta(days=1)).replace(day=1)
+                last_day_last_month = today.replace(day=1) - timedelta(days=1)
+                start_date = first_day_last_month.strftime('%Y-%m-%d')
+                end_date = last_day_last_month.strftime('%Y-%m-%d')
+
+            # Debugging: Print the selected dates and report type
+            print(f"Report Type: {report_type}, Start Date: {start_date}, End Date: {end_date}")
+
+            # Connect to the database and execute queries
+            connection = get_db_connection()
+            with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+                # Query for total tickets
+                query_total = """
+                    SELECT COUNT(*) AS total_tickets
+                    FROM purchases p
+                    JOIN ticket t ON p.ticket_id = t.ticket_id
+                    JOIN flight f ON t.flight_number = f.flight_number AND t.depart_time = f.depart_time
+                    WHERE f.name_airline = (
+                        SELECT name FROM airline_staff WHERE username = %s
+                    )
+                    AND p.purchase_date BETWEEN %s AND %s
+                """
+                cursor.execute(query_total, (session['user'], start_date, end_date))
+                total_result = cursor.fetchone()
+                print("Raw query result:", total_result)
+                total_tickets = total_result['total_tickets'] if total_result else 0
+
+                # Query for month-wise ticket sales
+                query_monthly = """
+                    SELECT DATE_FORMAT(p.purchase_date, '%%Y-%%m') AS month, COUNT(*) AS ticket_count
+                    FROM purchases p
+                    JOIN ticket t ON p.ticket_id = t.ticket_id
+                    JOIN flight f ON t.flight_number = f.flight_number AND t.depart_time = f.depart_time
+                    WHERE f.name_airline = (
+                        SELECT name FROM airline_staff WHERE username = %s
+                    )
+                    AND p.purchase_date BETWEEN %s AND %s
+                    GROUP BY month
+                    ORDER BY month ASC
+                """
+                cursor.execute(query_monthly, (session['user'], start_date, end_date))
+                ticket_sales = cursor.fetchall()
+
+            # Prepare data for the bar chart
+            chart_data["labels"] = [sale["month"] for sale in ticket_sales]
+            chart_data["values"] = [sale["ticket_count"] for sale in ticket_sales]
+
+        return render_template(
+            'reports.html',
+            total_tickets=total_tickets,
+            chart_data=chart_data,
+            report_type=report_type,
+            start_date=start_date,
+            end_date=end_date
+        )
+
+    except pymysql.MySQLError as e:
+        print(f"Database error: {e}")
+        flash("An error occurred while generating the report. Please try again later.", "error")
+        return redirect(url_for('airline_dashboard'))
+
+    except Exception as e:
+        print(f"Unexpected error: {e}")
+        flash("An unexpected error occurred. Please contact support.", "error")
+        return redirect(url_for('airline_dashboard'))
+
+    finally:
+        if 'connection' in locals():
+            connection.close()
+
+
+
+
+@app.route('/compare_revenue', methods=['GET'])
 def compare_revenue():
-    return "Compare Revenue - Placeholder"
+    # Ensure the user is logged in and has the necessary permissions
+    if 'user' not in session or session.get('user_type') != 'airline_staff':
+        flash("Access denied: Only airline staff can view revenue comparison.", "error")
+        return redirect(url_for('home'))
 
-@app.route('/view_top_destinations')
+    try:
+        connection = get_db_connection()
+        last_month_revenue = {"direct": 0, "indirect": 0}
+        last_year_revenue = {"direct": 0, "indirect": 0}
+
+        today = datetime.now()
+        # Define date ranges
+        first_day_last_month = (today.replace(day=1) - timedelta(days=1)).replace(day=1).strftime('%Y-%m-%d')
+        last_day_last_month = (today.replace(day=1) - timedelta(days=1)).strftime('%Y-%m-%d')
+        one_year_ago = (today - timedelta(days=365)).strftime('%Y-%m-%d')
+        today_date = today.strftime('%Y-%m-%d')
+
+        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+            # Revenue for the last month
+            query_last_month = """
+                SELECT
+                    SUM(CASE WHEN p.booking_agent_id IS NULL THEN f.price ELSE 0 END) AS direct_revenue,
+                    SUM(CASE WHEN p.booking_agent_id IS NOT NULL THEN f.price ELSE 0 END) AS indirect_revenue
+                FROM purchases p
+                JOIN ticket t ON p.ticket_id = t.ticket_id
+                JOIN flight f ON t.flight_number = f.flight_number AND t.depart_time = f.depart_time
+                WHERE f.name_airline = (
+                    SELECT name FROM airline_staff WHERE username = %s
+                )
+                AND p.purchase_date BETWEEN %s AND %s
+            """
+            cursor.execute(query_last_month, (session['user'], first_day_last_month, last_day_last_month))
+            result_last_month = cursor.fetchone()
+            if result_last_month:
+                last_month_revenue["direct"] = result_last_month["direct_revenue"] or 0
+                last_month_revenue["indirect"] = result_last_month["indirect_revenue"] or 0
+
+            # Revenue for the last year
+            query_last_year = """
+                SELECT
+                    SUM(CASE WHEN p.booking_agent_id IS NULL THEN f.price ELSE 0 END) AS direct_revenue,
+                    SUM(CASE WHEN p.booking_agent_id IS NOT NULL THEN f.price ELSE 0 END) AS indirect_revenue
+                FROM purchases p
+                JOIN ticket t ON p.ticket_id = t.ticket_id
+                JOIN flight f ON t.flight_number = f.flight_number AND t.depart_time = f.depart_time
+                WHERE f.name_airline = (
+                    SELECT name FROM airline_staff WHERE username = %s
+                )
+                AND p.purchase_date BETWEEN %s AND %s
+            """
+            cursor.execute(query_last_year, (session['user'], one_year_ago, today_date))
+            result_last_year = cursor.fetchone()
+            if result_last_year:
+                last_year_revenue["direct"] = result_last_year["direct_revenue"] or 0
+                last_year_revenue["indirect"] = result_last_year["indirect_revenue"] or 0
+
+        return render_template(
+            'compare_revenue.html',
+            last_month_revenue=last_month_revenue,
+            last_year_revenue=last_year_revenue
+        )
+
+    except pymysql.MySQLError as e:
+        print(f"Database error: {e}")
+        flash("An error occurred while generating revenue comparison. Please try again later.", "error")
+        return redirect(url_for('airline_dashboard'))
+
+    finally:
+        if 'connection' in locals():
+            connection.close()
+
+
+@app.route('/view_top_destinations', methods=['GET'])
 def view_top_destinations():
-    return "View Top Destinations - Placeholder"
+    # Ensure the user is logged in and has the necessary permissions
+    if 'user' not in session or session.get('user_type') != 'airline_staff':
+        flash("Access denied: Only airline staff can view top destinations.", "error")
+        return redirect(url_for('home'))
 
-@app.route('/grant_permissions')
+    try:
+        connection = get_db_connection()
+        top_destinations_3_months = []
+        top_destinations_year = []
+
+        today = datetime.now()
+        three_months_ago = (today - timedelta(days=90)).strftime('%Y-%m-%d')
+        one_year_ago = (today - timedelta(days=365)).strftime('%Y-%m-%d')
+        today_date = today.strftime('%Y-%m-%d')
+
+        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+            # Top destinations for the last 3 months
+            query_3_months = """
+                SELECT f.name_arrive AS destination, COUNT(*) AS trip_count
+                FROM purchases p
+                JOIN ticket t ON p.ticket_id = t.ticket_id
+                JOIN flight f ON t.flight_number = f.flight_number AND t.depart_time = f.depart_time
+                WHERE f.name_airline = (
+                    SELECT name FROM airline_staff WHERE username = %s
+                )
+                AND p.purchase_date BETWEEN %s AND %s
+                GROUP BY f.name_arrive
+                ORDER BY trip_count DESC
+                LIMIT 3
+            """
+            cursor.execute(query_3_months, (session['user'], three_months_ago, today_date))
+            top_destinations_3_months = cursor.fetchall()
+
+            # Top destinations for the last year
+            query_year = """
+                SELECT f.name_arrive AS destination, COUNT(*) AS trip_count
+                FROM purchases p
+                JOIN ticket t ON p.ticket_id = t.ticket_id
+                JOIN flight f ON t.flight_number = f.flight_number AND t.depart_time = f.depart_time
+                WHERE f.name_airline = (
+                    SELECT name FROM airline_staff WHERE username = %s
+                )
+                AND p.purchase_date BETWEEN %s AND %s
+                GROUP BY f.name_arrive
+                ORDER BY trip_count DESC
+                LIMIT 3
+            """
+            cursor.execute(query_year, (session['user'], one_year_ago, today_date))
+            top_destinations_year = cursor.fetchall()
+
+        return render_template(
+            'top_destinations.html',
+            top_destinations_3_months=top_destinations_3_months,
+            top_destinations_year=top_destinations_year
+        )
+
+    except pymysql.MySQLError as e:
+        print(f"Database error: {e}")
+        flash("An error occurred while fetching top destinations. Please try again later.", "error")
+        return redirect(url_for('airline_dashboard'))
+
+    finally:
+        if 'connection' in locals():
+            connection.close()
+
+
+@app.route('/grant_permissions', methods=['GET', 'POST'])
 def grant_permissions():
-    return "Grant Permissions - Placeholder"
+    # Check if the user is logged in and has Admin permissions
+    if 'user' not in session or session.get('user_type') != 'airline_staff':
+        flash("Access denied: Only airline staff can manage permissions.", "error")
+        return redirect(url_for('home'))
+
+    connection = get_db_connection()
+    try:
+        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+            # Check if the logged-in user has Admin permission
+            cursor.execute("""
+                SELECT permission
+                FROM permissions
+                WHERE username = %s AND permission = 'Admin'
+            """, (session['user'],))
+            has_admin_permission = cursor.fetchone()
+
+            if not has_admin_permission:
+                flash("Access denied: You do not have Admin permissions.", "error")
+                return redirect(url_for('airline_dashboard'))
+
+            # Fetch other staff members from the same airline
+            cursor.execute("""
+                SELECT username
+                FROM airline_staff
+                WHERE name = (
+                    SELECT name
+                    FROM airline_staff
+                    WHERE username = %s
+                )
+                AND username != %s
+            """, (session['user'], session['user']))
+            staff_list = cursor.fetchall()
+
+            if request.method == 'POST':
+                staff_username = request.form.get('staff_username')
+                new_permission = request.form.get('permission')
+
+                # Validate staff selection
+                cursor.execute("""
+                    SELECT username
+                    FROM airline_staff
+                    WHERE username = %s AND name = (
+                        SELECT name
+                        FROM airline_staff
+                        WHERE username = %s
+                    )
+                """, (staff_username, session['user']))
+                valid_staff = cursor.fetchone()
+
+                if not valid_staff:
+                    flash("The selected staff member does not belong to your airline.", "error")
+                    return redirect(url_for('grant_permissions'))
+
+                # Grant the new permission
+                cursor.execute("""
+                    INSERT INTO permissions (username, permission)
+                    VALUES (%s, %s)
+                    ON DUPLICATE KEY UPDATE permission = VALUES(permission)
+                """, (staff_username, new_permission))
+                connection.commit()
+
+                flash(f"Permission '{new_permission}' granted to {staff_username}.", "success")
+
+    except pymysql.MySQLError as e:
+        flash(f"Database error: {e}", "error")
+    finally:
+        connection.close()
+
+    return render_template('grant_permissions.html', staff_list=staff_list)
+
+@app.route('/update_booking_agent_airline', methods=['GET', 'POST'])
+def update_booking_agent_airline():
+    # Ensure the user is logged in and has Admin permissions
+    if 'user' not in session or session.get('user_type') != 'airline_staff':
+        flash("Access denied: Only airline staff can manage booking agents.", "error")
+        return redirect(url_for('home'))
+
+    connection = get_db_connection()
+    try:
+        with connection.cursor(pymysql.cursors.DictCursor) as cursor:
+            # Check if the logged-in user has Admin permission
+            cursor.execute("""
+                SELECT permission
+                FROM permissions
+                WHERE username = %s AND permission = 'Admin'
+            """, (session['user'],))
+            has_admin_permission = cursor.fetchone()
+
+            if not has_admin_permission:
+                flash("Access denied: You do not have Admin permissions.", "error")
+                return redirect(url_for('airline_dashboard'))
+
+            # Fetch the airline name of the current admin
+            cursor.execute("""
+                SELECT name
+                FROM airline_staff
+                WHERE username = %s
+            """, (session['user'],))
+            airline = cursor.fetchone()
+
+            if request.method == 'POST':
+                agent_email = request.form.get('agent_email')
+
+                # Validate the email
+                if not agent_email:
+                    flash("Please provide a valid booking agent email.", "error")
+                    return redirect(url_for('update_booking_agent_airline'))
+
+                # Check if the booking agent exists
+                cursor.execute("SELECT * FROM booking_agent WHERE email = %s", (agent_email,))
+                agent_exists = cursor.fetchone()
+
+                if not agent_exists:
+                    flash("Booking agent not found.", "warning")
+                    return redirect(url_for('update_booking_agent_airline'))
+
+                # Update the booking agent's airline
+                cursor.execute("""
+                    UPDATE booking_agent
+                    SET name = %s
+                    WHERE email = %s
+                """, (airline['name'], agent_email))
+                connection.commit()
+
+                flash(f"Booking agent '{agent_email}' has been updated to airline '{airline['name']}'.", "success")
+                return redirect(url_for('update_booking_agent_airline'))
+
+    except pymysql.MySQLError as e:
+        flash(f"Database error: {e}", "error")
+    finally:
+        connection.close()
+
+    return render_template('update_booking_agent_airline.html')
+
 #<--------------------------------------------------Staff section>
 #<--------------------------------------------------Agent section>
 @app.route('/view_my_flights', methods=['GET', 'POST'])

@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View Commission</title>
+    <title>Frequent Customers</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="icon" href="/static/A_sleek_and_modern_logo_for_an_NYU-themed_airline.ico">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-         body {
+       body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
@@ -20,7 +20,7 @@
             background-attachment: fixed;
         }
         .container {
-            max-width: 600px;
+            max-width: 900px;
             margin: 50px auto;
             padding: 20px;
             background: white;
@@ -31,19 +31,17 @@
             text-align: center;
             color: #4a0575;
         }
-        .info {
-            margin: 20px 0;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-        .info p {
-            margin: 10px 0;
-        }
         .chart-container {
             margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         canvas {
-            max-width: 100%;
+            width: 600px;  /* Fixed width */
+            height: 400px; /* Fixed height */
+            border: 1px solid #ccc;
+            background-color: #fff;
         }
         .back-button {
             display: block;
@@ -63,62 +61,55 @@
 </head>
 <body>
     <div class="container">
-        <h1>View Commission</h1>
-        <div class="info">
-            <p><strong>Total Tickets Sold:</strong> {{ total_tickets }}</p>
-            <p><strong>Commission Rate:</strong> {{ commission_percentage }}%</p>
-            <p><strong>Total Commission Earned:</strong> ${{ "%.2f" | format(total_commission) }}</p>
-        </div>
+        <h1>Frequent Customers</h1>
 
-        <!-- Chart Section -->
         <div class="chart-container">
-            <canvas id="commissionChart"></canvas>
+            <h2>Top 5 Customers by Tickets Purchased</h2>
+            <canvas id="frequentCustomersChart"></canvas>
         </div>
 
-        <a href="{{ url_for('booking_agent_dashboard') }}" class="back-button">Back to Dashboard</a>
+        <a href="{{ url_for('home') }}" class="back-button">Back to Home</a>
     </div>
 
     <script>
-        // Prepare data for the chart
-        const labels = {{ chart_data | map(attribute=0) | list | tojson }};
-        const data = {{ chart_data | map(attribute=1) | list | tojson }};
+        // Data for Frequent Customers Chart
+        const customerLabels = {{ chart_data['labels'] | tojson }};
+        const customerValues = {{ chart_data['values'] | tojson }};
 
-        // Configure and render the chart
-        const ctx = document.getElementById('commissionChart').getContext('2d');
+        const ctx = document.getElementById('frequentCustomersChart').getContext('2d');
         new Chart(ctx, {
-            type: 'line', // Line chart for trends
+            type: 'bar',
             data: {
-                labels: labels, // Dates
+                labels: customerLabels,
                 datasets: [{
-                    label: 'Commission Earned ($)',
-                    data: data, // Commission amounts
-                    backgroundColor: 'rgba(74, 5, 117, 0.2)', // Light purple for the area
-                    borderColor: '#4a0575', // Purple line
-                    borderWidth: 2,
-                    fill: true, // Fill under the line
+                    label: 'Tickets Purchased',
+                    data: customerValues,
+                    backgroundColor: 'rgba(74, 5, 117, 0.5)',
+                    borderColor: '#4a0575',
+                    borderWidth: 1
                 }]
             },
             options: {
-                responsive: true,
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    }
-                },
+                responsive: false,  // Disable responsiveness for fixed size
+                maintainAspectRatio: false,
                 scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Number of Tickets'
+                        }
+                    },
                     x: {
                         title: {
                             display: true,
-                            text: 'Date'
+                            text: 'Customers (Emails)'
                         }
-                    },
-                    y: {
-                        title: {
-                            display: true,
-                            text: 'Commission ($)'
-                        },
-                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false
                     }
                 }
             }

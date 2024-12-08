@@ -6,14 +6,18 @@
     <title>Booking Agent Dashboard</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/static/A_sleek_and_modern_logo_for_an_NYU-themed_airline.ico">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f4f4f4;
             margin: 0;
             padding: 0;
             color: #333;
+            background-image: url('{{ url_for('static', filename='technology-wire-mesh-network-connection-digital-background/19187761.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
         header {
             background-color: #4a0575;
@@ -117,21 +121,27 @@
         <p>Welcome back! Here are your available actions:</p>
         <div class="grid">
             <div class="button-card">
+                <i class="fas fa-plane"></i>
                 <a href="{{ url_for('view_flights') }}">View My Flights</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-shopping-cart"></i>
                 <a href="{{ url_for('booking_page') }}">Purchase Tickets</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-search"></i>
                 <a href="{{ url_for('show_flights') }}">Search for Flights</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-dollar-sign"></i>
                 <a href="{{ url_for('view_commission') }}">View My Commission</a>
             </div>
             <div class="button-card">
+                <i class="fas fa-users"></i>
                 <a href="{{ url_for('view_top_customers') }}">View Top Customers</a>
             </div>
         </div>
+        
     </div>
     <script>
         // Automatically hide flash messages after 5 seconds

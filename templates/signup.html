@@ -152,13 +152,6 @@
                 <input type="password" id="agent-password" name="agent-password">
                 <label for="name">Booking Agent Name:</label>
                 <input type="text" id="agency-name" name="agency_name">
-                <label for="airline_name">Airline:</label>
-                <select name="name" id="airline-name" required>
-                    <option value="">Select Airline</option>
-                    {% for airline in airlines %}
-                        <option value="{{ airline.name }}">{{ airline.name }}</option>
-                    {% endfor %}
-                </select>
             </div>
 
             <!-- Airline Staff SignUp -->

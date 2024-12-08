@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compare Revenue</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4a0575;
+        }
+        .chart-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+        canvas {
+            max-width: 400px;
+            margin: 10px;
+        }
+        .back-button {
+            display: block;
+            text-align: center;
+            margin: 20px 0;
+            padding: 10px 20px;
+            background-color: #4a0575;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .back-button:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Compare Revenue</h1>
+
+        <div class="chart-container">
+            <!-- Last Month Revenue Chart -->
+            <div>
+                <h2>Last Month</h2>
+                <canvas id="lastMonthChart"></canvas>
+            </div>
+
+            <!-- Last Year Revenue Chart -->
+            <div>
+                <h2>Last Year</h2>
+                <canvas id="lastYearChart"></canvas>
+            </div>
+        </div>
+
+        <a href="{{ url_for('airline_dashboard') }}" class="back-button">Back to Dashboard</a>
+    </div>
+
+    <script>
+        // Data for Last Month Revenue Chart
+        const lastMonthData = {
+            labels: ['Direct Sales', 'Indirect Sales'],
+            datasets: [{
+                label: 'Last Month Revenue',
+                data: [
+                    {{ last_month_revenue['direct'] }},
+                    {{ last_month_revenue['indirect'] }}
+                ],
+                backgroundColor: ['#4a0575', '#8c43c3']
+            }]
+        };
+
+        const lastMonthConfig = {
+            type: 'pie',
+            data: lastMonthData
+        };
+
+        new Chart(document.getElementById('lastMonthChart'), lastMonthConfig);
+
+        // Data for Last Year Revenue Chart
+        const lastYearData = {
+            labels: ['Direct Sales', 'Indirect Sales'],
+            datasets: [{
+                label: 'Last Year Revenue',
+                data: [
+                    {{ last_year_revenue['direct'] }},
+                    {{ last_year_revenue['indirect'] }}
+                ],
+                backgroundColor: ['#4a0575', '#8c43c3']
+            }]
+        };
+
+        const lastYearConfig = {
+            type: 'pie',
+            data: lastYearData
+        };
+
+        new Chart(document.getElementById('lastYearChart'), lastYearConfig);
+    </script>
+</body>
+</html>

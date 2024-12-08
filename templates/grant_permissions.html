@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grant Permissions</title>
+    <link rel="icon" href="/static/A_sleek_and_modern_logo_for_an_NYU-themed_airline.ico">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-image: url('{{ url_for('static', filename='technology-wire-mesh-network-connection-digital-background/19187761.jpg') }}');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #4a0575;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        select, input[type="submit"] {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #4a0575;
+            color: white;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #37004c;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Grant Permissions</h1>
+        <form method="POST" action="{{ url_for('grant_permissions') }}">
+            <label for="staff_username">Select Staff:</label>
+            <select id="staff_username" name="staff_username" required>
+                <option value="" disabled selected>Select a staff member</option>
+                {% for staff in staff_list %}
+                <option value="{{ staff['username'] }}">{{ staff['username'] }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="permission">Permission:</label>
+            <select id="permission" name="permission" required>
+                <option value="" disabled selected>Select a permission</option>
+                <option value="Operator">Operator</option>
+                <option value="Admin">Admin</option>
+            </select>
+
+            <input type="submit" value="Grant Permission">
+            <a href="{{ url_for('airline_dashboard') }}" class="back-button">Back to Dashboard</a>
+        </form>
+    </div>
+</body>
+</html>

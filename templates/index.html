@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Home - NYU-Air Ticket Reservation System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <link rel="icon" href="/static/A_sleek_and_modern_logo_for_an_NYU-themed_airline.ico">
-
+    
     <style>
-        /* Basic Styling */
+        /* Global Styles */
         body {
             background-image: url('{{ url_for("static", filename="technology-wire-mesh-network-connection-digital-background/19187761.jpg") }}');
             background-size: cover;
@@ -19,54 +19,64 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
+            color: #333;
         }
-
-        /* Flash Message Styling */
-        .flash-messages {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 15px;
-            border-radius: 5px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        /* Moving Banner Section */
+        .banner {
+            width: 100%;
+            background-color: #ffcc00;
+            color: #333;
+            padding: 15px 0;
+            font-size: 0.7rem;
             font-weight: bold;
             text-align: center;
+            overflow: hidden;
+            position: relative;
         }
 
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
+        .banner .banner-text {
+            display: inline-block;
+            position: absolute;
+            white-space: nowrap;
+            animation: scroll-left 10s linear infinite;
         }
 
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
+        @keyframes scroll-left {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
         }
-
-        /* Header Styling */
+        /* Header Section */
         .header {
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
             color: white;
-            padding: 20px;
+            padding: 10px; /* Reduced padding to make the header smaller */
             background-color: rgba(87, 6, 140, 0.8);
+            z-index: 900; /* Lower z-index than the banner */
         }
 
         .header h1 {
-            margin: 10px 0;
-            font-size: 2em;
-            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
         }
 
         .header .button-group {
             display: flex;
             gap: 15px;
-            margin-top: 10px;
         }
 
-        .button {
+        .header .button {
             background-color: #57068c;
             color: white;
             padding: 10px 20px;
@@ -76,82 +86,361 @@
             transition: background-color 0.3s;
         }
 
-        .button:hover {
+        .header .button:hover {
             background-color: #4a0575;
         }
 
-        /* Container Styling for Form Section */
+        /* Booking Form Section */
         .search-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             background-color: white;
-            max-width: 600px;
+            max-width: 90%;
             margin: 50px auto;
-            padding: 30px 40px;
+            padding: 20px 40px;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-            text-align: center;
         }
 
         .search-container h2 {
-            font-size: 1.8em;
-            margin-bottom: 20px;
-            color: #333;
+            font-size: 1.5rem;
+            color: #57068c;
+            margin-bottom: 10px;
+        }
+
+        form {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            gap: 10px;
         }
 
         form label {
             font-weight: bold;
-            display: block;
-            margin: 10px 0 5px;
-            text-align: left;
             color: #333;
+            margin-bottom: 5px;
         }
 
         form input, form select {
-            width: 100%;
             padding: 10px;
-            margin: 5px 0 15px;
+            font-size: 1rem;
             border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 1rem;
+            width: 100%;
         }
 
         form button[type="submit"] {
             background-color: #57068c;
             color: white;
-            padding: 12px;
-            font-size: 1.1rem;
+            padding: 12px 20px;
+            font-size: 1rem;
             border: none;
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
-            width: 100%;
         }
 
         form button[type="submit"]:hover {
             background-color: #4a0575;
         }
 
+        /* Countdown Timer Section */
+        .countdown {
+            text-align: center;
+            margin: 30px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 80%;
+        }
+
+        .countdown h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .countdown p {
+            font-size: 1.5rem;
+            color: #57068c;
+        }
+
+        /* Features Section */
+        .features {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+            margin: 50px auto;
+            width: 80%;
+        }
+
+        .feature {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 30%;
+        }
+
+        .feature i {
+            font-size: 2.5rem;
+            color: #57068c;
+        }
+
+        .feature h3 {
+            margin-top: 15px;
+            color: #333;
+        }
+
+        .feature p {
+            color: #666;
+        }
+
         /* Responsive Design */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.5em;
+            .features {
+                flex-direction: column;
+                gap: 20px;
             }
-            .search-container {
-                width: 90%;
-                padding: 20px;
+
+            .feature {
+                width: 100%;
+            }
+
+            form {
+                flex-direction: column;
+                gap: 15px;
             }
         }
+
+            /* Chat Support Button Styling */
+    .chat-support {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .chat-support a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #4a0575;
+        color: white;
+        font-size: 1rem;
+        font-weight: bold;
+        padding: 12px 20px;
+        text-decoration: none;
+        border-radius: 50px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.2s, background-color 0.3s;
+    }
+
+    .chat-support a:hover {
+        background-color: #37004c;
+        transform: scale(1.1);
+    }
+    .footer {
+    background-color: #4a0575;
+    color: white;
+    padding: 40px 20px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+.footer-column h3 {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #fff;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+    color: #f9a825;
+}
+
+.social-links i {
+    margin-right: 8px;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.8rem;
+}
+
+.footer-bottom a {
+    color: #f9a825;
+    text-decoration: none;
+    margin: 0 10px;
+}
+
+.footer-bottom a:hover {
+    text-decoration: underline;
+}
+
+.find-fares {
+    padding: 40px 20px;
+    background-color: transparent;
+    text-align: center;
+}
+
+.find-fares h2 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.fares-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* Four columns */
+    grid-gap: 10px; /* Uniform gap between cards */
+    padding: 20px;
+    align-items: stretch; /* Ensure cards stretch to fill available space */
+}
+
+.fare-card {
+    background-size: cover;
+    background-position: center;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    height: 300px;
+    display: flex;
+    align-items: flex-end;
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.fare-card:hover {
+    transform: scale(1.05);
+}
+
+.fare-details {
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 20px;
+    text-align: left;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.fare-details h3 {
+    margin: 0 0 5px;
+    font-size: 1.2rem;
+}
+
+.fare-details p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.fare-details button {
+    background-color: #57068c;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    border-radius: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    position: absolute;
+    bottom: -40px; /* Hidden below the card initially */
+    right: 50px;
+    opacity: 0; /* Fully transparent initially */
+}
+
+.fare-card:hover .fare-details button {
+    transform: translateY(-80px); /* Slide up */
+    opacity: 1; /* Make it visible */
+}
+/* Card Sizes */
+.fare-card.large {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+.fare-card.medium {
+    grid-column: span 2;
+    grid-row: span 1;
+}
+
+.fare-card.small {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+.fare-card.long {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+.fare-cards-container {
+    max-width: 90%; /* Adjust the width as needed */
+    margin: auto; /* Center horizontally */
+
+}
+
+.sticky-book-flight {
+    position: sticky;
+    top: 0; /* The section will stick to the top of the viewport */
+    z-index: 10; /* Ensures it stays above other content when scrolling */
+    background-color: transparent; /* Prevents the background from being transparent */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for visual separation */
+    padding: 10px 0;
+}
     </style>
 </head>
 <body>
+    <!-- Moving Banner Section -->
+    <div class="banner">
+        <div class="banner-text">
+            Caution: Flight cancellations due to bad weather may cause delays. Please check your flight status before leaving for the airport!
+        </div>
+    </div>
 
     <!-- Header Section -->
     <header class="header">
         {% if logged_in %}
-            <!-- Header for Logged-In Users -->
             <h1>Welcome back, {{ name }}!</h1>
             <div class="button-group">
                 <a href="{{ url_for('logout') }}" class="button">Logout</a>
-                <!-- User-Specific Dashboard Link -->
                 {% if user_type == 'customer' %}
                     <a href="{{ url_for('customer_dashboard') }}" class="button">Customer Dashboard</a>
                 {% elif user_type == 'booking_agent' %}
@@ -161,52 +450,242 @@
                 {% endif %}
             </div>
         {% else %}
-            <!-- Header for Guests (Not Logged In) -->
-            <h1>Welcome to the NYU-Air Ticket Reservation System</h1>
+            <h1>Welcome to NYU-Air Ticket Reservation System</h1>
             <p>Find the best deals on flights to your favorite destinations.</p>
             <div class="button-group">
-                <a href="{{ url_for('login', next=request.path) }}" class="button" aria-label="Login to NYU-Air Ticket Reservation System">Login</a>
-                <a href="{{ url_for('signup') }}" class="button" aria-label="Register on NYU-Air Ticket Reservation System">Register</a>
+                <a href="{{ url_for('login') }}" class="button">  <i class="fas fa-sign-in-alt"></i> Login</a>
+                <a href="{{ url_for('signup') }}" class="button"> <i class="fas fa-user-plus"></i>  Register</a>
             </div>
         {% endif %}
     </header>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            <div class="flash-messages">
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }}">{{ message }}</div>
-                {% endfor %}
-            </div>
-        {% endif %}
-    {% endwith %}
 
-    <!-- Main Content -->
-    <div class="search-container">
-        <h2>Book a Flight</h2>
-        <form action="{{ url_for('show_flights') }}" method="GET">
-            <label for="from">From</label>
-            <input type="text" id="from" name="from" placeholder="City or Airport" required>
-
-            <label for="to">To</label>
-            <input type="text" id="to" name="to" placeholder="City or Airport" required>
-
-            <label for="depart">Depart</label>
-            <input type="date" id="depart" name="depart" required>
-
-            <label for="return">Return</label>
-            <input type="date" id="return" name="return">
-
-            <label for="passengers">Passengers</label>
-            <select id="passengers" name="passengers">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-            </select>
-
-            <button type="submit" class="button">Show Flights</button>
-        </form>
+    <!-- Booking Form Section -->
+    <div class="sticky-book-flight">
+        <div class="search-container">
+            <h2>Book a Flight</h2>
+            <form action="{{ url_for('show_flights') }}" method="GET">
+                <label for="from">
+                    <i class="fas fa-plane-departure"></i> From
+                </label>
+                <input type="text" id="from" name="from" placeholder="City or Airport" required>
+        
+                <label for="to">
+                    <i class="fas fa-plane-arrival"></i> To
+                </label>
+                <input type="text" id="to" name="to" placeholder="City or Airport" required>
+        
+                <label for="depart">
+                     Depart
+                </label>
+                <input type="date" id="depart" name="depart" required>
+        
+                <label for="return">
+                    Return
+                </label>
+                <input type="date" id="return" name="return">
+        
+                <label for="passengers">
+                    <i class="fas fa-users"></i> 
+                </label>
+                <select id="passengers" name="passengers">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+        
+                <button type="submit" class="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+        </div>
+        
     </div>
+    
+    <section class="find-fares">
+        <h2>Find Great Fares</h2>
+        <div class="fare-cards-container">
+        <div class="fares-grid">
+            <!-- Large Card -->
+            <div class="fare-card medium" style="background-image: url('/static/images/shanghai.jpg');">
+                <div class="fare-details">
+                    <h3>Shanghai</h3>
+                    <p>20 Jan 2025 - 10 Feb 2025</p>
+                    <p>Economy from USD 1597</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+    
+            <!-- Medium Card -->
+            <div class="fare-card medium" style="background-image: url('/static/images/peshawar.jpg');">
+                <div class="fare-details">
+                    <h3>Peshawar</h3>
+                    <p>05 Feb 2025 - 05 Mar 2025</p>
+                    <p>Economy from USD 1011</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+            <div class="fare-card small" style="background-image: url('/static/images/newyork.jpg');">
+                <div class="fare-details">
+                    <h3>New York</h3>
+                    <p>15 Feb 2025 - 25 Feb 2025</p>
+                    <p>Economy from USD 899</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+            <div class="fare-card small" style="background-image: url('/static/images/saigon.jpg');">
+                <div class="fare-details">
+                    <h3>Saigon</h3>
+                    <p>10 Mar 2025 - 20 Mar 2025</p>
+                    <p>Economy from USD 1050</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+            <!-- Medium Card -->
+            <div class="fare-card medium" style="background-image: url('/static/images/chengdu.jpg');">
+                <div class="fare-details">
+                    <h3>Chengdu</h3>
+                    <p>19 Jan 2025 - 02 Feb 2025</p>
+                    <p>Economy from USD 2151</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+    
+            <!-- Small Card -->
+            <div class="fare-card small" style="background-image: url('/static/images/kathmandu.jpg');">
+                <div class="fare-details">
+                    <h3>Kathmandu</h3>
+                    <p>03 Mar 2025 - 01 Apr 2025</p>
+                    <p>Economy from USD 1169</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+    
+            <!-- Small Card -->
+            <div class="fare-card small" style="background-image: url('/static/images/kilimanjaro.jpg');">
+                <div class="fare-details">
+                    <h3>Kilimanjaro</h3>
+                    <p>22 Jan 2025 - 29 Jan 2025</p>
+                    <p>Economy from USD 1094</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+    
+            <!-- Large Card -->
+            <div class="fare-card medium" style="background-image: url('/static/images/mashhad.jpg');">
+                <div class="fare-details">
+                    <h3>Mashhad</h3>
+                    <p>15 Jan 2025 - 02 Feb 2025</p>
+                    <p>Economy from USD 962</p>
+                    <button>Book Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    
+    
+    
+    <!-- Countdown Timer Section -->
+    <div class="countdown">
+        <h2>Special Offer Ends In:</h2>
+        <p id="timer"></p>
+    </div>
+
+    <div class="chat-support">
+        <a href="#" onclick="openChatSupport()">💬 Chat Support</a>
+    </div>
+    
+    <!-- Features Section -->
+    <section class="features">
+        <div class="feature">
+            <i class="fas fa-plane"></i>
+            <h3>Easy Booking</h3>
+            <p>Find and book flights with just a few clicks.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-tags"></i>
+            <h3>Exclusive Discounts</h3>
+            <p>Access the best deals and offers on airfare.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-clock"></i>
+            <h3>Reliable Service</h3>
+            <p>On-time flights and seamless experiences.</p>
+        </div>
+    </section>
+
+
+    
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <ul>
+                    <li><a href="#">Our Mission</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Press Releases</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Customer Support</h3>
+                <ul>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                    <li><a href="#">Travel Alerts</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Services</h3>
+                <ul>
+                    <li><a href="#">Book a Flight</a></li>
+                    <li><a href="#">Track Booking</a></li>
+                    <li><a href="#">Special Assistance</a></li>
+                    <li><a href="#">Group Bookings</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Connect With Us</h3>
+                <ul class="social-links">
+                    <li><a href="#"><i class="fab fa-facebook"></i> Facebook</a></li>
+                    <li><a href="#"><i class="fab fa-twitter"></i> Twitter</a></li>
+                    <li><a href="#"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <li><a href="#"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 NYU-Air. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Use</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // Countdown Timer Script
+        const targetDate = new Date("2024-12-31T23:59:59").getTime();
+        const timer = document.getElementById('timer');
+        setInterval(() => {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            timer.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            if (distance < 0) {
+                timer.textContent = "Offer Expired!";
+            }
+        }, 1000);
+    </script>
+    <script>
+        // Open Chat Support Modal or Redirect
+        function openChatSupport() {
+            alert("Chat support will be added soon!"); // Placeholder functionality
+            // Example: You can integrate a chat widget or redirect to a support page
+            // window.location.href = "https://example.com/support-chat";
+        }
+    </script>
 </body>
 </html>

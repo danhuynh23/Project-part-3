@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 import pymysql
 import hashlib
 import secrets
+import requests
+import pandas as pd
+import math
 from datetime import datetime,timedelta
 
 app = Flask(__name__)
@@ -15,6 +18,66 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 app.config['SESSION_COOKIE_SECURE'] = True  # Use HTTPS in production
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+
+airport_data = pd.read_csv('airports.dat', header=None, names=[
+    "Airport ID", "Name", "City", "Country", "IATA/FAA", "ICAO",
+    "Latitude", "Longitude", "Altitude", "Timezone", "DST",
+    "Tz Database Timezone", "Type", "Source"
+])
+
+# Function to calculate the Haversine distance
+def haversine(lat1, lon1, lat2, lon2):
+    R = 6371.0  # Radius of Earth in kilometers
+    lat1, lon1, lat2, lon2 = map(math.radians, [lat1, lon1, lat2, lon2])
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    a = math.sin(dlat / 2)**2 + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2)**2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    return R * c
+
+# Function to find the nearest airport (ignoring heliports and airbases, returning airport codes)
+def find_nearest_airport(lat, lon):
+    # Exclude heliports and airbases by filtering based on 'Name'
+    filtered_data = airport_data[
+        ~airport_data['Name'].str.contains("Heliport|Air Base", case=False, na=False)
+    ].copy()
+    
+    # Calculate distances to all remaining airports
+    filtered_data['Distance'] = filtered_data.apply(
+        lambda row: haversine(lat, lon, row['Latitude'], row['Longitude']), axis=1
+    )
+    
+    # Find the nearest airport
+    nearest_row = filtered_data.loc[filtered_data['Distance'].idxmin()]
+    return nearest_row['IATA/FAA'], nearest_row['Distance']
+
+# Function to get default origin based on user's location
+def get_default_origin():
+    """
+    Determine the default origin based on the user's location.
+    """
+    try:
+        # Use an external service to get the user's approximate location
+        response = requests.get("http://ip-api.com/json")
+        response.raise_for_status()
+        data = response.json()
+
+        if data["status"] == "success":
+            latitude = data["lat"]
+            longitude = data["lon"]
+            print(f"Lat: {latitude} \nLong: {longitude}")
+            # Find the nearest airport using the user's location
+            airport_code, distance = find_nearest_airport(latitude, longitude)
+            print(f"The nearest airport is {airport_code} at {distance:.2f} km.")
+            return airport_code
+        
+        # Default to JFK if location cannot be determined
+        print("Could not determine location. Defaulting to JFK.")
+        return "JFK"
+
+    except Exception as e:
+        print(f"Error fetching location: {e}")
+        return "JFK"  # Fallback to default JFK
 
 # Database connection
 def get_db_connection():
@@ -122,7 +185,9 @@ def login():
                 'booking_agent': 'booking_agent_dashboard',
                 'airline_staff': 'airline_dashboard'
             }.get(user_type, 'home')  # Default to 'home' if no match
-            
+            default_origin = get_default_origin()
+            print(default_origin)
+            session['default_origin'] = default_origin
             return redirect(next_url or url_for(dashboard_route))
         else:
             flash('Invalid credentials', 'error')
@@ -608,28 +673,21 @@ def get_location():
     if not latitude or not longitude:
         return jsonify({"success": False, "error": "Missing GPS coordinates"}), 400
 
-    # Logic to map GPS coordinates to the nearest airport
-    connection = get_db_connection()
-    with connection.cursor() as cursor:
-        cursor.execute("""
-            SELECT name, city, 
-            (3959 * acos(
-                cos(radians(%s)) * cos(radians(latitude)) * 
-                cos(radians(longitude) - radians(%s)) + 
-                sin(radians(%s)) * sin(radians(latitude))
-            )) AS distance
-            FROM airport
-            ORDER BY distance ASC
-            LIMIT 1
-        """, (latitude, longitude, latitude))
-        nearest_airport = cursor.fetchone()
+    # Find the nearest airport code using the provided location
+    airport_code, distance = find_nearest_airport(latitude, longitude)
 
-    if not nearest_airport:
+    if not airport_code:
         return jsonify({"success": False, "error": "No nearby airport found"}), 404
 
-    # Save the nearest airport to the session or as a backend variable
-    session['default_origin'] = nearest_airport['name']
-    return jsonify({"success": True, "nearest_airport": nearest_airport['name']})
+    # Save the nearest airport code to the session or as a backend variable
+    session['default_origin'] = airport_code
+    return jsonify({
+        "success": True,
+        "nearest_airport": {
+            "code": airport_code,
+            "distance": distance
+        }
+    })
 
 
 

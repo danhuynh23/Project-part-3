@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
+from flask_mail import Mail,Message
 import pymysql
 import hashlib
 import secrets
@@ -18,6 +19,17 @@ app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
 app.config['SESSION_COOKIE_SECURE'] = True  # Use HTTPS in production
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
+
+
+# Email configuration
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'  # Your SMTP server
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+app.config['MAIL_USERNAME'] = 'squirrelboat@gmail.com'  # Your email
+app.config['MAIL_PASSWORD'] = 'jiqh vnoy rrfi xdux'    # Your email password
+app.config['MAIL_DEFAULT_SENDER'] = 'squirrelboat@gmail.com'
+mail = Mail(app)
 
 airport_data = pd.read_csv('airports.dat', header=None, names=[
     "Airport ID", "Name", "City", "Country", "IATA/FAA", "ICAO",
@@ -618,9 +630,9 @@ def confirm_booking():
 
             # Insert into the ticket table (auto-increment ticket_id)
             cursor.execute("""
-                INSERT INTO ticket (name_airline, flight_number, depart_time)
-                VALUES (%s, %s, %s)
-            """, (name_airline, flight_number, depart_time))
+                INSERT INTO ticket (name_airline, flight_number, depart_time, flight_id)
+                VALUES (%s, %s, %s, %s)
+            """, (name_airline, flight_number, depart_time, flight_id))
 
             # Retrieve the auto-generated ticket_id
             ticket_id = cursor.lastrowid
@@ -634,6 +646,17 @@ def confirm_booking():
 
         # Commit the transaction after successful inserts
         connection.commit()
+
+        # Send confirmation email
+        send_confirmation_email(
+            mail,  # Pass the Flask-Mail instance
+            passenger_name,
+            passenger_email,
+            flight_data,
+            fare_type,
+            passenger_count,
+            total_price
+        )
 
         # Redirect to the confirmation page
         return render_template(
@@ -661,6 +684,48 @@ def confirm_booking():
     finally:
         # Ensure the database connection is closed
         connection.close()
+
+
+def send_confirmation_email(mail, passenger_name, passenger_email, flight_data, fare_type, passenger_count, total_price):
+    """
+    Sends a booking confirmation email to the passenger.
+    
+    Parameters:
+        mail (Mail): Flask-Mail instance.
+        passenger_name (str): Name of the passenger.
+        passenger_email (str): Email address of the passenger.
+        flight_data (dict): Flight details including airline, flight number, etc.
+        fare_type (str): Fare type selected by the passenger.
+        passenger_count (int): Number of passengers booked.
+        total_price (float): Total price of the booking.
+    """
+    try:
+        msg = Message(
+            subject="Booking Confirmation",
+            recipients=[passenger_email],
+            body=f"""Dear {passenger_name},
+
+Your booking has been successfully confirmed!
+
+Flight Details:
+- Airline: {flight_data['name_airline']}
+- Flight Number: {flight_data['flight_number']}
+- Departure: {flight_data['name_depart']} on {flight_data['depart_time']}
+- Arrival: {flight_data['name_arrive']}
+- Fare Type: {fare_type.capitalize()}
+- Passengers: {passenger_count}
+- Total Price: ${total_price}
+
+Thank you for booking with us!
+
+Best regards,
+Your Airline Team
+"""
+        )
+        mail.send(msg)
+        print(f"Confirmation email sent to {passenger_email}")
+    except Exception as e:
+        print(f"Failed to send email to {passenger_email}: {e}")
 
 import geopy.distance
 
@@ -1109,6 +1174,7 @@ def get_customers():
                 WHERE flight_number = %s AND depart_time = %s
             """
             cursor.execute(flight_query, (flight_number, depart_time))
+            print(f"The flight number is: {flight_number} and depart time is: {depart_time}")
             flight = cursor.fetchone()
 
             if not flight:

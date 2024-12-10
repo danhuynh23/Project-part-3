@@ -269,29 +269,34 @@
         });
 
         document.querySelectorAll('.customers-btn').forEach(button => {
-            button.addEventListener('click', () => {
-                const flightNumber = button.getAttribute('data-flight-number');
-                const departTime = button.getAttribute('data-depart-time');
-                fetch(`/get_customers?flight_number=${flightNumber}&depart_time=${encodeURIComponent(departTime)}`)
-                    .then(response => response.json())
-                    .then(data => {
-                        modalTitle.textContent = 'Customers on Flight';
-                        if (data.error) {
-                            modalBody.textContent = data.error;
-                        } else {
-                            const customers = data.customers;
-                            modalBody.innerHTML = customers.length
-                                ? `<ul>${customers.map(c => `<li><a href="/customer_profile?email=${c.email}" target="_blank">${c.name} (${c.email})</a></li>`).join('')}</ul>`
-                                : 'No customers booked for this flight.';
-                        }
-                        modal.style.display = 'flex';
-                    })
-                    .catch(error => {
-                        modalBody.textContent = `Error fetching customer data: ${error}`;
-                        modal.style.display = 'flex';
-                    });
+    button.addEventListener('click', () => {
+        const flightNumber = button.getAttribute('data-flight-number');
+        const departTime = button.getAttribute('data-depart-time');
+        fetch(`/get_customers?flight_number=${flightNumber}&depart_time=${encodeURIComponent(departTime)}`)
+            .then(response => response.json())
+            .then(data => {
+                modalTitle.textContent = 'Customers on Flight';
+                if (data.error) {
+                    modalBody.textContent = data.error;
+                    console.log("Data Error");
+                } else {
+                    const customers = data.customers;
+                    modalBody.innerHTML = customers.length
+                        ? `<ul>${customers.map(c => {
+                            console.log(c.email); // Log each email inside the map
+                            return `<li><a href="/customer_profile?email=${c.email}" target="_blank">${c.name} (${c.email})</a></li>`;
+                        }).join('')}</ul>`
+                        : 'No customers booked for this flight.';
+                }
+                modal.style.display = 'flex';
+            })
+            .catch(error => {
+                modalBody.textContent = `Error fetching customer data: ${error}`;
+                modal.style.display = 'flex';
             });
-        });
+    });
+});
+
 
         closeModal.addEventListener('click', () => {
             modal.style.display = 'none';

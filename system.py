@@ -7,6 +7,7 @@ import requests
 import pandas as pd
 import math
 from datetime import datetime,timedelta
+import os 
 
 app = Flask(__name__)
 app.secret_key = 'your_secret_key'  # Use a strong, secret value in production

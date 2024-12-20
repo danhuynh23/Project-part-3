@@ -103,11 +103,12 @@ def get_db_connection_local():
 
 def get_db_connection():
     return pymysql.connect(
-        unix_socket='/cloudsql/boreal-matrix-443304-f6:us-central1:airsystem',  # Replace with your Cloud SQL instance connection name
-        user='root',             # Replace with your Cloud SQL username
-        password='Daniscool123!', # Replace with your Cloud SQL password
-        database='airticketingsystem',  # Replace with your database name
-        cursorclass=pymysql.cursors.DictCursor
+        host=os.getenv('MYSQL_HOST', 'localhost'),  # Default to 'localhost' if MYSQL_HOST is not set
+        user=os.getenv('MYSQL_USER', 'root'),       # Default to 'root'
+        password=os.getenv('MYSQL_PASSWORD', ''),  # Default to empty password
+        database=os.getenv('MYSQL_DB', 'airticketingsystem'),  # Default to 'airticketingsystem'
+        port=int(os.getenv('MYSQL_PORT', 3306)),   # Default to 3306
+        cursorclass=pymysql.cursors.DictCursor     # Optional: Use dictionary-style rows
     )
 def check_permission(required_permission):
     if 'user' not in session or session['user_type'] != 'airline_staff':

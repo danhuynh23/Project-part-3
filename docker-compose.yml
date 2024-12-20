@@ -31,7 +31,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql-data:/var/lib/mysql
-      - ./airsystem.sql:/docker-entrypoint-initdb.d/airsystem.sql
+      - ./airsystem.sql:/docker-entrypoint-initdb.d/airticketingsystemdb.sql
 
 volumes:
   mysql-data:

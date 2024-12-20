@@ -92,12 +92,21 @@ def get_default_origin():
         return "JFK"  # Fallback to default JFK
 
 # Database connection
+def get_db_connection_local():
+    return pymysql.connect(
+        host='34.173.201.121',  # Replace with your Cloud SQL instance's public IP
+        user='root',            # Replace with your Cloud SQL username
+        password='Daniscool123!',  # Replace with your Cloud SQL password
+        database='airticketingsystem',  # Replace with your database name
+        cursorclass=pymysql.cursors.DictCursor
+    )
+
 def get_db_connection():
     return pymysql.connect(
-        host='localhost',
-        user='root',
-        password='',
-        database='air_ticketing_system',
+        unix_socket='/cloudsql/boreal-matrix-443304-f6:us-central1:airsystem',  # Replace with your Cloud SQL instance connection name
+        user='root',             # Replace with your Cloud SQL username
+        password='Daniscool123!', # Replace with your Cloud SQL password
+        database='airticketingsystem',  # Replace with your database name
         cursorclass=pymysql.cursors.DictCursor
     )
 def check_permission(required_permission):
@@ -527,7 +536,7 @@ def booking_page():
     with connection.cursor() as cursor:
         cursor.execute("""
             SELECT f.flight_number, f.name_airline, f.depart_time, f.arrive_time, f.name_depart, 
-                   f.name_arrive, f.price
+                   f.name_arrive, f.price, f.seats
             FROM flight f
             WHERE f.id = %s
         """, (flight_id,))
@@ -537,6 +546,24 @@ def booking_page():
         flash("Flight not found.", "error")
         return redirect(url_for('show_flights'))
 
+    # Fetch the total tickets booked for this flight
+    with connection.cursor() as cursor:
+            cursor.execute("""
+                SELECT COUNT(*) AS tickets_booked
+                FROM ticket
+                WHERE flight_id = %s
+            """, (flight_id,))
+            tickets_booked = cursor.fetchone()['tickets_booked']
+    print(tickets_booked)
+    if flight_details['seats']: 
+        if tickets_booked >= flight_details['seats']:
+                    flash("This flight is fully booked. Please choose another flight.", "error")
+                    return redirect(url_for('show_flights'))
+    else: 
+        flash("This flight is fully booked. Please choose another flight.", "error")
+        return redirect(url_for('show_flights'))
+    
+    print(flight_details)
     # Fetch user details
     user_details = None
     booking_agent_id = None
@@ -599,7 +626,7 @@ def confirm_booking():
             # Fetch flight details to ensure it exists
             cursor.execute("""
                 SELECT name_airline, flight_number, depart_time, name_depart, 
-                       name_arrive, price 
+                       name_arrive, price, seats
                 FROM flight 
                 WHERE id = %s
             """, (flight_id,))
@@ -627,6 +654,18 @@ def confirm_booking():
 
             # Debugging: Print booking agent ID
             print(f"Booking Agent ID: {booking_agent_id}")
+            #Check if flight is over booked 
+            cursor.execute("""
+                SELECT COUNT(*) AS tickets_booked
+                FROM ticket
+                WHERE flight_id = %s
+            """, (flight_id,))
+            tickets_booked = cursor.fetchone()['tickets_booked']
+
+            available_seats = flight_data['seats'] - tickets_booked
+            if passenger_count > available_seats:
+                flash(f"Only {available_seats} seat(s) are available. Please adjust your booking.", "error")
+                return redirect(url_for('booking_page', flight_id=flight_id, fare_type=fare_type))
 
             # Insert into the ticket table (auto-increment ticket_id)
             cursor.execute("""
@@ -1000,6 +1039,7 @@ def create_flight():
         arrive_time = request.form.get('arrive_time')
         price = request.form.get('price')
         status = request.form.get('status', 'Scheduled')
+        seats = request.form.get('seats',0)
         
         if not all([airline, flight_number, name_depart, name_arrive, depart_time, arrive_time, price]):
             flash("All fields are required.", "error")
@@ -1010,11 +1050,11 @@ def create_flight():
             with connection.cursor() as cursor:
                 query = """
                 INSERT INTO flight (name_airline, flight_number, name_depart, name_arrive, 
-                                    depart_time, arrive_time, price, status)
-                VALUES (%s, %s, %s, %s, %s, %s, %s, %s)
+                                    depart_time, arrive_time, price, status, seats)
+                VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
                 """
                 cursor.execute(query, (airline, flight_number, name_depart, name_arrive, 
-                                       depart_time, arrive_time, price, status))
+                                       depart_time, arrive_time, price, status,seats))
                 connection.commit()
             
             flash("Flight created successfully.", "success")

@@ -144,6 +144,15 @@
 </head>
 <body>
     <a href="{{ url_for('show_flights') }}" class="back-button">&#8592; Back to Flights</a>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="alert {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
 
     <div class="container">
 
@@ -203,5 +212,26 @@
         </form>
 
     </div>
+    <script>
+        $(document).ready(function() {
+            // Check if there are any error messages and show the modal if true
+            {% if get_flashed_messages(category_filter=["error"]) %}
+                $('#errorModal').modal('show');
+            {% endif %}
+
+            // Allow modal to be dismissible
+            $('#errorModal').on('hidden.bs.modal', function () {
+                $(this).removeClass('show').hide();
+            });
+        });
+          // Automatically hide flash messages after 5 seconds
+        setTimeout(() => {
+            const flashMessage = document.getElementById('flash-messages');
+            if (flashMessage) {
+                flashMessage.classList.add('fade-out');
+                setTimeout(() => flashMessage.remove(), 1000); // Remove from DOM after fade-out
+            }
+        }, 5000);
+    </script>
 </body>
 </html>

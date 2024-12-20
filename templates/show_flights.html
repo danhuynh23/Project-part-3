@@ -10,11 +10,56 @@
             margin: 0;
             padding: 0;
             color: #333;
+
             background-image: url('{{ url_for('static', filename='technology-wire-mesh-network-connection-digital-background/19187761.jpg') }}');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
         }
+
+                /* Flash Messages */
+        .flash-messages {
+            position: fixed;
+            top: 10px;
+            left: 10px; /* Align messages to the left */
+            z-index: 1000;
+            width: auto; /* Dynamic width based on content */
+            max-width: 600px;
+        }
+
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            font-size: 16px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .alert.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .alert.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .alert.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        /* Optional Fade-Out Effect */
+        .fade-out {
+            transition: opacity 1s ease-out;
+            opacity: 0;
+        }
+
+
     </style>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -22,6 +67,7 @@
 
 </head>
 <body>
+       
 
     <!-- Top Navigation with Route and Login -->
     <div class="top-nav">
@@ -48,14 +94,6 @@
             {% endif %}
         </div>
     </div>
-    <!-- Success or Error Message -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-                <div class="message {{ category }}">{{ message }}</div>
-            {% endfor %}
-        {% endif %}
-    {% endwith %}
 
     <!-- Sidebar for Modifying Search -->
     <div id="overlay" class="overlay" onclick="closeSidebar()"></div>
@@ -87,6 +125,16 @@
             <button type="submit" class="button">Search Flights</button>
         </form>
     </div>
+    <div id="flash-messages" class="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
     <div class="departure-info">
         <div class="departure-date">
             <p>{{ depart_date or 'Date not available' }}</p>
@@ -224,6 +272,30 @@
             document.getElementById("mySidebar").style.width = "0";
             document.getElementById("overlay").style.display = "none";
         }
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Check if there are any error messages and show the modal if true
+            {% if get_flashed_messages(category_filter=["error"]) %}
+                $('#errorModal').modal('show');
+            {% endif %}
+
+            // Allow modal to be dismissible
+            $('#errorModal').on('hidden.bs.modal', function () {
+                $(this).removeClass('show').hide();
+            });
+        });
+          document.addEventListener("DOMContentLoaded", () => {
+        // Automatically hide flash messages after 5 seconds
+        setTimeout(() => {
+            const flashMessages = document.getElementById('flash-messages');
+            if (flashMessages) {
+                flashMessages.classList.add('fade-out');
+                setTimeout(() => flashMessages.remove(), 1000); // Remove from DOM after fade-out
+            }
+        }, 5000);
+    });
+
     </script>
 
 </body>

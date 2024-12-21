@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS=0;
+
 -- MySQL dump 10.13  Distrib 8.0.31, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: airticketingsystem
@@ -61,10 +63,12 @@ CREATE TABLE `airline_staff` (
   `first_name` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `last_name` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
-  PRIMARY KEY (`username`,`name`),
+  PRIMARY KEY (`username`, `name`),
   KEY `name` (`name`),
+  UNIQUE KEY `username` (`username`),
   CONSTRAINT `airline_staff_ibfk_1` FOREIGN KEY (`name`) REFERENCES `airline` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -82,14 +86,15 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `airlinestaffpermission`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
 CREATE TABLE `airlinestaffpermission` (
-  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `permission` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`username`,`permission`),
-  CONSTRAINT `airlinestaffpermission_ibfk_1` FOREIGN KEY (`username`) REFERENCES `airline_staff` (`username`)
+  `username` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `permission` varchar(50) NOT NULL,
+  PRIMARY KEY (`username`, `name`, `permission`),
+  CONSTRAINT `airlinestaffpermission_ibfk_1` FOREIGN KEY (`username`, `name`) REFERENCES `airline_staff` (`username`, `name`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -115,9 +120,10 @@ CREATE TABLE `airplane` (
   `model` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
   PRIMARY KEY (`id`),
   KEY `name_airline` (`name_airline`),
-  KEY `idx_airplane_id_name_airline` (`id`,`name_airline`),
+  UNIQUE KEY `idx_airplane_id_name_airline` (`id`, `name_airline`),
   CONSTRAINT `airplane_ibfk_1` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -353,12 +359,17 @@ CREATE TABLE `ticket` (
   `depart_time` datetime DEFAULT NULL,
   `flight_id` int DEFAULT NULL,
   PRIMARY KEY (`ticket_id`),
-  KEY `ticket_fk` (`name_airline`,`flight_number`,`depart_time`),
+  KEY `ticket_fk` (`name_airline`, `flight_number`, `depart_time`),
   KEY `fk_flight_id` (`flight_id`),
-  CONSTRAINT `fk_flight_id` FOREIGN KEY (`flight_id`) REFERENCES `flight` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `ticket_fk` FOREIGN KEY (`name_airline`, `flight_number`, `depart_time`) REFERENCES `flight` (`name_airline`, `flight_number`, `depart_time`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`name_airline`, `flight_number`) REFERENCES `flight` (`name_airline`, `flight_number`)
+  CONSTRAINT `fk_flight_id` FOREIGN KEY (`flight_id`) 
+    REFERENCES `flight` (`id`) 
+    ON DELETE CASCADE,
+  CONSTRAINT `ticket_fk` FOREIGN KEY (`name_airline`, `flight_number`, `depart_time`) 
+    REFERENCES `flight` (`name_airline`, `flight_number`, `depart_time`) 
+    ON DELETE CASCADE 
+    ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

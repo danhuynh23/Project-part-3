@@ -192,7 +192,7 @@ def login():
 
         if user:
             session.clear()
-            print(user['name'])
+            # print(user['name'])
             if user_type=="booking_agent":
                 session['name']=user['booking_agent_id']
             else:

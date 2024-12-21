@@ -1,3 +1,5 @@
+SET FOREIGN_KEY_CHECKS=0;
+
 -- MySQL dump 10.13  Distrib 8.0.31, for Linux (x86_64)
 --
 -- Host: 127.0.0.1    Database: mysql
@@ -61,7 +63,7 @@ CREATE TABLE `airline_staff` (
   `first_name` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `last_name` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `date_of_birth` date DEFAULT NULL,
-  PRIMARY KEY (`username`,`name`),
+  PRIMARY KEY (`username`), -- Make `username` the primary key
   KEY `name` (`name`),
   CONSTRAINT `airline_staff_ibfk_1` FOREIGN KEY (`name`) REFERENCES `airline` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -82,14 +84,17 @@ UNLOCK TABLES;
 --
 
 DROP TABLE IF EXISTS `airlinestaffpermission`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
+
+
 CREATE TABLE `airlinestaffpermission` (
-  `username` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `permission` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`username`,`permission`),
-  CONSTRAINT `airlinestaffpermission_ibfk_1` FOREIGN KEY (`username`) REFERENCES `airline_staff` (`username`)
+  `username` varchar(100) NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `permission` varchar(50) NOT NULL,
+  PRIMARY KEY (`username`, `name`, `permission`),
+  CONSTRAINT `airlinestaffpermission_ibfk_1` FOREIGN KEY (`username`, `name`) REFERENCES `airline_staff` (`username`, `name`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --

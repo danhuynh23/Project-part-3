@@ -10,7 +10,8 @@ from datetime import datetime,timedelta
 import os 
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Use a strong, secret value in production
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your_default_secret_key')
+app.logger.debug(f"Secret Key: {app.secret_key}")
 
 # Session configuration
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -193,6 +194,7 @@ def login():
         if user:
             session.clear()
             # print(user['name'])
+            app.logger.debug(f"User found: {user}")
             if user_type=="booking_agent":
                 session['name']=user['booking_agent_id']
             else:
@@ -202,7 +204,8 @@ def login():
             session['session_id'] = secrets.token_hex(16)
             session.permanent = True
             flash('Login successful', 'success')
-
+            app.logger.debug(f"Session data after login: {dict(session)}")
+    
             # Redirect to the user-specific dashboard or the next URL if provided
             dashboard_route = {
                 'customer': 'customer_dashboard',
@@ -215,9 +218,37 @@ def login():
             return redirect(next_url or url_for(dashboard_route))
         else:
             flash('Invalid credentials', 'error')
+            app.logger.debug("No user found")
             return redirect(url_for('login', next=next_url))
 
     return render_template('login.html', next=next_url)
+
+@app.route('/test-table/<table_name>')
+def test_table(table_name):
+    try:
+        connection = get_db_connection()  # Replace with your database connection function
+        with connection:
+            cursor = connection.cursor()
+            
+            # Check if the table exists
+            cursor.execute(f"SHOW TABLES LIKE '{table_name}';")
+            result = cursor.fetchone()
+            
+            if not result:
+                return f"Table '{table_name}' does not exist in the database."
+            
+            # Retrieve the first few rows of the table
+            cursor.execute(f"SELECT * FROM {table_name} LIMIT 5;")
+            rows = cursor.fetchall()
+            if rows:
+                return f"Table '{table_name}' exists. Sample rows: {rows}"
+            else:
+                return f"Table '{table_name}' exists but is empty."
+    except Exception as e:
+        return f"Error checking table '{table_name}': {str(e)}"
+
+
+
 
 @app.route('/update_profile', methods=['GET', 'POST'])
 def update_profile():

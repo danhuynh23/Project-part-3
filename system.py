@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from flask_mail import Mail,Message
+from amadeus import Client, ResponseError
+
 import pymysql
 import hashlib
 import secrets
@@ -8,6 +10,8 @@ import pandas as pd
 import math
 from datetime import datetime,timedelta
 import os 
+import logging
+
 
 app = Flask(__name__)
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your_default_secret_key')
@@ -140,6 +144,216 @@ def check_permission(required_permission):
 
     finally:
         connection.close()
+
+
+
+# Initialize the Amadeus client with your API credentials
+amadeus = Client(
+    client_id=os.getenv('AMADEUS_CLIENT_ID'),
+    client_secret=os.getenv('AMADEUS_CLIENT_SECRET')
+)
+
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("flight_sync.log"),
+        logging.StreamHandler()
+    ]
+)
+
+
+def fetch_airline_name_from_api(airline_code):
+    try:
+        # Fetch the airline information from the Amadeus API
+        response = amadeus.reference_data.airlines.get(airlineCodes=airline_code)
+        
+        # Check if the response is valid and contains data
+        if response.status_code == 200 and response.data:
+            # Extract airline name using fallback fields
+            airline_data = response.data[0]
+            airline_name = (
+                airline_data.get('commonName') or 
+                airline_data.get('businessName') or 
+                airline_data.get('name')
+            )
+            
+            if airline_name:
+                return airline_name
+            else:
+                logging.warning(f"Airline code {airline_code} found, but no name available in the response.")
+                return None
+        else:
+            logging.warning(f"No airline information found for code: {airline_code}")
+            return None
+    except ResponseError as e:
+        logging.error(f"Error fetching airline name from Amadeus API for code {airline_code}: {e}")
+        return None
+
+
+def resolve_airline_name(airline_code): 
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            # Check if the airline code exists
+            cursor.execute("SELECT name FROM airline WHERE airline_code = %s", (airline_code,))
+            result = cursor.fetchone()
+            if result:
+                return result['name']  # Return the existing airline name
+            else:
+                # Fetch airline name from the API
+                unformatted_airline_name = fetch_airline_name_from_api(airline_code)
+                airline_name = format_airline_name(unformatted_airline_name)
+                
+                if airline_name:
+                    # Insert the airline into the airline table
+                    cursor.execute("""
+                        INSERT INTO airline (name, airline_code)
+                        VALUES (%s, %s)
+                    """, (airline_name, airline_code))
+                    connection.commit()
+                    logging.info(f"Airline code {airline_code} for {airline_name} inserted successfully.")
+                    return airline_name
+                else:
+                    logging.warning(f"Could not resolve name for airline code: {airline_code}")
+                    return None
+    except Exception as e:
+        logging.error(f"Database error while processing airline {airline_code}: {e}")
+        return None
+    finally:
+        connection.close()
+
+
+# Fetch flights using Amadeus API
+def fetch_flights(origin, destination, departure_date):
+    logging.debug(f"Fetching flights: origin={origin}, destination={destination}, departure_date={departure_date}")
+    try:
+        response = amadeus.shopping.flight_offers_search.get(
+            originLocationCode=origin,
+            destinationLocationCode=destination,
+            departureDate=departure_date,
+            adults=1
+        )
+        logging.info(f"Fetched {len(response.data)} flights from Amadeus API.")
+        return response.data
+    except ResponseError as error:
+        logging.error(f"Error fetching flights: {error}")
+        return []
+
+# Prepare and log the SQL statement
+def prepare_sql_statement(flight):
+    sql_statement = f"""
+    INSERT INTO flight (flight_number,name_airline, name_depart, name_arrive, depart_time, arrive_time, price)
+    VALUES (
+        '{flight['flight_number']}', 
+        '{flight['name_airline']}',
+        '{flight['origin']}', 
+        '{flight['destination']}', 
+        '{flight['departure_time'].strftime('%Y-%m-%d %H:%M:%S')}', 
+        '{flight['arrival_time'].strftime('%Y-%m-%d %H:%M:%S')}', 
+        {flight['price']}
+    );
+    """
+    logging.debug(f"Prepared SQL statement: {sql_statement.strip()}")
+
+# Get or create airline code
+def get_or_create_airline_code(airline_name, airline_code):
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            # Check if the airline code exists
+            cursor.execute("SELECT airline_code FROM airline WHERE airline_code = %s", (airline_code,))
+            result = cursor.fetchone()
+            if result:
+                return result['airline_code']
+            else:
+                # Insert the airline if not found
+                logging.info(f"Airline code {airline_code} for {airline_name} not found. Inserting into database.")
+                cursor.execute("""
+                    INSERT INTO airline (name, airline_code)
+                    VALUES (%s, %s)
+                """, (airline_name, airline_code))
+                connection.commit()
+                logging.info(f"Airline code {airline_code} for {airline_name} inserted successfully.")
+                return airline_code
+    except Exception as e:
+        logging.error(f"Database error while processing airline {airline_name}: {e}")
+        return None
+    finally:
+        connection.close()
+
+# Insert flight into the database with SQL statement logging
+# Insert flight into the database
+def insert_flight_into_db(flight,insert=False):
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            sql_statement = f"""
+            INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                '{flight['flight_number']}', 
+                '{flight['name_airline']}', 
+                '{flight['origin']}', 
+                '{flight['destination']}', 
+                '{flight['departure_time'].strftime('%Y-%m-%d %H:%M:%S')}', 
+                '{flight['arrival_time'].strftime('%Y-%m-%d %H:%M:%S')}', 
+                {flight['price']}, 
+                'Scheduled'
+            )
+            """
+            logging.debug(f"Prepared SQL statement: {sql_statement.strip()}")
+            if insert: 
+                cursor.execute(sql_statement)
+                connection.commit()
+                logging.info(f"Flight {flight['flight_number']} inserted successfully into the database.")
+
+            else: 
+                logging.info("Not inserting cause mode is FALSE")
+    except Exception as e:
+        logging.error(f"Error inserting flight into database: {e}")
+    finally:
+        connection.close()
+
+def format_airline_name(name):
+    # Convert to title case (handles cases like "JETBLUE AIRWAYS" -> "Jetblue Airways")
+    return name.title() if name else "Unknown Airline (Format Error)"
+
+# Sync flights and log SQL statements
+def sync_flights_to_db(origin, destination, departure_date):
+    flights = fetch_flights(origin, destination, departure_date)
+
+    # Step 1: Resolve all airline names
+    airline_name_map = {}
+    for flight_data in flights:
+        airline_code = flight_data.get('validatingAirlineCodes', [None])[0]
+        if airline_code not in airline_name_map:
+            airline_name = resolve_airline_name(airline_code)
+            airline_name_map[airline_code] = format_airline_name(airline_name)
+
+    # Step 2: Process flights with resolved and formatted airline names
+    for flight_data in flights:
+        try:
+            airline_code = flight_data.get('validatingAirlineCodes', [None])[0]
+            airline_name = airline_name_map.get(airline_code, "Unknown Airline")
+            
+            # Prepare flight details
+            flight = {
+                'flight_number': f"{airline_code}{flight_data['id'][-3:]}",
+                'name_airline': airline_name,  # Add formatted airline name here
+                'origin': flight_data['itineraries'][0]['segments'][0]['departure']['iataCode'],
+                'destination': flight_data['itineraries'][0]['segments'][0]['arrival']['iataCode'],
+                'departure_time': datetime.fromisoformat(flight_data['itineraries'][0]['segments'][0]['departure']['at']),
+                'arrival_time': datetime.fromisoformat(flight_data['itineraries'][0]['segments'][0]['arrival']['at']),
+                'price': float(flight_data['price']['total'])
+            }
+
+            # Insert into the database
+            insert_flight_into_db(flight,insert=True)
+
+        except Exception as e:
+            logging.error(f"Error processing flight data: {e}")
+            logging.debug(f"Flight data: {flight_data}")
 
 
 @app.route('/manage_flights', methods=['GET', 'POST'])
@@ -329,6 +543,11 @@ import sqlite3
 
 
 from random import randint
+from flask import g
+
+# Cache to store last sync timestamps for each query
+last_sync_cache = {}
+CACHE_EXPIRY = timedelta(hours=1)  # Cache expiry time
 
 @app.route('/show_flights', methods=['GET'])
 def show_flights():
@@ -364,6 +583,17 @@ def show_flights():
     if not origin:
         flash(f"Departure location is required, defaulting to { session.get('default_origin')} .", "error")
         return redirect(url_for('home'))
+    
+    # Check if we need to sync flights
+
+    cache_key = (origin, destination, depart_date_obj.strftime('%Y-%m-%d'))
+    last_sync = last_sync_cache.get(cache_key)
+    now = datetime.now()
+
+    if not last_sync or now - last_sync > CACHE_EXPIRY:
+        sync_flights_to_db(origin, destination, depart_date)
+        last_sync_cache[cache_key] = now
+        logging.info(f"Synced flights for {cache_key}.")
 
     # Connect to the database
     connection = get_db_connection()
@@ -374,7 +604,9 @@ def show_flights():
         flights = []
         date_prices = {}
         for date in date_options:
+
             date_str = date.strftime('%Y-%m-%d')
+
             if destination:
                 query = """
                 SELECT f.*, dep_airport.city AS origin_city, arr_airport.city AS destination_city

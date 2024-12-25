@@ -33931,3 +33931,7 @@
 2024-12-25 00:31:41,946 - DEBUG - No user found
 2024-12-25 00:31:44,404 - DEBUG - No user found
 2024-12-25 00:31:55,587 - DEBUG - No user found
+2024-12-25 13:34:28,583 - DEBUG - User found: {'email': 'dsh400@nyu.edu', 'name': 'Dan Huynh', 'password': '53bc3911362cda98b1014b8566f6800c72f6be0688961274130bd6a3fcfee8b9', 'building_number': '', 'street': '65 Duong 51 Binh Trung Dong, Quan 2', 'city': 'Ho Chi Minh', 'state': 'HCM', 'phone_number': '0901663700', 'passport_number': '123', 'passport_expiration': datetime.date(2024, 11, 1), 'passport_country': 'VN', 'date_of_birth': datetime.date(2024, 11, 30)}
+2024-12-25 13:34:28,584 - DEBUG - Session data after login: {'name': 'Dan Huynh', 'user': 'dsh400@nyu.edu', 'user_type': 'customer', 'session_id': '80932ebfc9ca2d786bf96779ced0a03c', '_permanent': True, '_flashes': [('success', 'Login successful')]}
+2024-12-25 13:34:28,596 - DEBUG - Starting new HTTP connection (1): ip-api.com:80
+2024-12-25 13:34:28,845 - DEBUG - http://ip-api.com:80 "GET /json HTTP/1.1" 200 307

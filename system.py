@@ -11,6 +11,7 @@ import math
 from datetime import datetime,timedelta
 import os 
 import logging
+from bs4 import BeautifulSoup
 
 
 app = Flask(__name__)
@@ -146,6 +147,71 @@ def check_permission(required_permission):
         connection.close()
 
 
+def fetch_airline_logo_from_wikipedia(airline_name):
+    try:
+        # Replace spaces with underscores for the Wikipedia URL
+        search_url = f"https://en.wikipedia.org/wiki/{airline_name.replace(' ', '_')}"
+        response = requests.get(search_url, timeout=10)
+        
+        if response.status_code != 200:
+            logging.error(f"Failed to fetch Wikipedia page for {airline_name}. Status code: {response.status_code}")
+            return None
+        
+        # Parse the HTML using BeautifulSoup
+        soup = BeautifulSoup(response.text, "html.parser")
+        
+        # Find the link to the "File:" page for the logo
+        file_link = soup.find("a", href=lambda x: x and "File:" in x)
+        if not file_link:
+            logging.warning(f"No 'File:' link found on Wikipedia page for {airline_name}.")
+            return None
+        
+        file_page_url = f"https://en.wikipedia.org{file_link['href']}"
+        logging.info(f"Found 'File:' page for {airline_name}: {file_page_url}")
+        
+        # Fetch the "File:" page
+        file_response = requests.get(file_page_url, timeout=10)
+        if file_response.status_code != 200:
+            logging.error(f"Failed to fetch 'File:' page for {airline_name}. Status code: {file_response.status_code}")
+            return None
+        
+        # Parse the "File:" page to get the image URL
+        file_soup = BeautifulSoup(file_response.text, "html.parser")
+        logo_img = file_soup.find("a", class_="internal")
+        if not logo_img:
+            logging.warning(f"No logo image found on 'File:' page for {airline_name}.")
+            return None
+        
+        logo_url = "https:" + logo_img["href"]
+        logging.info(f"Fetched logo URL for {airline_name}: {logo_url}")
+
+        # Adjust headers to mimic a browser request
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+
+        # Download the logo
+        response = requests.get(logo_url, stream=True, headers=headers, timeout=10)
+        if response.status_code == 200:
+            # Save the logo locally
+            local_logo_dir = "wikipedia_airline_logos"
+            os.makedirs(local_logo_dir, exist_ok=True)
+            extension = os.path.splitext(logo_url)[-1] or ".svg"
+            logo_path = os.path.join(local_logo_dir, f"{airline_name.replace(' ', '_').lower()}{extension}")
+            with open(logo_path, "wb") as file:
+                for chunk in response.iter_content(1024):
+                    file.write(chunk)
+            logging.info(f"Logo for airline {airline_name} saved locally at {logo_path}.")
+            return logo_path
+        else:
+            logging.warning(f"Failed to download logo for {airline_name}. Status code: {response.status_code}")
+            return None
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Request error for airline {airline_name}: {e}")
+        return None
+    except Exception as e:
+        logging.error(f"Unexpected error for airline {airline_name}: {e}")
+        return None
 
 # Initialize the Amadeus client with your API credentials
 amadeus = Client(
@@ -609,10 +675,11 @@ def show_flights():
 
             if destination:
                 query = """
-                SELECT f.*, dep_airport.city AS origin_city, arr_airport.city AS destination_city
+                SELECT f.*, dep_airport.city AS origin_city, arr_airport.city AS destination_city, a.logo_path
                 FROM flight f
                 JOIN airport dep_airport ON f.name_depart = dep_airport.name
                 JOIN airport arr_airport ON f.name_arrive = arr_airport.name
+                JOIN airline a ON f.name_airline = a.name
                 WHERE f.name_depart = %s AND f.name_arrive = %s AND DATE(f.depart_time) = %s
                 """
                 cursor.execute(query, [origin, destination, date_str])

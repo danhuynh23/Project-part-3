@@ -59,6 +59,13 @@
             opacity: 0;
         }
 
+        .airline-logo {
+        width: 50px;
+        height: auto;
+        margin-right: 10px;
+        vertical-align: middle;
+    }
+
 
     </style>
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
@@ -176,7 +183,12 @@
             {% for flight in flights %}
                 <div class="flight-item">
                     <div class="flight-info">
-                        <p class="airline">{{ flight.name_airline }}</p>
+                        <p class="airline">
+                            {% if flight.logo_path %}
+                            <img src="{{ url_for('static', filename=flight.logo_path) }}" alt="{{ flight.name_airline }} logo" class="airline-logo">
+                            {% endif %}
+                        {{ flight.name_airline }}
+                        </p>
                         <p class="route">
                             {{ flight.flight_number }} <br>
                             <span class="time">{{ flight.depart_time.strftime('%H:%M') }}</span> {{ flight.name_depart }}

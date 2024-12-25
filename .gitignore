@@ -1,2 +1,4 @@
 myenv/
 docker-compose.yml
+docker-compose.yml
+ragbot/Dockerfile

@@ -126,7 +126,31 @@ def rag_query():
     try:
         validate_sql_query(sql_query)
         results = execute_sql_query(sql_query)
-        return jsonify({"query": user_query, "sql_query": sql_query, "results": results})
+
+        # Check if results are empty
+        if not results:
+            # Generate fallback response using LLM
+            context = f"No data was found for the query: {user_query}. "
+            context += (
+                "You are unable to find the data as specified, please give the user a response to apologize for that. You are an customer service agent working for a booking agency."
+            )
+
+            fallback_response = generate_response(user_query, context)
+
+            return jsonify({
+                "query": user_query,
+                "sql_query": sql_query,
+                "results": results,
+                "response": fallback_response
+            }), 200
+
+        # Return the actual results if found
+        return jsonify({
+            "query": user_query,
+            "sql_query": sql_query,
+            "results": results
+        })
+
     except Exception as e:
         return jsonify({"error": str(e), "sql_query": sql_query}), 400
 

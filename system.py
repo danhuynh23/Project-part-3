@@ -2332,6 +2332,34 @@ def view_top_customers():
         commission_chart_data=commission_chart_data
     )
 
+@app.route('/chat_support', methods=['POST'])
+def chat_support():
+    data = request.json
+    user_query = data.get('query', '')
+    logging.info("Received a request to /chat_support with query: %s", user_query)
+
+    if not user_query:
+        logging.warning("Query is missing in the request")
+        return jsonify({"error": "Query is required"}), 400
+
+    try:
+        # Forward the query to the RAG bot container
+        import requests
+        rag_bot_url = "http://project-part-3-rag-bot-1:5001/rag_query"  # Correct URL
+        logging.info("Forwarding query to RAG bot at URL: %s", rag_bot_url)
+
+        response = requests.post(rag_bot_url, json={"query": user_query})
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        response_data = response.json()
+
+        logging.info("Successfully received response from RAG bot: %s", response_data)
+        return jsonify(response_data)
+    except requests.exceptions.RequestException as e:
+        logging.error("Failed to reach RAG bot: %s", e)
+        return jsonify({"error": f"Failed to reach RAG bot: {e}"}), 500
+    except Exception as e:
+        logging.error("An unexpected error occurred: %s", e)
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route('/logout')

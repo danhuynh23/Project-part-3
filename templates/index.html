@@ -680,12 +680,30 @@
         }, 1000);
     </script>
     <script>
-        // Open Chat Support Modal or Redirect
         function openChatSupport() {
-            alert("Chat support will be added soon!"); // Placeholder functionality
-            // Example: You can integrate a chat widget or redirect to a support page
-            // window.location.href = "https://example.com/support-chat";
-        }
+            const userQuery = prompt("Enter your query:"); // Prompt user for input
+            if (userQuery) {
+                fetch('/chat_support', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ query: userQuery })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(`Error: ${data.error}`);
+                    } else {
+                        alert(`Chatbot Response: ${data.response || 'No response received.'}`);
+                    }
+                })
+                .catch(error => {
+                    alert(`An error occurred: ${error.message}`);
+                });
+            }
+}
+
     </script>
 </body>
 </html>

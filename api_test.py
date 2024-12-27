@@ -52,7 +52,7 @@ def fetch_airline_name_from_api(airline_code, retry=3):
                 logging.error(f"Error fetching airline name for {airline_code}: {e}")
                 return None
 
-
+#
 
 def resolve_airline_name(airline_code): 
     connection = get_db_connection()

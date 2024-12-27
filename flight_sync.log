@@ -33935,3 +33935,53 @@
 2024-12-25 13:34:28,584 - DEBUG - Session data after login: {'name': 'Dan Huynh', 'user': 'dsh400@nyu.edu', 'user_type': 'customer', 'session_id': '80932ebfc9ca2d786bf96779ced0a03c', '_permanent': True, '_flashes': [('success', 'Login successful')]}
 2024-12-25 13:34:28,596 - DEBUG - Starting new HTTP connection (1): ip-api.com:80
 2024-12-25 13:34:28,845 - DEBUG - http://ip-api.com:80 "GET /json HTTP/1.1" 200 307
+2024-12-25 15:05:30,523 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-25 15:27:41,724 - DEBUG - Starting new HTTP connection (1): rag-bot-1:5001
+2024-12-25 15:34:17,126 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=2024-12-23
+2024-12-25 15:34:18,873 - ERROR - Error fetching flights: [400]
+
+
+2024-12-25 15:34:18,873 - INFO - Synced flights for ('1', '1', '2024-12-23').
+2024-12-25 15:34:22,122 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=2024-12-24
+2024-12-25 15:34:22,930 - ERROR - Error fetching flights: [400]
+
+
+2024-12-25 15:34:22,930 - INFO - Synced flights for ('1', '1', '2024-12-24').
+2024-12-25 15:34:31,574 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=1
+2024-12-25 15:34:32,407 - ERROR - Error fetching flights: [400]
+
+
+
+2024-12-25 15:34:32,408 - INFO - Synced flights for ('1', '1', '2024-12-25').
+2024-12-27 11:32:10,844 - DEBUG - Starting new HTTP connection (1): rag-bot-1:5001
+2024-12-27 11:34:03,174 - DEBUG - Starting new HTTP connection (1): localhost:5001
+2024-12-27 11:38:27,425 - DEBUG - Starting new HTTP connection (1): 0.0.0.0:5001
+2024-12-27 11:40:55,107 - INFO - Received a request to /chat_support with query: Hello
+2024-12-27 11:40:55,109 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot:5001/rag_query
+2024-12-27 11:40:55,125 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot:5001
+2024-12-27 11:40:55,199 - ERROR - Failed to reach RAG bot: HTTPConnectionPool(host='project-part-3-rag-bot', port=5001): Max retries exceeded with url: /rag_query (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7821ca0cd6d0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+2024-12-27 11:42:05,950 - INFO - Received a request to /chat_support with query: Hello]
+2024-12-27 11:42:05,951 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-27 11:42:05,963 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-27 11:42:08,376 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 483
+2024-12-27 11:42:08,377 - INFO - Successfully received response from RAG bot: {'query': 'Hello]', 'results': {'error': '(1064, \'You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near \\\'The user query "Hello" does not provide any specific information or request rela\\\' at line 1\')'}, 'sql_query': 'The user query "Hello" does not provide any specific information or request related to the database schema. Therefore, it\'s not possible to generate an SQL query based on this input.'}
+2024-12-27 11:42:30,516 - INFO - Received a request to /chat_support with query: I want to see flights from NYC?
+2024-12-27 11:42:30,517 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-27 11:42:30,518 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-27 11:42:31,628 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 119
+2024-12-27 11:42:31,629 - INFO - Successfully received response from RAG bot: {'query': 'I want to see flights from NYC?', 'results': [], 'sql_query': "SELECT * FROM flight WHERE name_depart = 'NYC';"}
+2024-12-27 11:50:01,513 - INFO - Received a request to /chat_support with query: Show me flights from NYC
+2024-12-27 11:50:01,516 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-27 11:50:01,536 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-27 11:50:12,307 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 1018
+2024-12-27 11:50:12,308 - INFO - Successfully received response from RAG bot: {'query': 'Show me flights from NYC', 'response': "I'm sorry for any misunderstanding, but as an AI text-based model, I don't have real-time access to databases or the ability to display live flight information. However, based on the database schema you provided, you could potentially conduct a search by querying the 'flights' and 'airports' tables. \n\nYou'd want to look for flights where the 'origin' matches the airport code for NYC. This information might be in your 'airports' table. If you're looking for a specific destination, you'd also want to use the 'destination' field in your 'flights' table. \n\nRemember to also check 'airlines' for specific carrier information, and 'tickets' and 'purchases' tables if you're interested in pricing or purchasing data.\n\nFor real-time updates and detailed flight information, I recommend visiting airline websites, or flight tracking services, or using dedicated flight search applications.", 'results': [], 'sql_query': "SELECT * FROM flight WHERE name_depart = 'NYC';"}
+2024-12-27 11:50:30,502 - INFO - Received a request to /chat_support with query: Show me flights from NYC
+2024-12-27 11:50:30,502 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-27 11:50:30,504 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-27 11:50:43,518 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 1023
+2024-12-27 11:50:43,519 - INFO - Successfully received response from RAG bot: {'query': 'Show me flights from NYC', 'response': "I'm sorry, but as an AI, I don't have real-time access to flight databases to provide you with specific flight information. However, I can guide you on how to find this information. You can search for flights from New York City on various airline websites or through travel booking sites. \n\nIf you need to use a database, you might create a query that looks something like this:\n\n```\nSELECT Flights.FlightNumber, Flights.DepartureTime, Airlines.AirlineName, Airports.AirportName \nFROM Flights \nJOIN Airlines ON Flights.AirlineID = Airlines.AirlineID \nJOIN Airports ON Flights.OriginID = Airports.AirportID \nWHERE Airports.City = 'New York City'\n```\n\nThis SQL command will show you all flights departing from airports in New York City, along with their flight number, departure time, and airline name. Please note that the actual command might differ based on the specific structure and", 'results': [], 'sql_query': "SELECT * FROM flight WHERE name_depart = 'NYC';"}
+2024-12-27 11:53:45,065 - INFO - Received a request to /chat_support with query: I want flights from NYC
+2024-12-27 11:53:45,068 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-27 11:53:45,074 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-27 11:53:49,152 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 514
+2024-12-27 11:53:49,153 - INFO - Successfully received response from RAG bot: {'query': 'I want flights from NYC', 'response': "I'm truly sorry for the inconvenience, but I'm currently unable to provide the details on flights departing from NYC at the moment. I would suggest checking with various airlines or travel booking websites for the most accurate and up-to-date information. They should be able to assist you with your travel needs. Again, I apologize for any inconvenience and appreciate your understanding.", 'results': [], 'sql_query': "SELECT * FROM flight WHERE name_depart = 'NYC';"}

@@ -4,7 +4,8 @@ from langchain.prompts import PromptTemplate
 from langchain.schema import AIMessage, HumanMessage, SystemMessage
 from langchain.memory import ConversationBufferMemory
 from langchain_openai import ChatOpenAI
-from difflib import get_close_matches
+import datetime
+from langchain.schema import SystemMessage
 
 import pymysql
 import os
@@ -23,6 +24,22 @@ logger = logging.getLogger(__name__)
 # Stores multi-turn messages from user & assistant
 memory = ConversationBufferMemory(return_messages=True)
 
+#Making the agent aware of time 
+def build_system_message():
+    """
+    Generates a system message that includes the current local time.
+    """
+    now_str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    return SystemMessage(
+        content=(
+            f"You are an AI assistant. The current local time is {now_str}. "
+            "Use this time if the user requests time-related data, or if relevant to scheduling. "
+            "If the user doesn't need the time, you may ignore it."
+        )
+    )
+
+system_msg = build_system_message()
+memory.chat_memory.add_message(system_msg)
 # ---------------------------
 # 3) GPT-4 Chat Model
 # ---------------------------
@@ -94,7 +111,7 @@ response_prompt = PromptTemplate(
 User Query: "{query}"
 SQL Results: "{results}"
 
-Give a concise summary for the user.
+Give a concise summary for the user, you are a travel agent customer support bot.
 """
 )
 response_chain = response_prompt | llm

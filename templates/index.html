@@ -425,6 +425,82 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional shadow for visual separation */
     padding: 10px 0;
 }
+
+/* Chatbox Container */
+.chatbox-modal {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 300px;
+    max-height: 400px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.chatbox-modal.hidden {
+    display: none;
+}
+
+.chatbox-header {
+    background-color: #4a0575;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.chatbox-messages {
+    flex-grow: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+    font-size: 0.9rem;
+    color: #333;
+}
+
+.chatbox-input {
+    display: flex;
+    border-top: 1px solid #ddd;
+    padding: 10px;
+    background-color: white;
+}
+
+.chatbox-input input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-right: 5px;
+    font-size: 0.9rem;
+}
+
+.chatbox-input button {
+    background-color: #4a0575;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.chatbox-input button:hover {
+    background-color: #37004c;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
     </style>
 </head>
 <body>
@@ -593,9 +669,33 @@
         <p id="timer"></p>
     </div>
 
-    <div class="chat-support">
-        <a href="#" onclick="openChatSupport()">💬 Chat Support</a>
+    <div id="chatbox-container">
+        <!-- Chatbox Button -->
+        <div class="chat-support">
+            <a href="#" onclick="toggleChatbox()">💬 Chat Support</a>
+        </div>
+    
+        <!-- Chatbox Modal -->
+        <div id="chatbox-modal" class="chatbox-modal hidden">
+            <div class="chatbox-header">
+                <h3>Customer Support</h3>
+                <button class="close-button" onclick="toggleChatbox()">×</button>
+            </div>
+            <div id="chatbox-messages" class="chatbox-messages">
+                <!-- Chat messages will appear here -->
+            </div>
+            <div class="chatbox-input">
+                <input
+                    type="text"
+                    id="chatbox-input"
+                    placeholder="Type your message..."
+                    onkeydown="handleInput(event)"
+                />
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
     </div>
+    
     
     <!-- Features Section -->
     <section class="features">
@@ -680,30 +780,59 @@
         }, 1000);
     </script>
     <script>
-        function openChatSupport() {
-            const userQuery = prompt("Enter your query:"); // Prompt user for input
-            if (userQuery) {
-                fetch('/chat_support', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ query: userQuery })
-                })
-                .then(response => response.json())
-                .then(data => {
+        function toggleChatbox() {
+            const chatboxModal = document.getElementById("chatbox-modal");
+            chatboxModal.classList.toggle("hidden");
+        }
+        
+        function handleInput(event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        }
+        
+        function sendMessage() {
+            const inputField = document.getElementById("chatbox-input");
+            const userMessage = inputField.value.trim();
+            if (!userMessage) return;
+        
+            // Add user message to chatbox
+            addMessage("You", userMessage);
+        
+            // Send message to backend
+            fetch("/chat_support", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ query: userMessage }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
                     if (data.error) {
-                        alert(`Error: ${data.error}`);
+                        addMessage("Support", "Sorry, we couldn't process your request.");
                     } else {
-                        alert(`Chatbot Response: ${data.response || 'No response received.'}`);
+                        addMessage("Support", data.response || "Here is what I found: " + JSON.stringify(data.results));
                     }
                 })
-                .catch(error => {
-                    alert(`An error occurred: ${error.message}`);
+                .catch((error) => {
+                    console.error("Error:", error);
+                    addMessage("Support", "Sorry, there was an issue processing your query.");
                 });
-            }
-}
-
-    </script>
+        
+            // Clear the input field
+            inputField.value = "";
+        }
+        
+        function addMessage(sender, message) {
+            const messagesContainer = document.getElementById("chatbox-messages");
+            const messageElement = document.createElement("div");
+            messageElement.classList.add("message");
+            messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+            messagesContainer.appendChild(messageElement);
+        
+            // Scroll to the latest message
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        </script>
+        
 </body>
 </html>

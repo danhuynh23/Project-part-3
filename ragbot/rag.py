@@ -99,6 +99,7 @@ Avoid T-SQL or other dialect features like 'TOP'. Use `LIMIT` instead.
 
 User Query: "{query}"
 Only generate the SQL query. No explanations.
+If the user allows AND there are no flights, you can query the dates near to the date used in the conversation. 
 """
 )
 sql_chain = sql_prompt | llm
@@ -133,13 +134,15 @@ fallback_chain = fallback_prompt | llm
 # 6) Classification Logic
 # ---------------------------
 classification_prompt = PromptTemplate(
-    input_variables=["query"],
+    input_variables=["conversation_history", "query"],
     template="""
+{conversation_history}
+
 User Query: "{query}"
 
-Decide if the above query is about flights, tickets, customers, or any database operation. 
-If yes, respond with exactly "true".
-If no, respond with exactly "false".
+Determine if the user's query is related to flights, tickets, customers, or any database operation. 
+If it is, respond with exactly "true".
+If it is not, respond with exactly "false".
 """
 )
 
@@ -150,23 +153,28 @@ class UserQuery(BaseModel):
     """Simple Pydantic model for the JSON payload."""
     query: str
 
-def classify_query(query: str) -> bool:
+def classify_query(conversation_text: str, query: str) -> bool:
     """
-    Ask the LLM if the query is 'database-related' 
-    (e.g. flights, tickets, customers).
-    Returns True if LLM says "true", otherwise False.
+    Uses the LLM to classify if the query is related to the database.
     """
-    # 1) Invoke the classification chain
-    classification_result = classification_chain.invoke({"query": query})
-    
-    # 2) Extract the text from AIMessage or fallback to string
-    if isinstance(classification_result, AIMessage):
-        answer = classification_result.content.strip().lower()
-    else:
-        answer = str(classification_result).strip().lower()
+    try:
+        result = classification_chain.invoke({
+            "conversation_history": conversation_text,
+            "query": query
+        })
 
-    # 3) Return True if LLM answered "true", otherwise False
-    return (answer == "true")
+        # Extract classification result
+        if isinstance(result, AIMessage):
+            classification = result.content.strip().lower() == "true"
+        else:
+            classification = str(result).strip().lower() == "true"
+
+        logger.info(f"Query classification: {classification}")
+        return classification
+
+    except Exception as e:
+        logger.error(f"Error in query classification: {e}")
+        return False
 
 # Helper to map message classes (Human, AI, System) to role strings
 def get_message_role(msg):
@@ -206,7 +214,7 @@ def rag_query():
         )
 
         # 4) Classification
-        if classify_query(user_query.query):
+        if classify_query(conversation_text,user_query.query):
             # a) Generate SQL with conversation history
             sql_result = sql_chain.invoke({
                 "conversation_history": conversation_text,

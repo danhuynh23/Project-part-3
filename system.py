@@ -12,9 +12,12 @@ from datetime import datetime,timedelta
 import os 
 import logging
 from bs4 import BeautifulSoup
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+
 app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your_default_secret_key')
 app.logger.debug(f"Secret Key: {app.secret_key}")
 
@@ -430,6 +433,14 @@ def manage_flights():
     # Flight management logic here
     return render_template('manage_flights.html')
 
+@app.route('/api/manage_flights', methods=['GET', 'POST'])
+def manage_flights():
+    if not check_permission('manage_flights'):
+        return redirect(url_for('dashboard'))
+    
+    # Flight management logic here
+    return jsonify()
+
 @app.route('/')
 def home():
     logged_in = 'user' in session 
@@ -440,7 +451,22 @@ def home():
         return render_template('index.html', logged_in=logged_in, user_type=user_type, user=user,name=user)
     else: 
         return render_template('index.html', logged_in=logged_in, user_type=user_type, user=user,name=name)
-    
+
+@app.route('/api/home', methods=['GET'])
+def api_home():
+    logged_in = 'user' in session 
+    user_type = session.get('user_type')  # Optional: pass user type if you need it in the header
+    user = session.get('user')
+    name = session.get('name')
+
+    response = {
+        "logged_in": logged_in,
+        "user_type": user_type,
+        "user": user,
+        "name": name
+    }
+    return jsonify(response)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     next_url = request.args.get('next')  # Capture the next URL
@@ -502,6 +528,54 @@ def login():
             return redirect(url_for('login', next=next_url))
 
     return render_template('login.html', next=next_url)
+
+@app.route('/api/login', methods=['POST'])
+def api_login():
+    data = request.json
+    user_type = data.get('user_type')
+    login_field = data.get('login_field')
+    password = data.get('password')
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+    # Determine table based on user type
+    table_name = {
+        'customer': 'customer',
+        'booking_agent': 'booking_agent',
+        'airline_staff': 'airline_staff'
+    }.get(user_type)
+
+    if not table_name:
+        return jsonify({"error": "Invalid user type"}), 400
+
+    # Execute the query based on user type
+    connection = get_db_connection()
+    with connection:
+        cursor = connection.cursor()
+        query = f"SELECT * FROM {table_name} WHERE password=%s AND "
+        query += "username=%s" if user_type == 'airline_staff' else "email=%s"
+        cursor.execute(query, (hashed_password, login_field))
+        user = cursor.fetchone()
+
+    if user:
+        session.clear()
+        if user_type == "booking_agent":
+            session['name'] = user['booking_agent_id']
+        else:
+            session['name'] = user['name']
+        session['user'] = login_field
+        session['user_type'] = user_type
+        session['session_id'] = secrets.token_hex(16)
+        session.permanent = True
+
+        response = {
+            "message": "Login successful",
+            "user_type": user_type,
+            "default_origin": get_default_origin()
+        }
+        return jsonify(response)
+    else:
+        return jsonify({"error": "Invalid credentials"}), 401
+
 
 @app.route('/test-table/<table_name>')
 def test_table(table_name):

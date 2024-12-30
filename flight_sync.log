@@ -34398,3 +34398,1992 @@
 2024-12-30 13:23:01,714 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
 2024-12-30 13:23:13,848 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 1168
 2024-12-30 13:23:13,850 - INFO - Successfully received response from RAG bot: {'response': 'Sure, Jeff. Here are the details for the first flight:\n\n- Flight Number: AS6\n- Airline: Alaska Airlines\n- Departure Airport: JFK (New York)\n- Arrival Airport: SFO (San Francisco)\n- Departure Time: 16:30 on December 30, 2024\n- Arrival Time: 20:12 on December 30, 2024\n- Price: $389\n- Status: Scheduled\n\nPlease note that the seat information is currently unavailable. Let me know if you need any more information or if you want to book this flight.', 'results': [{'arrive_city': 'San Francisco', 'arrive_time': 'Mon, 30 Dec 2024 20:12:00 GMT', 'depart_city': 'New York', 'depart_time': 'Mon, 30 Dec 2024 16:30:00 GMT', 'flight_number': 'AS6', 'id': 339, 'name_airline': 'Alaska Airlines', 'name_arrive': 'SFO', 'name_depart': 'JFK', 'price': 389, 'seats': None, 'status': 'Scheduled'}], 'sql_query': "SELECT f.id, f.flight_number, f.name_depart, f.name_arrive, f.name_airline, f.depart_time, f.arrive_time, f.price, f.status, f.seats, a_depart.city AS depart_city, a_arrive.city AS arrive_city\nFROM flight AS f\nJOIN airport AS a_depart ON f.name_depart = a_depart.name\nJOIN airport AS a_arrive ON f.name_arrive = a_arrive.name\nWHERE f.flight_number = 'AS6'\nLIMIT 1;"}
+2024-12-30 13:33:37,512 - INFO - Received a request to /chat_support with query: hello
+2024-12-30 13:33:37,514 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:33:37,529 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:33:39,817 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2024-12-30 13:33:39,818 - INFO - Successfully received response from RAG bot: {'query': 'hello', 'response': 'Hello! How can I assist you today?'}
+2024-12-30 13:33:55,936 - INFO - Received a request to /chat_support with query: I want flight today from JFK to HND
+2024-12-30 13:33:55,936 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:33:55,940 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:34:01,154 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 525
+2024-12-30 13:34:01,155 - INFO - Successfully received response from RAG bot: {'response': "I'm sorry, but there are no available flights from JFK to HND today. Would you like me to check for flights on another date?", 'results': 'No results found.', 'sql_query': "SELECT * \nFROM flight f\nJOIN airline a ON f.name_airline = a.name\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.name = 'JFK' \nAND a_arrive.name = 'HND' \nAND DATE(f.depart_time) = '2024-12-30' \nAND f.status = 'Available'\nORDER BY f.depart_time\nLIMIT 1;"}
+2024-12-30 13:34:12,476 - INFO - Received a request to /chat_support with query: Yeah sure, dates near today
+2024-12-30 13:34:12,476 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:34:12,478 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:34:15,072 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 196
+2024-12-30 13:34:15,079 - INFO - Successfully received response from RAG bot: {'query': 'Yeah sure, dates near today', 'response': "Sure, I can help with that. Let's look at flights from JFK to HND for the next few days. Please hold on while I find this information for you."}
+2024-12-30 13:35:00,898 - INFO - Received a request to /chat_support with query: Did you find any?
+2024-12-30 13:35:00,898 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:35:00,903 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:35:03,084 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 153
+2024-12-30 13:35:03,088 - INFO - Successfully received response from RAG bot: {'query': 'Did you find any?', 'response': "I'm still searching for the best flights for you. It may take a few more moments. I appreciate your patience."}
+2024-12-30 13:35:26,853 - INFO - Received a request to /chat_support with query: I what the day today?
+2024-12-30 13:35:26,853 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:35:26,857 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:35:29,586 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 102
+2024-12-30 13:35:29,587 - INFO - Successfully received response from RAG bot: {'query': 'I what the day today?', 'response': 'Today is December 30, 2024. How else may I assist you?'}
+2024-12-30 13:38:30,805 - INFO - Received a request to /chat_support with query: Hello I want flights from JFK to HND today
+2024-12-30 13:38:30,810 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:38:30,834 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:38:37,648 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 454
+2024-12-30 13:38:37,654 - INFO - Successfully received response from RAG bot: {'response': "I'm sorry, but there are no available flights from JFK to HND today, December 30, 2024. Would you like to search for flights on another date?", 'results': 'No results found.', 'sql_query': "SELECT f.id, f.flight_number, f.name_airline, f.depart_time, f.arrive_time, f.price, f.status, f.seats\nFROM flight f\nWHERE f.name_depart = 'JFK' AND f.name_arrive = 'HND' AND DATE(f.depart_time) = DATE('2024-12-30')\nORDER BY f.depart_time\nLIMIT 10;"}
+2024-12-30 13:38:45,678 - INFO - Received a request to /chat_support with query: Yes
+2024-12-30 13:38:45,678 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:38:45,680 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:38:48,285 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 100
+2024-12-30 13:38:48,287 - INFO - Successfully received response from RAG bot: {'query': 'Yes', 'response': 'Sure, could you please provide me with the date you would like to fly?'}
+2024-12-30 13:39:01,464 - INFO - Received a request to /chat_support with query: Any time within this week is fine
+2024-12-30 13:39:01,465 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:39:01,471 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:39:04,112 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 242
+2024-12-30 13:39:04,113 - INFO - Successfully received response from RAG bot: {'query': 'Any time within this week is fine', 'response': 'Sure, I will search for flights from JFK to HND within this week. Please note that availability might vary due to the holiday season. I will get back to you shortly with the options.'}
+2024-12-30 13:40:06,012 - INFO - Received a request to /chat_support with query: Did you find any?
+2024-12-30 13:40:06,013 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:40:06,015 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:40:08,466 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 211
+2024-12-30 13:40:08,467 - INFO - Successfully received response from RAG bot: {'query': 'Did you find any?', 'response': "I'm still in the process of searching for the best flights for you. I appreciate your patience and will get back to you as soon as possible with the available options."}
+2024-12-30 13:47:35,365 - INFO - Received a request to /chat_support with query: I want flights from JFK to HND for today
+2024-12-30 13:47:35,367 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:47:35,385 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:47:35,473 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 463
+2024-12-30 13:47:35,475 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:49:36,263 - INFO - Received a request to /chat_support with query: Hello I want flights from JFK to HND for today
+2024-12-30 13:49:36,264 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:49:36,284 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:49:47,558 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 560
+2024-12-30 13:49:47,566 - INFO - Successfully received response from RAG bot: {'response': "I'm sorry, but there are no available flights from JFK to HND for today, December 30, 2024. Would you like to search for flights on another date?", 'results': 'No results found.', 'sql_query': "SELECT f.id, f.flight_number, f.name_airline, f.depart_time, f.arrive_time, f.price, f.status, f.seats\nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.name = 'JFK' AND a_arrive.name = 'HND' AND DATE(f.depart_time) = DATE('2024-12-30')\nORDER BY f.depart_time;"}
+2024-12-30 13:49:56,498 - INFO - Received a request to /chat_support with query: Yes
+2024-12-30 13:49:56,498 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:49:56,512 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:49:58,928 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 100
+2024-12-30 13:49:58,929 - INFO - Successfully received response from RAG bot: {'query': 'Yes', 'response': 'Sure, could you please provide me with the date you would like to fly?'}
+2024-12-30 13:50:11,648 - INFO - Received a request to /chat_support with query: Anytime around this week or last is okay
+2024-12-30 13:50:11,649 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:50:11,651 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:50:18,039 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 559
+2024-12-30 13:50:18,041 - INFO - Successfully received response from RAG bot: {'response': "I'm sorry, but there are no available flights from JFK to HND for the dates you've specified in the last and this week. Would you like to search for flights on another date or consider another destination?", 'results': 'No results found.', 'sql_query': "SELECT f.id, f.flight_number, f.name_depart, f.name_arrive, f.name_airline, f.depart_time, f.arrive_time, f.price, f.status, f.seats\nFROM flight f\nWHERE f.name_depart = 'JFK' AND f.name_arrive = 'HND' AND f.depart_time BETWEEN '2024-12-23' AND '2024-01-06'\nORDER BY f.depart_time\nLIMIT 10;"}
+2024-12-30 13:50:32,936 - INFO - Received a request to /chat_support with query: What dates did you search?
+2024-12-30 13:50:32,936 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:50:32,944 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:50:39,258 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 414
+2024-12-30 13:50:39,259 - INFO - Successfully received response from RAG bot: {'response': 'I searched for flights from JFK to HND from December 23, 2024, to January 6, 2025. Unfortunately, there were no available flights during this period.', 'results': 'No results found.', 'sql_query': "SELECT depart_time \nFROM flight \nWHERE name_depart = 'JFK' \nAND name_arrive = 'HND' \nAND depart_time BETWEEN '2024-12-23' AND '2024-01-06' \nAND status = 'Available' \nORDER BY depart_time \nLIMIT 10;"}
+2024-12-30 13:51:03,275 - DEBUG - Fetching flights: origin=JFK, destination=HND, departure_date=2024-12-31
+2024-12-30 13:51:08,960 - INFO - Fetched 56 flights from Amadeus API.
+2024-12-30 13:51:09,012 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC1', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2024-12-31 09:45:00', 
+                '2024-12-31 11:29:00', 
+                611.21, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,027 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,030 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC2', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2024-12-31 15:55:00', 
+                '2024-12-31 17:39:00', 
+                642.21, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,032 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,042 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH3', 
+                'All Nippon', 
+                'JFK', 
+                'HND', 
+                '2024-12-31 00:50:00', 
+                '2025-01-01 05:25:00', 
+                822.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,064 - INFO - Flight NH3 inserted successfully into the database.
+2024-12-30 13:51:09,067 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH4', 
+                'All Nippon', 
+                'JFK', 
+                'HND', 
+                '2024-12-31 13:05:00', 
+                '2025-01-01 17:40:00', 
+                822.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,074 - INFO - Flight NH4 inserted successfully into the database.
+2024-12-30 13:51:09,077 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL5', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2024-12-31 00:35:00', 
+                '2025-01-01 05:10:00', 
+                823.85, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,085 - INFO - Flight JL5 inserted successfully into the database.
+2024-12-30 13:51:09,088 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL6', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2024-12-31 12:40:00', 
+                '2025-01-01 17:15:00', 
+                823.85, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,097 - INFO - Flight JL6 inserted successfully into the database.
+2024-12-30 13:51:09,100 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX7', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2024-12-31 09:00:00', 
+                '2025-01-01 14:15:00', 
+                880.27, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,108 - INFO - Flight CX7 inserted successfully into the database.
+2024-12-30 13:51:09,111 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ8', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2024-12-31 11:30:00', 
+                '2025-01-01 17:25:00', 
+                881.15, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,114 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,119 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX9', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2024-12-31 13:50:00', 
+                '2025-01-01 19:05:00', 
+                895.15, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,126 - INFO - Flight CX9 inserted successfully into the database.
+2024-12-30 13:51:09,131 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'UA10', 
+                'United Airlines', 
+                'JFK', 
+                'HND', 
+                '2024-12-31 00:50:00', 
+                '2025-01-01 05:25:00', 
+                897.38, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,145 - INFO - Flight UA10 inserted successfully into the database.
+2024-12-30 13:51:09,148 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'UA11', 
+                'United Airlines', 
+                'JFK', 
+                'HND', 
+                '2024-12-31 13:05:00', 
+                '2025-01-01 17:40:00', 
+                897.38, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,157 - INFO - Flight UA11 inserted successfully into the database.
+2024-12-30 13:51:09,161 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CA12', 
+                'Air China', 
+                'JFK', 
+                'PEK', 
+                '2024-12-31 01:05:00', 
+                '2025-01-01 07:15:00', 
+                1058.05, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,162 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,166 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CA13', 
+                'Air China', 
+                'JFK', 
+                'PEK', 
+                '2024-12-31 01:05:00', 
+                '2025-01-01 07:15:00', 
+                1058.05, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,168 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,176 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX14', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2024-12-31 01:35:00', 
+                '2025-01-01 06:35:00', 
+                1092.27, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,182 - INFO - Flight CX14 inserted successfully into the database.
+2024-12-30 13:51:09,188 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK15', 
+                'Turkish Airlines', 
+                'JFK', 
+                'IST', 
+                '2024-12-31 19:45:00', 
+                '2025-01-01 13:45:00', 
+                1126.03, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,189 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,195 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'BR16', 
+                'Eva Airways', 
+                'JFK', 
+                'TPE', 
+                '2024-12-31 00:05:00', 
+                '2025-01-01 06:20:00', 
+                1238.08, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,199 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,206 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ17', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2024-12-31 07:30:00', 
+                '2024-12-31 10:52:00', 
+                1238.55, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,216 - INFO - Flight OZ17 inserted successfully into the database.
+2024-12-30 13:51:09,222 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AY18', 
+                'Finnair', 
+                'JFK', 
+                'HEL', 
+                '2024-12-31 22:45:00', 
+                '2025-01-01 13:55:00', 
+                1308.1, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,224 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,226 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ19', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2024-12-31 07:30:00', 
+                '2024-12-31 10:52:00', 
+                1313.54, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,236 - INFO - Flight OZ19 inserted successfully into the database.
+2024-12-30 13:51:09,245 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QR20', 
+                'Qatar Airways', 
+                'JFK', 
+                'DOH', 
+                '2024-12-31 00:20:00', 
+                '2024-12-31 20:45:00', 
+                1326.61, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,250 - INFO - Flight QR20 inserted successfully into the database.
+2024-12-30 13:51:09,257 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA21', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HNL', 
+                '2024-12-31 10:00:00', 
+                '2024-12-31 16:15:00', 
+                1327.47, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,259 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,264 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QR22', 
+                'Qatar Airways', 
+                'JFK', 
+                'DOH', 
+                '2024-12-31 21:30:00', 
+                '2025-01-01 17:45:00', 
+                1329.12, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,270 - INFO - Flight QR22 inserted successfully into the database.
+2024-12-30 13:51:09,274 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ23', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2024-12-31 11:30:00', 
+                '2025-01-01 17:25:00', 
+                1347.14, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,276 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,279 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ24', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2024-12-31 05:59:00', 
+                '2024-12-31 09:38:00', 
+                1406.54, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,286 - INFO - Flight OZ24 inserted successfully into the database.
+2024-12-30 13:51:09,290 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE25', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2024-12-31 12:00:00', 
+                '2025-01-01 17:50:00', 
+                1408.78, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,292 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,295 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE26', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2024-12-31 00:50:00', 
+                '2025-01-01 06:30:00', 
+                1408.78, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,297 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,299 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX27', 
+                'Cathaypacific', 
+                'JFK', 
+                'SFO', 
+                '2024-12-31 16:30:00', 
+                '2024-12-31 20:12:00', 
+                1410.27, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,305 - INFO - Flight CX27 inserted successfully into the database.
+2024-12-30 13:51:09,312 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX28', 
+                'Cathaypacific', 
+                'JFK', 
+                'SFO', 
+                '2024-12-31 16:30:00', 
+                '2024-12-31 20:12:00', 
+                1410.27, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,319 - INFO - Flight CX28 inserted successfully into the database.
+2024-12-30 13:51:09,324 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE29', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2024-12-31 00:50:00', 
+                '2025-01-01 06:30:00', 
+                1418.77, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,325 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,329 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE30', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2024-12-31 12:00:00', 
+                '2025-01-01 17:50:00', 
+                1418.77, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,330 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,333 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH31', 
+                'All Nippon', 
+                'JFK', 
+                'DCA', 
+                '2024-12-31 06:00:00', 
+                '2024-12-31 07:24:00', 
+                1708.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,335 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,340 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH32', 
+                'All Nippon', 
+                'JFK', 
+                'DCA', 
+                '2024-12-31 06:00:00', 
+                '2024-12-31 07:24:00', 
+                1708.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,341 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,344 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL33', 
+                'Japan Airlines', 
+                'JFK', 
+                'SFO', 
+                '2024-12-31 06:50:00', 
+                '2024-12-31 10:33:00', 
+                1755.85, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,350 - INFO - Flight JL33 inserted successfully into the database.
+2024-12-30 13:51:09,355 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH34', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-31 17:25:00', 
+                '2025-01-01 06:30:00', 
+                2517.48, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,357 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,363 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH35', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-31 17:25:00', 
+                '2025-01-01 06:30:00', 
+                2517.48, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,365 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,369 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH36', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-31 07:00:00', 
+                '2024-12-31 15:00:00', 
+                2533.02, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,376 - INFO - Flight LH36 inserted successfully into the database.
+2024-12-30 13:51:09,380 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH37', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-31 04:00:00', 
+                '2024-12-31 17:25:00', 
+                2533.02, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,386 - INFO - Flight LH37 inserted successfully into the database.
+2024-12-30 13:51:09,389 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH38', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-31 22:10:00', 
+                '2025-01-01 12:05:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,395 - INFO - Flight LH38 inserted successfully into the database.
+2024-12-30 13:51:09,399 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH39', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-31 20:00:00', 
+                '2025-01-01 11:00:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,406 - INFO - Flight LH39 inserted successfully into the database.
+2024-12-30 13:51:09,411 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH40', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-31 20:00:00', 
+                '2025-01-01 04:00:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,417 - INFO - Flight LH40 inserted successfully into the database.
+2024-12-30 13:51:09,424 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH41', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-31 20:00:00', 
+                '2025-01-01 04:00:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,430 - INFO - Flight LH41 inserted successfully into the database.
+2024-12-30 13:51:09,436 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH42', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-31 15:45:00', 
+                '2025-01-01 05:25:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,441 - INFO - Flight LH42 inserted successfully into the database.
+2024-12-30 13:51:09,447 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH43', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-31 22:10:00', 
+                '2025-01-01 12:05:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,452 - INFO - Flight LH43 inserted successfully into the database.
+2024-12-30 13:51:09,457 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH44', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-31 17:25:00', 
+                '2025-01-01 06:30:00', 
+                2543.62, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,458 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,465 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH45', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-31 17:25:00', 
+                '2025-01-01 06:30:00', 
+                2543.62, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,467 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,471 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF46', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2024-12-31 01:00:00', 
+                '2024-12-31 14:05:00', 
+                2953.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,477 - INFO - Flight AF46 inserted successfully into the database.
+2024-12-30 13:51:09,481 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF47', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2024-12-31 23:30:00', 
+                '2025-01-01 12:45:00', 
+                2953.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,488 - INFO - Flight AF47 inserted successfully into the database.
+2024-12-30 13:51:09,491 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ48', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2024-12-31 11:30:00', 
+                '2025-01-01 17:25:00', 
+                5323.13, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,493 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,498 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'SQ49', 
+                'Singapore Airlines', 
+                'JFK', 
+                'SIN', 
+                '2024-12-31 22:40:00', 
+                '2025-01-02 06:10:00', 
+                6597.78, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,504 - INFO - Flight SQ49 inserted successfully into the database.
+2024-12-30 13:51:09,507 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH50', 
+                'All Nippon', 
+                'JFK', 
+                'YYZ', 
+                '2024-12-31 09:45:00', 
+                '2024-12-31 11:29:00', 
+                6725.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,508 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,511 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH51', 
+                'All Nippon', 
+                'JFK', 
+                'SFO', 
+                '2024-12-31 18:30:00', 
+                '2024-12-31 22:31:00', 
+                6726.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,518 - INFO - Flight NH51 inserted successfully into the database.
+2024-12-30 13:51:09,522 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH52', 
+                'All Nippon', 
+                'JFK', 
+                'LAX', 
+                '2024-12-31 19:00:00', 
+                '2024-12-31 22:18:00', 
+                6726.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,528 - INFO - Flight NH52 inserted successfully into the database.
+2024-12-30 13:51:09,532 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH53', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-31 07:00:00', 
+                '2024-12-31 15:00:00', 
+                7283.3, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,538 - INFO - Flight LH53 inserted successfully into the database.
+2024-12-30 13:51:09,543 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE54', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2024-12-31 12:00:00', 
+                '2025-01-01 17:50:00', 
+                7783.09, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,545 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,550 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ55', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2024-12-31 21:15:00', 
+                '2025-01-01 11:45:00', 
+                8646.01, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,551 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,554 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ56', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2024-12-31 16:45:00', 
+                '2025-01-01 07:05:00', 
+                8646.01, 
+                'Scheduled'
+            )
+2024-12-30 13:51:09,555 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:09,556 - INFO - Synced flights for ('JFK', 'HND', '2024-12-31').
+2024-12-30 13:51:11,572 - DEBUG - Fetching flights: origin=JFK, destination=HND, departure_date=2025-01-01
+2024-12-30 13:51:20,195 - INFO - Fetched 47 flights from Amadeus API.
+2024-12-30 13:51:20,232 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL1', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-01-01 00:35:00', 
+                '2025-01-02 05:10:00', 
+                823.85, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,239 - INFO - Flight JL1 inserted successfully into the database.
+2024-12-30 13:51:20,251 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL2', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-01-01 12:40:00', 
+                '2025-01-02 17:15:00', 
+                823.85, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,272 - INFO - Flight JL2 inserted successfully into the database.
+2024-12-30 13:51:20,281 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ3', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2025-01-01 11:30:00', 
+                '2025-01-02 17:25:00', 
+                829.15, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,288 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,302 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC4', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2025-01-01 09:45:00', 
+                '2025-01-01 11:29:00', 
+                835.21, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,304 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,307 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ5', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2025-01-01 11:30:00', 
+                '2025-01-02 17:25:00', 
+                839.14, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,308 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,311 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'UA6', 
+                'United Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-01-01 00:50:00', 
+                '2025-01-02 05:25:00', 
+                897.38, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,317 - INFO - Flight UA6 inserted successfully into the database.
+2024-12-30 13:51:20,322 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC7', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2025-01-01 15:55:00', 
+                '2025-01-01 17:39:00', 
+                975.21, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,334 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,338 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'PR8', 
+                'Philippine Al', 
+                'JFK', 
+                'MNL', 
+                '2025-01-01 01:40:00', 
+                '2025-01-02 07:45:00', 
+                1125.9, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,340 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,345 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'UA9', 
+                'United Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-01-01 13:05:00', 
+                '2025-01-02 17:40:00', 
+                1217.38, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,355 - INFO - Flight UA9 inserted successfully into the database.
+2024-12-30 13:51:20,359 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH10', 
+                'All Nippon', 
+                'JFK', 
+                'HND', 
+                '2025-01-01 00:50:00', 
+                '2025-01-02 05:25:00', 
+                1219.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,366 - INFO - Flight NH10 inserted successfully into the database.
+2024-12-30 13:51:20,369 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH11', 
+                'All Nippon', 
+                'JFK', 
+                'HND', 
+                '2025-01-01 13:05:00', 
+                '2025-01-02 17:40:00', 
+                1219.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,375 - INFO - Flight NH11 inserted successfully into the database.
+2024-12-30 13:51:20,378 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AY12', 
+                'Finnair', 
+                'JFK', 
+                'HEL', 
+                '2025-01-01 22:45:00', 
+                '2025-01-02 13:55:00', 
+                1308.1, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,380 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,383 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ13', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-01-01 20:00:00', 
+                '2025-01-01 23:31:00', 
+                1327.15, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,391 - INFO - Flight OZ13 inserted successfully into the database.
+2024-12-30 13:51:20,395 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'BR14', 
+                'Eva Airways', 
+                'JFK', 
+                'TPE', 
+                '2025-01-01 00:05:00', 
+                '2025-01-02 06:20:00', 
+                1375.08, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,396 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,409 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ15', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-01-01 21:40:00', 
+                '2025-01-02 01:16:00', 
+                1448.15, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,421 - INFO - Flight OZ15 inserted successfully into the database.
+2024-12-30 13:51:20,425 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ16', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-01-01 21:40:00', 
+                '2025-01-02 01:16:00', 
+                1515.14, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,433 - INFO - Flight OZ16 inserted successfully into the database.
+2024-12-30 13:51:20,439 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ17', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-01-01 21:40:00', 
+                '2025-01-02 01:16:00', 
+                1520.54, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,445 - INFO - Flight OZ17 inserted successfully into the database.
+2024-12-30 13:51:20,454 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL18', 
+                'Japan Airlines', 
+                'JFK', 
+                'SFO', 
+                '2025-01-01 06:50:00', 
+                '2025-01-01 10:33:00', 
+                1755.85, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,461 - INFO - Flight JL18 inserted successfully into the database.
+2024-12-30 13:51:20,468 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE19', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-01-01 12:00:00', 
+                '2025-01-02 17:50:00', 
+                1767.78, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,469 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,473 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE20', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-01-01 00:50:00', 
+                '2025-01-02 06:30:00', 
+                1767.78, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,474 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,478 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE21', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-01-01 00:50:00', 
+                '2025-01-02 06:30:00', 
+                1777.77, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,481 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,486 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK22', 
+                'Turkish Airlines', 
+                'JFK', 
+                'IST', 
+                '2025-01-01 00:10:00', 
+                '2025-01-01 17:55:00', 
+                1809.03, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,489 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,496 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'PR23', 
+                'Philippine Al', 
+                'JFK', 
+                'MNL', 
+                '2025-01-01 01:40:00', 
+                '2025-01-02 07:45:00', 
+                1833.2, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,499 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,506 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA24', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HNL', 
+                '2025-01-01 10:00:00', 
+                '2025-01-01 16:15:00', 
+                2078.47, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,507 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,512 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH25', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2025-01-01 17:30:00', 
+                '2025-01-02 07:20:00', 
+                2517.48, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,514 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,519 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH26', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2025-01-01 17:30:00', 
+                '2025-01-02 07:20:00', 
+                2517.48, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,520 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,524 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH27', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-01-01 07:00:00', 
+                '2025-01-01 15:00:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,530 - INFO - Flight LH27 inserted successfully into the database.
+2024-12-30 13:51:20,533 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH28', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-01-01 15:45:00', 
+                '2025-01-02 05:25:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,540 - INFO - Flight LH28 inserted successfully into the database.
+2024-12-30 13:51:20,544 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH29', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-01-01 22:10:00', 
+                '2025-01-02 12:05:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,550 - INFO - Flight LH29 inserted successfully into the database.
+2024-12-30 13:51:20,553 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH30', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-01-01 22:10:00', 
+                '2025-01-02 12:05:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,561 - INFO - Flight LH30 inserted successfully into the database.
+2024-12-30 13:51:20,566 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH31', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-01-01 15:45:00', 
+                '2025-01-02 05:25:00', 
+                2536.34, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,572 - INFO - Flight LH31 inserted successfully into the database.
+2024-12-30 13:51:20,577 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF32', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2025-01-01 01:00:00', 
+                '2025-01-01 14:05:00', 
+                2963.07, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,587 - INFO - Flight AF32 inserted successfully into the database.
+2024-12-30 13:51:20,591 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF33', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2025-01-01 23:30:00', 
+                '2025-01-02 12:45:00', 
+                2963.07, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,597 - INFO - Flight AF33 inserted successfully into the database.
+2024-12-30 13:51:20,602 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ34', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2025-01-01 11:30:00', 
+                '2025-01-02 17:25:00', 
+                5323.13, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,603 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,608 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU35', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2025-01-01 15:25:00', 
+                '2025-01-02 19:15:00', 
+                6336.98, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,609 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,613 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU36', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2025-01-01 15:25:00', 
+                '2025-01-02 19:15:00', 
+                6336.98, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,615 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,618 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU37', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2025-01-01 15:25:00', 
+                '2025-01-02 19:15:00', 
+                6373.98, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,619 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,624 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU38', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2025-01-01 15:25:00', 
+                '2025-01-02 19:15:00', 
+                6373.98, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,625 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,630 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU39', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2025-01-01 15:25:00', 
+                '2025-01-02 19:15:00', 
+                6537.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,632 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,636 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'SQ40', 
+                'Singapore Airlines', 
+                'JFK', 
+                'SIN', 
+                '2025-01-01 22:40:00', 
+                '2025-01-03 06:10:00', 
+                6597.78, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,644 - INFO - Flight SQ40 inserted successfully into the database.
+2024-12-30 13:51:20,649 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH41', 
+                'All Nippon', 
+                'JFK', 
+                'YYZ', 
+                '2025-01-01 09:45:00', 
+                '2025-01-01 11:29:00', 
+                6725.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,652 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,657 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH42', 
+                'All Nippon', 
+                'JFK', 
+                'SFO', 
+                '2025-01-01 18:30:00', 
+                '2025-01-01 22:31:00', 
+                6726.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,667 - INFO - Flight NH42 inserted successfully into the database.
+2024-12-30 13:51:20,671 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH43', 
+                'All Nippon', 
+                'JFK', 
+                'LAX', 
+                '2025-01-01 19:00:00', 
+                '2025-01-01 22:18:00', 
+                6726.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,679 - INFO - Flight NH43 inserted successfully into the database.
+2024-12-30 13:51:20,686 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH44', 
+                'All Nippon', 
+                'JFK', 
+                'LAX', 
+                '2025-01-01 06:00:00', 
+                '2025-01-01 09:25:00', 
+                6868.33, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,693 - INFO - Flight NH44 inserted successfully into the database.
+2024-12-30 13:51:20,698 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH45', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-01-01 07:00:00', 
+                '2025-01-01 15:00:00', 
+                7286.62, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,704 - INFO - Flight LH45 inserted successfully into the database.
+2024-12-30 13:51:20,713 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ46', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2025-01-01 21:15:00', 
+                '2025-01-02 11:45:00', 
+                8646.01, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,718 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,731 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ47', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2025-01-01 16:45:00', 
+                '2025-01-02 07:05:00', 
+                8646.01, 
+                'Scheduled'
+            )
+2024-12-30 13:51:20,732 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:20,733 - INFO - Synced flights for ('JFK', 'HND', '2025-01-01').
+2024-12-30 13:51:25,294 - DEBUG - Fetching flights: origin=JFK, destination=HND, departure_date=2024-12-30
+2024-12-30 13:51:29,359 - INFO - Fetched 47 flights from Amadeus API.
+2024-12-30 13:51:29,384 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC1', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2024-12-30 09:45:00', 
+                '2024-12-30 11:29:00', 
+                611.21, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,387 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,392 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC2', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2024-12-30 15:55:00', 
+                '2024-12-30 17:39:00', 
+                611.21, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,394 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,397 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH3', 
+                'All Nippon', 
+                'JFK', 
+                'HND', 
+                '2024-12-30 13:05:00', 
+                '2024-12-31 17:40:00', 
+                822.88, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,413 - INFO - Flight NH3 inserted successfully into the database.
+2024-12-30 13:51:29,415 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL4', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2024-12-30 12:40:00', 
+                '2024-12-31 17:15:00', 
+                823.85, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,422 - INFO - Flight JL4 inserted successfully into the database.
+2024-12-30 13:51:29,426 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ5', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2024-12-30 11:30:00', 
+                '2024-12-31 17:25:00', 
+                881.15, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,428 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,433 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX6', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2024-12-30 13:50:00', 
+                '2024-12-31 19:05:00', 
+                895.15, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,440 - INFO - Flight CX6 inserted successfully into the database.
+2024-12-30 13:51:29,444 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ7', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2024-12-30 11:30:00', 
+                '2024-12-31 17:25:00', 
+                1105.14, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,446 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,450 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA8', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAS', 
+                '2024-12-30 17:00:00', 
+                '2024-12-30 19:50:00', 
+                1138.38, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,452 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,456 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA9', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HNL', 
+                '2024-12-30 10:00:00', 
+                '2024-12-30 16:15:00', 
+                1142.47, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,458 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,461 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA10', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAS', 
+                '2024-12-30 17:00:00', 
+                '2024-12-30 19:50:00', 
+                1218.38, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,462 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,467 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA11', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAS', 
+                '2024-12-30 20:54:00', 
+                '2024-12-31 00:01:00', 
+                1218.38, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,468 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,472 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AY12', 
+                'Finnair', 
+                'JFK', 
+                'HEL', 
+                '2024-12-30 22:45:00', 
+                '2024-12-31 13:55:00', 
+                1307.81, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,473 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,477 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX13', 
+                'Cathaypacific', 
+                'JFK', 
+                'BOS', 
+                '2024-12-30 14:52:00', 
+                '2024-12-30 16:08:00', 
+                1389.27, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,479 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,483 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX14', 
+                'Cathaypacific', 
+                'JFK', 
+                'BOS', 
+                '2024-12-30 13:35:00', 
+                '2024-12-30 14:46:00', 
+                1389.27, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,485 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,490 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE15', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2024-12-30 12:00:00', 
+                '2024-12-31 17:50:00', 
+                1408.78, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,492 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,494 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX16', 
+                'Cathaypacific', 
+                'JFK', 
+                'SFO', 
+                '2024-12-30 13:00:00', 
+                '2024-12-30 16:37:00', 
+                1410.27, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,500 - INFO - Flight CX16 inserted successfully into the database.
+2024-12-30 13:51:29,503 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE17', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2024-12-30 12:00:00', 
+                '2024-12-31 17:50:00', 
+                1418.77, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,504 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,508 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ18', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2024-12-30 21:40:00', 
+                '2024-12-31 01:16:00', 
+                1448.15, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,513 - INFO - Flight OZ18 inserted successfully into the database.
+2024-12-30 13:51:29,517 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ19', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2024-12-30 21:40:00', 
+                '2024-12-31 01:16:00', 
+                1527.54, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,525 - INFO - Flight OZ19 inserted successfully into the database.
+2024-12-30 13:51:29,530 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH20', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-30 17:25:00', 
+                '2024-12-31 06:30:00', 
+                2516.12, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,531 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,535 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH21', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-30 17:25:00', 
+                '2024-12-31 06:30:00', 
+                2516.12, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,537 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,540 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH22', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-30 17:25:00', 
+                '2024-12-31 06:30:00', 
+                2520.5, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,541 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,545 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH23', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-30 17:25:00', 
+                '2024-12-31 06:30:00', 
+                2521.11, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,546 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,549 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH24', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-30 17:25:00', 
+                '2024-12-31 06:30:00', 
+                2521.11, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,550 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,555 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH25', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-30 22:10:00', 
+                '2024-12-31 12:05:00', 
+                2533.02, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,560 - INFO - Flight LH25 inserted successfully into the database.
+2024-12-30 13:51:29,563 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH26', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-30 20:00:00', 
+                '2024-12-31 11:00:00', 
+                2533.02, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,569 - INFO - Flight LH26 inserted successfully into the database.
+2024-12-30 13:51:29,572 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH27', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-30 20:00:00', 
+                '2024-12-31 04:00:00', 
+                2533.02, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,578 - INFO - Flight LH27 inserted successfully into the database.
+2024-12-30 13:51:29,581 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH28', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-30 20:00:00', 
+                '2024-12-31 04:00:00', 
+                2533.02, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,588 - INFO - Flight LH28 inserted successfully into the database.
+2024-12-30 13:51:29,591 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH29', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-30 15:45:00', 
+                '2024-12-31 05:25:00', 
+                2533.02, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,597 - INFO - Flight LH29 inserted successfully into the database.
+2024-12-30 13:51:29,599 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH30', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-30 20:00:00', 
+                '2024-12-31 11:00:00', 
+                2533.02, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,605 - INFO - Flight LH30 inserted successfully into the database.
+2024-12-30 13:51:29,608 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH31', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2024-12-30 22:10:00', 
+                '2024-12-31 12:05:00', 
+                2533.02, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,616 - INFO - Flight LH31 inserted successfully into the database.
+2024-12-30 13:51:29,618 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH32', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-30 17:25:00', 
+                '2024-12-31 06:30:00', 
+                2540.86, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,620 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,626 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH33', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2024-12-30 17:25:00', 
+                '2024-12-31 06:30:00', 
+                2540.86, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,628 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,632 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF34', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2024-12-30 18:30:00', 
+                '2024-12-31 07:50:00', 
+                2953.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,640 - INFO - Flight AF34 inserted successfully into the database.
+2024-12-30 13:51:29,646 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF35', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2024-12-30 17:30:00', 
+                '2024-12-31 06:30:00', 
+                2953.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,652 - INFO - Flight AF35 inserted successfully into the database.
+2024-12-30 13:51:29,657 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF36', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2024-12-30 23:30:00', 
+                '2024-12-31 12:45:00', 
+                2953.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,669 - INFO - Flight AF36 inserted successfully into the database.
+2024-12-30 13:51:29,674 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'SQ37', 
+                'Singapore Airlines', 
+                'JFK', 
+                'SIN', 
+                '2024-12-30 20:15:00', 
+                '2025-01-01 06:50:00', 
+                5756.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,685 - INFO - Flight SQ37 inserted successfully into the database.
+2024-12-30 13:51:29,695 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU38', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2024-12-30 15:25:00', 
+                '2024-12-31 19:15:00', 
+                6336.98, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,697 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,705 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU39', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2024-12-30 15:25:00', 
+                '2024-12-31 19:15:00', 
+                6336.98, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,706 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,713 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU40', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2024-12-30 15:25:00', 
+                '2024-12-31 19:15:00', 
+                6373.98, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,717 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,725 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU41', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2024-12-30 15:25:00', 
+                '2024-12-31 19:15:00', 
+                6373.98, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,726 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,732 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU42', 
+                'China Eastern Airlines', 
+                'JFK', 
+                'PVG', 
+                '2024-12-30 15:25:00', 
+                '2024-12-31 19:15:00', 
+                6537.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,734 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,738 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH43', 
+                'All Nippon', 
+                'JFK', 
+                'YYZ', 
+                '2024-12-30 09:45:00', 
+                '2024-12-30 11:29:00', 
+                6725.43, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,739 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,742 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ44', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2024-12-30 21:15:00', 
+                '2024-12-31 11:45:00', 
+                8644.83, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,743 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,747 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ45', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2024-12-30 16:45:00', 
+                '2024-12-31 07:05:00', 
+                8644.83, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,749 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,753 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QF46', 
+                'Qantas', 
+                'JFK', 
+                'SYD', 
+                '2024-12-30 17:30:00', 
+                '2025-01-01 08:15:00', 
+                10805.05, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,754 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,759 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QF47', 
+                'Qantas', 
+                'JFK', 
+                'SYD', 
+                '2024-12-30 17:30:00', 
+                '2025-01-01 08:15:00', 
+                10805.05, 
+                'Scheduled'
+            )
+2024-12-30 13:51:29,760 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_2` FOREIGN KEY (`name_arrive`) REFERENCES `airport` (`name`))')
+2024-12-30 13:51:29,761 - INFO - Synced flights for ('JFK', 'HND', '2024-12-30').
+2024-12-30 13:51:49,223 - INFO - Received a request to /chat_support with query: I want flight from JFK to Japan today
+2024-12-30 13:51:49,224 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:51:49,226 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:51:54,435 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 110
+2024-12-30 13:51:54,440 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:52:19,002 - INFO - Received a request to /chat_support with query: I want flight from JFK to HND today
+2024-12-30 13:52:19,002 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:52:19,004 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:52:25,891 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 859
+2024-12-30 13:52:25,895 - INFO - Successfully received response from RAG bot: {'response': 'I found a flight for you from JFK to HND today. The flight number is NH3, operated by All Nippon. It is scheduled to depart from JFK at 13:05 today, December 30, 2024, and will arrive in Tokyo at 17:40 on December 31, 2024. The price for this flight is $823.', 'results': [{'a_arrive.city': 'Tokyo', 'a_arrive.name': 'HND ', 'arrive_time': 'Tue, 31 Dec 2024 17:40:00 GMT', 'city': 'New York', 'depart_time': 'Mon, 30 Dec 2024 13:05:00 GMT', 'flight_number': 'NH3', 'id': 2062, 'name': 'JFK', 'name_airline': 'All Nippon', 'name_arrive': 'HND', 'name_depart': 'JFK', 'price': 823, 'seats': None, 'status': 'Scheduled'}], 'sql_query': "SELECT * \nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.name = 'JFK' AND a_arrive.name = 'HND' AND DATE(f.depart_time) = '2024-12-30'\nLIMIT 1;"}
+2024-12-30 13:53:11,162 - INFO - Received a request to /chat_support with query: What is your name?
+2024-12-30 13:53:11,163 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:53:11,165 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:53:14,517 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 184
+2024-12-30 13:53:14,519 - INFO - Successfully received response from RAG bot: {'query': 'What is your name?', 'response': "As an artificial intelligence, I don't have a personal name. You can simply refer to me as your AI assistant. How may I assist you further?"}
+2024-12-30 13:53:32,530 - INFO - Received a request to /chat_support with query: Can you give me info on customer Dan Huynh
+2024-12-30 13:53:32,530 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:53:32,532 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:53:39,096 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 1510
+2024-12-30 13:53:39,098 - INFO - Successfully received response from RAG bot: {'response': 'I found two customers named Dan Huynh in our system. \n\nThe first Dan Huynh has an email address of dsh400@nyu.edu and lives in Ho Chi Minh, Vietnam. His phone number is 0901663700 and his passport is from Vietnam with the number 123, which expired on November 1, 2024. His date of birth is November 30, 2024.\n\nThe second Dan Huynh has an email address of squirrelboat@gmail.com and lives in New York, NY. His phone number is +16468525947 and his passport is from the US with the number US122, which expired on December 10, 2024. His date of birth is December 10, 2024.\n\nPlease let me know how I can assist you further.', 'results': [{'building_number': '', 'city': 'Ho Chi Minh', 'date_of_birth': 'Sat, 30 Nov 2024 00:00:00 GMT', 'email': 'dsh400@nyu.edu', 'name': 'Dan Huynh', 'passport_country': 'VN', 'passport_expiration': 'Fri, 01 Nov 2024 00:00:00 GMT', 'passport_number': '123', 'password': '53bc3911362cda98b1014b8566f6800c72f6be0688961274130bd6a3fcfee8b9', 'phone_number': '0901663700', 'state': 'HCM', 'street': '65 Duong 51 Binh Trung Dong, Quan 2'}, {'building_number': '0', 'city': 'New York', 'date_of_birth': 'Tue, 10 Dec 2024 00:00:00 GMT', 'email': 'squirrelboat@gmail.com', 'name': 'Dan Huynh', 'passport_country': 'US', 'passport_expiration': 'Tue, 10 Dec 2024 00:00:00 GMT', 'passport_number': 'US122', 'password': '53bc3911362cda98b1014b8566f6800c72f6be0688961274130bd6a3fcfee8b9', 'phone_number': '+16468525947', 'state': 'NY', 'street': '140 E 14 St'}], 'sql_query': "SELECT * FROM customer WHERE name = 'Dan Huynh';"}
+2024-12-30 13:56:28,698 - INFO - Received a request to /chat_support with query: Hello
+2024-12-30 13:56:28,698 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:56:28,700 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:56:31,026 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2024-12-30 13:56:31,029 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2024-12-30 13:56:47,384 - INFO - Received a request to /chat_support with query: What is the weather like in Tokyo?
+2024-12-30 13:56:47,384 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:56:47,385 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:56:50,120 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 258
+2024-12-30 13:56:50,121 - INFO - Successfully received response from RAG bot: {'query': 'What is the weather like in Tokyo?', 'response': "I'm sorry, as an AI, I don't have real-time capabilities to provide current weather updates. I recommend checking a reliable weather website or app for the most accurate and up-to-date information."}
+2024-12-30 13:57:05,868 - INFO - Received a request to /chat_support with query: Hello I want flights from JFK to HND
+2024-12-30 13:57:05,868 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:57:05,869 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:57:12,249 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 633
+2024-12-30 13:57:12,251 - INFO - Successfully received response from RAG bot: {'response': "I'm sorry, but there are no available flights from JFK to HND at the moment. Would you like to search for flights on another date or consider another destination?", 'results': 'No results found.', 'sql_query': "SELECT f.flight_number, f.name_depart, f.name_arrive, f.name_airline, f.depart_time, f.arrive_time, f.price\nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.city = 'JFK' AND a_arrive.city = 'HND' AND f.depart_time >= '2024-12-30 00:00:00' AND f.depart_time <= '2024-12-30 23:59:59'\nORDER BY f.depart_time\nLIMIT 10;"}
+2024-12-30 13:57:24,155 - INFO - Received a request to /chat_support with query: What is the date today
+2024-12-30 13:57:24,155 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:57:24,157 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:57:26,336 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 113
+2024-12-30 13:57:26,337 - INFO - Successfully received response from RAG bot: {'query': 'What is the date today', 'response': "Today's date is December 30, 2024. How can I assist you further?"}
+2024-12-30 13:58:20,405 - INFO - Received a request to /chat_support with query: What is the most expensive flight today
+2024-12-30 13:58:20,405 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:58:20,406 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:58:26,898 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 658
+2024-12-30 13:58:26,900 - INFO - Successfully received response from RAG bot: {'response': 'The most expensive flight today is flight number SQ37, operated by Singapore Airlines. It departs from JFK at 20:15 on December 30, 2024, and arrives in Singapore at 06:50 on January 1, 2025. The price for this flight is $5756.', 'results': [{'arrive_time': 'Wed, 01 Jan 2025 06:50:00 GMT', 'depart_time': 'Mon, 30 Dec 2024 20:15:00 GMT', 'flight_number': 'SQ37', 'id': 2096, 'name_airline': 'Singapore Airlines', 'name_arrive': 'SIN', 'name_depart': 'JFK', 'price': 5756, 'seats': None, 'status': 'Scheduled'}], 'sql_query': "SELECT * FROM flight \nWHERE depart_time >= '2024-12-30 00:00:00' AND depart_time < '2024-12-31 00:00:00' \nORDER BY price DESC \nLIMIT 1;"}
+2024-12-30 13:59:52,393 - INFO - Received a request to /chat_support with query: How many flights are there today?
+2024-12-30 13:59:52,393 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 13:59:52,394 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 13:59:56,083 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 230
+2024-12-30 13:59:56,084 - INFO - Successfully received response from RAG bot: {'response': 'There are a total of 46 flights scheduled for today, December 30, 2024. How can I assist you further?', 'results': [{'COUNT(*)': 46}], 'sql_query': "SELECT COUNT(*) \nFROM flight \nWHERE DATE(depart_time) = '2024-12-30'"}
+2024-12-30 14:00:05,634 - INFO - Received a request to /chat_support with query: What is the most commin airline
+2024-12-30 14:00:05,634 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:00:05,636 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:00:09,904 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 292
+2024-12-30 14:00:09,904 - INFO - Successfully received response from RAG bot: {'response': 'The most common airline today is Alaska Airlines, with a total of 96 flights.', 'results': [{'flight_count': 96, 'name_airline': 'Alaska Airlines'}], 'sql_query': 'SELECT name_airline, COUNT(*) as flight_count\nFROM flight\nGROUP BY name_airline\nORDER BY flight_count DESC\nLIMIT 1;'}
+2024-12-30 14:00:36,275 - INFO - Received a request to /chat_support with query: why does Alaska airline have 96 flights when today only have 46?
+2024-12-30 14:00:36,275 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:00:36,276 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:00:43,047 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 358
+2024-12-30 14:00:43,048 - INFO - Successfully received response from RAG bot: {'response': 'I apologize for the confusion. Today, Alaska Airlines has 15 flights. The number 96 represents the total number of flights Alaska Airlines operates on a typical day, not specifically today.', 'results': [{'COUNT(*)': 15}], 'sql_query': "SELECT COUNT(*) \nFROM flight \nWHERE name_airline = 'Alaska Airlines' \nAND DATE(depart_time) = '2024-12-30';"}
+2024-12-30 14:02:58,091 - INFO - Received a request to /chat_support with query: Are there any American Airlines flight this week?
+2024-12-30 14:02:58,093 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:02:58,095 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:03:03,138 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 343
+2024-12-30 14:03:03,141 - INFO - Successfully received response from RAG bot: {'response': "I'm sorry, but there are no American Airlines flights scheduled for this week. Would you like to search for flights on another date or consider another airline?", 'results': 'No results found.', 'sql_query': "SELECT * \nFROM flight \nWHERE name_airline = 'American Airlines' \nAND depart_time BETWEEN '2024-12-24' AND '2024-12-31';"}
+2024-12-30 14:21:01,089 - INFO - Received a request to /chat_support with query: I want flights from JFK to HND
+2024-12-30 14:21:01,093 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:21:01,106 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:21:14,621 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 1546
+2024-12-30 14:21:14,623 - INFO - Successfully received response from RAG bot: {'response': 'I found two flights for you from JFK to HND today. \n\nThe first flight is NH3, operated by All Nippon. It is scheduled to depart from JFK at 13:05 today, December 30, 2024, and will arrive in Tokyo at 17:40 on December 31, 2024. The price for this flight is $823.\n\nThe second flight is JL4, operated by Japan Airlines. It is scheduled to depart from JFK at 12:40 today, December 30, 2024, and will arrive in Tokyo at 17:15 on December 31, 2024. The price for this flight is $824.\n\nPlease let me know if you would like to book any of these flights or if you need further assistance.', 'results': [{'a_arrive.city': 'Tokyo', 'a_arrive.name': 'HND ', 'arrive_time': 'Tue, 31 Dec 2024 17:40:00 GMT', 'city': 'New York', 'depart_time': 'Mon, 30 Dec 2024 13:05:00 GMT', 'flight_number': 'NH3', 'id': 2062, 'name': 'JFK', 'name_airline': 'All Nippon', 'name_arrive': 'HND', 'name_depart': 'JFK', 'price': 823, 'seats': None, 'status': 'Scheduled'}, {'a_arrive.city': 'Tokyo', 'a_arrive.name': 'HND ', 'arrive_time': 'Tue, 31 Dec 2024 17:15:00 GMT', 'city': 'New York', 'depart_time': 'Mon, 30 Dec 2024 12:40:00 GMT', 'flight_number': 'JL4', 'id': 2063, 'name': 'JFK', 'name_airline': 'Japan Airlines', 'name_arrive': 'HND', 'name_depart': 'JFK', 'price': 824, 'seats': None, 'status': 'Scheduled'}], 'sql_query': "SELECT * \nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.name = 'JFK' AND a_arrive.name = 'HND' AND f.depart_time >= '2024-12-30 00:00:00' AND f.depart_time < '2024-12-31 00:00:00';"}
+2024-12-30 14:28:24,178 - INFO - Received a request to /chat_support with query: Hello
+2024-12-30 14:28:24,179 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:28:24,184 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:28:25,721 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2024-12-30 14:28:25,723 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2024-12-30 14:28:35,158 - INFO - Received a request to /chat_support with query: I want a flight from JFK to HNd
+2024-12-30 14:28:35,159 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:28:35,161 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:28:43,100 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 1142
+2024-12-30 14:28:43,102 - INFO - Successfully received response from RAG bot: {'response': 'I found a flight for you from JFK to HND. The flight number is AA205, operated by American Airlines. It is scheduled to depart from JFK at 14:00 on December 1, 2024, and will arrive in Tokyo at 07:00 on December 2, 2024. The price for this flight is $800. However, please note that this flight is currently delayed. Please let me know if you would like to book this flight or if you need further assistance.', 'results': [{'a_arrive.city': 'Tokyo', 'a_arrive.name': 'HND ', 'a_depart.name': 'JFK', 'airline_code': 'AA', 'arrive_time': 'Mon, 02 Dec 2024 07:00:00 GMT', 'city': 'New York', 'depart_time': 'Sun, 01 Dec 2024 14:00:00 GMT', 'flight_number': 'AA205', 'id': 47, 'logo_path': 'wikipedia_airline_logos/aa.svg', 'name': 'American Airlines', 'name_airline': 'American Airlines', 'name_arrive': 'HND', 'name_depart': 'JFK', 'price': 800, 'seats': None, 'status': 'Delayed'}], 'sql_query': "SELECT * \nFROM flight f\nJOIN airline a ON f.name_airline = a.name\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.name = 'JFK' AND a_arrive.name = 'HND'\nORDER BY f.depart_time\nLIMIT 1;"}
+2024-12-30 14:29:13,396 - INFO - Received a request to /chat_support with query: I want a flight for today
+2024-12-30 14:29:13,396 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:29:13,398 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:29:18,642 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 703
+2024-12-30 14:29:18,643 - INFO - Successfully received response from RAG bot: {'response': 'I found a flight for you from JFK to SFO today. The flight number is AS6, operated by Alaska Airlines. It is scheduled to depart from JFK at 16:30 today, December 30, 2024, and will arrive in San Francisco at 20:12. The price for this flight is $389. Please let me know if you would like to book this flight or if you need further assistance.', 'results': [{'arrive_time': 'Mon, 30 Dec 2024 20:12:00 GMT', 'depart_time': 'Mon, 30 Dec 2024 16:30:00 GMT', 'flight_number': 'AS6', 'id': 339, 'name_airline': 'Alaska Airlines', 'name_arrive': 'SFO', 'name_depart': 'JFK', 'price': 389, 'seats': None, 'status': 'Scheduled'}], 'sql_query': "SELECT * \nFROM flight \nWHERE DATE(depart_time) = '2024-12-30' \nLIMIT 1;"}
+2024-12-30 14:32:24,788 - INFO - Received a request to /chat_support with query: Hello
+2024-12-30 14:32:24,790 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:32:24,791 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:32:26,399 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2024-12-30 14:32:26,400 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2024-12-30 14:38:08,544 - INFO - Received a request to /chat_support with query: Hello
+2024-12-30 14:38:08,545 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:38:08,556 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:38:10,560 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2024-12-30 14:38:10,563 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2024-12-30 14:38:49,160 - INFO - Received a request to /chat_support with query: Hello
+2024-12-30 14:38:49,160 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:38:49,162 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:38:51,643 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2024-12-30 14:38:51,647 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2024-12-30 14:39:11,131 - INFO - Received a request to /chat_support with query: Hello
+2024-12-30 14:39:11,131 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:39:11,136 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:39:13,158 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2024-12-30 14:39:13,159 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2024-12-30 14:55:09,500 - INFO - Received a request to /chat_support with query: Hello
+2024-12-30 14:55:09,502 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 14:55:09,513 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 14:55:12,068 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2024-12-30 14:55:12,070 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}

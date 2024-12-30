@@ -9,3 +9,4 @@ geopy==2.4.0
 cryptography
 amadeus==11.0.0
 beautifulsoup4
+flask_cors

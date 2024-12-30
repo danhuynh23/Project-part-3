@@ -34060,3 +34060,241 @@
 2024-12-27 12:28:41,148 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
 2024-12-27 12:28:43,048 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 400 344
 2024-12-27 12:28:43,049 - ERROR - Failed to reach RAG bot: 400 Client Error: BAD REQUEST for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:24:01,639 - INFO - Received a request to /chat_support with query: Find flights from JFK to LAX
+2024-12-30 08:24:01,642 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:24:01,651 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:24:06,044 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 4573
+2024-12-30 08:24:06,046 - INFO - Successfully received response from RAG bot: {'response': 'There are numerous flights departing from JFK to LAX. The flights are from various airlines including AA, SW, UA, DL, 6X, B6, JL, NH, HA, OZ. The departure dates range from 2024-11-14 to 2024-12-30, with multiple flights each day at different times.', 'results': 'Flight AA101 departs JFK at 2024-11-15 08:00:00.\nFlight AA102 departs JFK at 2024-11-15 08:30:00.\nFlight SW111 departs JFK at 2024-11-15 11:00:00.\nFlight UA113 departs JFK at 2024-11-15 13:00:00.\nFlight DL115 departs JFK at 2024-11-15 14:00:00.\nFlight AA124 departs JFK at 2024-11-15 08:30:00.\nFlight AA125 departs JFK at 2024-11-14 09:00:00.\nFlight AA126 departs JFK at 2024-11-14 13:00:00.\nFlight DL127 departs JFK at 2024-11-14 11:30:00.\nFlight DL128 departs JFK at 2024-11-14 14:00:00.\nFlight UA129 departs JFK at 2024-11-14 08:30:00.\nFlight UA130 departs JFK at 2024-11-14 10:00:00.\nFlight AA131 departs JFK at 2024-11-16 09:00:00.\nFlight AA132 departs JFK at 2024-11-16 12:30:00.\nFlight DL133 departs JFK at 2024-11-16 08:30:00.\nFlight DL134 departs JFK at 2024-11-16 13:00:00.\nFlight UA135 departs JFK at 2024-11-16 14:00:00.\nFlight UA136 departs JFK at 2024-11-16 16:30:00.\nFlight AA137 departs JFK at 2024-11-17 07:00:00.\nFlight AA138 departs JFK at 2024-11-17 10:30:00.\nFlight DL139 departs JFK at 2024-11-17 12:00:00.\nFlight DL140 departs JFK at 2024-11-17 14:30:00.\nFlight AA203 departs JFK  at 2024-12-01 14:19:00.\nFlight AA204 departs JFK at 2024-12-03 14:23:00.\nFlight AA201 departs JFK at 2024-12-01 08:00:00.\nFlight AA205 departs JFK  at 2024-12-03 14:00:00.\nFlight 6X12 departs JFK at 2024-12-30 09:00:00.\nFlight 6X13 departs JFK at 2024-12-30 19:00:00.\nFlight 6X14 departs JFK at 2024-12-30 19:00:00.\nFlight B617 departs JFK at 2024-12-30 19:00:00.\nFlight B618 departs JFK at 2024-12-30 11:00:00.\nFlight B619 departs JFK at 2024-12-30 15:40:00.\nFlight B620 departs JFK at 2024-12-30 07:00:00.\nFlight B621 departs JFK at 2024-12-30 20:00:00.\nFlight B629 departs JFK at 2024-12-30 12:56:00.\nFlight B630 departs JFK at 2024-12-30 05:59:00.\nFlight B631 departs JFK at 2024-12-30 09:00:00.\nFlight B635 departs JFK at 2024-12-30 21:40:00.\nFlight JL30 departs JFK at 2024-12-25 07:00:00.\nFlight NH54 departs JFK at 2024-12-25 19:00:00.\nFlight NH55 departs JFK at 2024-12-25 10:00:00.\nFlight HA9 departs JFK at 2024-12-24 05:59:00.\nFlight OZ23 departs JFK at 2024-12-24 19:00:00.\nFlight OZ24 departs JFK at 2024-12-24 07:30:00.\nFlight NH51 departs JFK at 2024-12-24 19:00:00.\nFlight JL11 departs JFK at 2024-12-26 07:00:00.\nFlight JL34 departs JFK at 2024-12-26 07:00:00.\nFlight NH57 departs JFK at 2024-12-26 19:00:00.\nFlight HA13 departs JFK at 2024-12-27 19:00:00.\nFlight HA23 departs JFK at 2024-12-27 19:00:00.\nFlight OZ27 departs JFK at 2024-12-27 21:40:00.\nFlight JL35 departs JFK at 2024-12-27 07:00:00.\nFlight NH52 departs JFK at 2024-12-27 19:00:00.\nFlight NH53 departs JFK at 2024-12-27 06:00:00.\nFlight NH54 departs JFK at 2024-12-27 10:00:00.\nFlight HA6 departs JFK at 2024-12-28 21:40:00.\nFlight HA24 departs JFK at 2024-12-28 21:40:00.\nFlight JL34 departs JFK at 2024-12-28 07:00:00.\nFlight NH49 departs JFK at 2024-12-28 19:00:00.\nFlight NH51 departs JFK at 2024-12-28 06:00:00.\nFlight B614 departs JFK at 2024-12-25 19:00:00.\nFlight B615 departs JFK at 2024-12-25 07:00:00.\nFlight 6X16 departs JFK at 2024-12-25 09:00:00.\nFlight 6X17 departs JFK at 2024-12-25 19:00:00.\nFlight 6X18 departs JFK at 2024-12-25 19:00:00.\nFlight B628 departs JFK at 2024-12-25 12:56:00.\nFlight B629 departs JFK at 2024-12-25 15:40:00.\nFlight B630 departs JFK at 2024-12-25 05:59:00.\nFlight B631 departs JFK at 2024-12-25 11:00:00.\nFlight B637 departs JFK at 2024-12-25 09:00:00.\nFlight B638 departs JFK at 2024-12-25 20:00:00.\nFlight B639 departs JFK at 2024-12-25 21:40:00.\nFlight 6X6 departs JFK at 2024-12-26 19:00:00.\nFlight 6X7 departs JFK at 2024-12-26 19:00:00.\nFlight B618 departs JFK at 2024-12-26 19:00:00.\nFlight B619 departs JFK at 2024-12-26 09:00:00.\nFlight B620 departs JFK at 2024-12-26 07:00:00.\nFlight B621 departs JFK at 2024-12-26 15:40:00.\nFlight B628 departs JFK at 2024-12-26 12:56:00.\nFlight B629 departs JFK at 2024-12-26 11:00:00.\nFlight B630 departs JFK at 2024-12-26 05:59:00.\nFlight B637 departs JFK at 2024-12-26 20:00:00.\nFlight B638 departs JFK at 2024-12-26 21:40:00.', 'sql_query': "SELECT *\nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.name = 'JFK' AND a_arrive.name = 'LAX';"}
+2024-12-30 08:24:55,362 - INFO - Received a request to /chat_support with query: Hello
+2024-12-30 08:24:55,363 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:24:55,366 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:24:56,576 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 90
+2024-12-30 08:24:56,577 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:28:19,924 - INFO - Received a request to /chat_support with query: Hello
+2024-12-30 08:28:19,925 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:28:19,930 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:28:21,226 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 70
+2024-12-30 08:28:21,229 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': '"Hello! How can I assist you today?"'}
+2024-12-30 08:28:39,393 - INFO - Received a request to /chat_support with query: I want flights to Tokyo?
+2024-12-30 08:28:39,394 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:28:39,395 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:28:46,923 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 2099
+2024-12-30 08:28:46,924 - INFO - Successfully received response from RAG bot: {'response': 'There are multiple flights to Tokyo available from JFK and other airports. The flights are scheduled throughout December 2024, with departure times ranging from early morning to afternoon. The airlines operating these flights include AA, NH, UA, and JL.', 'results': 'Flight AA205 departs JFK at 2024-12-01 14:00:00.\nFlight AA207 departs HKG at 2024-12-10 15:42:00.\nFlight AA401 departs NUQ at 2024-12-12 12:14:00.\nFlight AA405 departs JFK at 2024-12-12 12:43:00.\nFlight AA707 departs JFK at 2024-12-12 14:33:00.\nFlight AA206 departs JFK  at 2024-12-13 15:14:00.\nFlight NH2 departs JFK at 2024-12-25 13:05:00.\nFlight UA9 departs JFK at 2024-12-25 13:05:00.\nFlight JL10 departs JFK at 2024-12-25 00:35:00.\nFlight JL11 departs JFK at 2024-12-25 12:40:00.\nFlight NH18 departs JFK at 2024-12-25 00:50:00.\nFlight UA31 departs JFK at 2024-12-25 00:50:00.\nFlight NH1 departs JFK at 2024-12-24 13:05:00.\nFlight JL29 departs JFK at 2024-12-24 00:35:00.\nFlight JL30 departs JFK at 2024-12-24 12:40:00.\nFlight NH7 departs JFK at 2024-12-26 13:05:00.\nFlight UA14 departs JFK at 2024-12-26 13:05:00.\nFlight NH15 departs JFK at 2024-12-26 00:50:00.\nFlight JL16 departs JFK at 2024-12-26 00:35:00.\nFlight JL17 departs JFK at 2024-12-26 12:40:00.\nFlight UA27 departs JFK at 2024-12-26 00:50:00.\nFlight NH7 departs JFK at 2024-12-27 00:50:00.\nFlight NH8 departs JFK at 2024-12-27 13:05:00.\nFlight UA14 departs JFK at 2024-12-27 00:50:00.\nFlight UA15 departs JFK at 2024-12-27 13:05:00.\nFlight JL16 departs JFK at 2024-12-27 00:35:00.\nFlight JL17 departs JFK at 2024-12-27 12:40:00.\nFlight NH11 departs JFK at 2024-12-28 00:50:00.\nFlight NH12 departs JFK at 2024-12-28 13:05:00.\nFlight UA18 departs JFK at 2024-12-28 00:50:00.\nFlight JL19 departs JFK at 2024-12-28 00:35:00.\nFlight JL20 departs JFK at 2024-12-28 12:40:00.', 'sql_query': "SELECT f.id, f.flight_number, f.name_depart, f.name_arrive, f.name_airline, f.depart_time, f.arrive_time, f.price, f.status, f.seats\nFROM flight f\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_arrive.city = 'Tokyo';"}
+2024-12-30 08:28:56,993 - INFO - Received a request to /chat_support with query: Show me one of them
+2024-12-30 08:28:56,993 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:28:56,996 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:28:58,166 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 141
+2024-12-30 08:28:58,167 - INFO - Successfully received response from RAG bot: {'query': 'Show me one of them', 'response': "I'm sorry, but your request is a bit unclear. Could you please provide more details or context?"}
+2024-12-30 08:29:11,604 - INFO - Received a request to /chat_support with query: Show me a flight to tokyo
+2024-12-30 08:29:11,604 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:29:11,606 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:29:15,757 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 1994
+2024-12-30 08:29:15,758 - INFO - Successfully received response from RAG bot: {'response': 'There are multiple flights to Tokyo from various airports like JFK, HKG, and NUQ. The flights are scheduled throughout December 2024, with departure times ranging from early morning to afternoon. The flights are operated by different airlines including AA, NH, UA, and JL.', 'results': 'Flight AA205 departs JFK at 2024-12-01 14:00:00.\nFlight AA207 departs HKG at 2024-12-10 15:42:00.\nFlight AA401 departs NUQ at 2024-12-12 12:14:00.\nFlight AA405 departs JFK at 2024-12-12 12:43:00.\nFlight AA707 departs JFK at 2024-12-12 14:33:00.\nFlight AA206 departs JFK  at 2024-12-13 15:14:00.\nFlight NH2 departs JFK at 2024-12-25 13:05:00.\nFlight UA9 departs JFK at 2024-12-25 13:05:00.\nFlight JL10 departs JFK at 2024-12-25 00:35:00.\nFlight JL11 departs JFK at 2024-12-25 12:40:00.\nFlight NH18 departs JFK at 2024-12-25 00:50:00.\nFlight UA31 departs JFK at 2024-12-25 00:50:00.\nFlight NH1 departs JFK at 2024-12-24 13:05:00.\nFlight JL29 departs JFK at 2024-12-24 00:35:00.\nFlight JL30 departs JFK at 2024-12-24 12:40:00.\nFlight NH7 departs JFK at 2024-12-26 13:05:00.\nFlight UA14 departs JFK at 2024-12-26 13:05:00.\nFlight NH15 departs JFK at 2024-12-26 00:50:00.\nFlight JL16 departs JFK at 2024-12-26 00:35:00.\nFlight JL17 departs JFK at 2024-12-26 12:40:00.\nFlight UA27 departs JFK at 2024-12-26 00:50:00.\nFlight NH7 departs JFK at 2024-12-27 00:50:00.\nFlight NH8 departs JFK at 2024-12-27 13:05:00.\nFlight UA14 departs JFK at 2024-12-27 00:50:00.\nFlight UA15 departs JFK at 2024-12-27 13:05:00.\nFlight JL16 departs JFK at 2024-12-27 00:35:00.\nFlight JL17 departs JFK at 2024-12-27 12:40:00.\nFlight NH11 departs JFK at 2024-12-28 00:50:00.\nFlight NH12 departs JFK at 2024-12-28 13:05:00.\nFlight UA18 departs JFK at 2024-12-28 00:50:00.\nFlight JL19 departs JFK at 2024-12-28 00:35:00.\nFlight JL20 departs JFK at 2024-12-28 12:40:00.', 'sql_query': "SELECT *\nFROM flight f\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_arrive.city = 'tokyo';"}
+2024-12-30 08:29:40,203 - INFO - Received a request to /chat_support with query: I want 1 flight from NYC to Tokyo
+2024-12-30 08:29:40,203 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:29:40,205 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:29:45,026 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 322
+2024-12-30 08:29:45,034 - INFO - Successfully received response from RAG bot: {'response': 'No flights are available from New York City (NYC) to Tokyo.', 'results': 'No results found.', 'sql_query': "SELECT *\nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.city = 'NYC' AND a_arrive.city = 'Tokyo'\nLIMIT 1;"}
+2024-12-30 08:30:26,538 - INFO - Received a request to /chat_support with query: I want 1 flight from NY to Tokyo
+2024-12-30 08:30:26,538 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:30:26,540 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:30:31,849 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 310
+2024-12-30 08:30:31,852 - INFO - Successfully received response from RAG bot: {'response': 'No flights are available from New York to Tokyo.', 'results': 'No results found.', 'sql_query': "SELECT *\nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.city = 'NY' AND a_arrive.city = 'Tokyo'\nLIMIT 1;"}
+2024-12-30 08:34:16,076 - INFO - Received a request to /chat_support with query: Hello my name is Dan
+2024-12-30 08:34:16,078 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:34:16,094 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:34:17,954 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 86
+2024-12-30 08:34:17,956 - INFO - Successfully received response from RAG bot: {'query': 'Hello my name is Dan', 'response': '"Hi Dan! How can I assist you today?"'}
+2024-12-30 08:34:22,261 - INFO - Received a request to /chat_support with query: What is my name
+2024-12-30 08:34:22,261 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:34:22,264 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:34:24,557 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 277
+2024-12-30 08:34:24,557 - INFO - Successfully received response from RAG bot: {'query': 'What is my name', 'response': "As an AI, I don't have access to personal data about individuals unless it has been shared with me in the course of our conversation. I am designed to respect user privacy and confidentiality. So, I'm unable to help you with your name."}
+2024-12-30 08:35:44,166 - INFO - Received a request to /chat_support with query: hello
+2024-12-30 08:35:44,168 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:35:44,176 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:35:45,846 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 70
+2024-12-30 08:35:45,848 - INFO - Successfully received response from RAG bot: {'query': 'hello', 'response': '"Hello! How can I assist you today?"'}
+2024-12-30 08:35:49,142 - INFO - Received a request to /chat_support with query: My name is Dan
+2024-12-30 08:35:49,143 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:35:49,144 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:35:50,669 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 95
+2024-12-30 08:35:50,676 - INFO - Successfully received response from RAG bot: {'query': 'My name is Dan', 'response': '"Nice to meet you, Dan! How can I assist you today?"'}
+2024-12-30 08:35:56,581 - INFO - Received a request to /chat_support with query: What is my name again?
+2024-12-30 08:35:56,582 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:35:56,583 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:35:58,775 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 291
+2024-12-30 08:35:58,776 - INFO - Successfully received response from RAG bot: {'query': 'What is my name again?', 'response': "As an AI, I don't have access to personal data about individuals unless it has been shared with me in the course of our conversation. I am designed to respect user privacy and confidentiality. Therefore, I'm unable to help you with your name."}
+2024-12-30 08:37:07,613 - INFO - Received a request to /chat_support with query: I want flights to JFK to HND
+2024-12-30 08:37:07,614 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:37:07,617 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:38:42,315 - INFO - Received a request to /chat_support with query: hello
+2024-12-30 08:38:42,316 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:38:42,321 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:38:43,598 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 70
+2024-12-30 08:38:43,599 - INFO - Successfully received response from RAG bot: {'query': 'hello', 'response': '"Hello! How can I assist you today?"'}
+2024-12-30 08:38:54,136 - INFO - Received a request to /chat_support with query: I want flights from NYC to Tokyo?
+2024-12-30 08:38:54,136 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:38:54,138 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:39:02,298 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 447
+2024-12-30 08:39:02,304 - INFO - Successfully received response from RAG bot: {'response': 'There are currently no available flights from New York City to Tokyo.', 'results': 'No results found.', 'sql_query': "SELECT f.id, f.flight_number, f.name_depart, f.name_arrive, f.name_airline, f.depart_time, f.arrive_time, f.price, f.status, f.seats\nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.city = 'NYC' AND a_arrive.city = 'Tokyo';"}
+2024-12-30 08:39:40,356 - INFO - Received a request to /chat_support with query: I want 1 flight from New York to Tokyo
+2024-12-30 08:39:40,356 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:39:40,358 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:39:45,843 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 399
+2024-12-30 08:39:45,844 - INFO - Successfully received response from RAG bot: {'response': 'Your flight AA205 from New York (JFK) to Tokyo is scheduled to depart on December 1, 2024, at 14:00.', 'results': 'Flight AA205 departs JFK at 2024-12-01 14:00:00.', 'sql_query': "SELECT *\nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.city = 'New York' AND a_arrive.city = 'Tokyo'\nLIMIT 1;"}
+2024-12-30 08:41:53,464 - INFO - Received a request to /chat_support with query: how expensive is this flight?
+2024-12-30 08:41:53,464 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:41:53,466 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:41:56,118 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 184
+2024-12-30 08:41:56,119 - INFO - Successfully received response from RAG bot: {'response': 'The system could not find any information about the cost of the flight.', 'results': 'No results found.', 'sql_query': "SELECT price \nFROM flight \nWHERE id = 'flight_id';"}
+2024-12-30 08:43:56,696 - INFO - Received a request to /chat_support with query: Hello my name is Dan
+2024-12-30 08:43:56,698 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:43:56,704 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:43:59,041 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 89
+2024-12-30 08:43:59,045 - INFO - Successfully received response from RAG bot: {'query': 'Hello my name is Dan', 'response': '"Hello Dan! How can I assist you today?"'}
+2024-12-30 08:44:05,043 - INFO - Received a request to /chat_support with query: What is my name again
+2024-12-30 08:44:05,043 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:44:05,047 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:44:08,992 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 290
+2024-12-30 08:44:08,995 - INFO - Successfully received response from RAG bot: {'query': 'What is my name again', 'response': "As an AI, I don't have access to personal data about individuals unless it has been shared with me in the course of our conversation. I am designed to respect user privacy and confidentiality. Therefore, I'm unable to help you with your name."}
+2024-12-30 08:45:31,929 - INFO - Received a request to /chat_support with query: Hello my name is Dan
+2024-12-30 08:45:31,932 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:45:31,935 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:45:33,014 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 89
+2024-12-30 08:45:33,015 - INFO - Successfully received response from RAG bot: {'query': 'Hello my name is Dan', 'response': '"Hello Dan! How can I assist you today?"'}
+2024-12-30 08:45:38,738 - INFO - Received a request to /chat_support with query: What is my name again?
+2024-12-30 08:45:38,739 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:45:38,740 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:45:41,985 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 291
+2024-12-30 08:45:41,986 - INFO - Successfully received response from RAG bot: {'query': 'What is my name again?', 'response': "As an AI, I don't have access to personal data about individuals unless it has been shared with me in the course of our conversation. I am designed to respect user privacy and confidentiality. Therefore, I'm unable to help you with your name."}
+2024-12-30 08:50:38,497 - INFO - Received a request to /chat_support with query: Hello my name is Dan
+2024-12-30 08:50:38,500 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:50:38,507 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:50:39,578 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 89
+2024-12-30 08:50:39,585 - INFO - Successfully received response from RAG bot: {'query': 'Hello my name is Dan', 'response': '"Hello Dan! How can I assist you today?"'}
+2024-12-30 08:50:43,642 - INFO - Received a request to /chat_support with query: What is my name again
+2024-12-30 08:50:43,643 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:50:43,644 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:50:45,685 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 240
+2024-12-30 08:50:45,687 - INFO - Successfully received response from RAG bot: {'query': 'What is my name again', 'response': "As an AI, I don't have access to personal data about individuals unless it has been shared with me in the course of our conversation. I am designed to respect user privacy and confidentiality."}
+2024-12-30 08:56:30,649 - INFO - Received a request to /chat_support with query: Hello my name is Dan
+2024-12-30 08:56:30,651 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:56:30,657 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:56:30,681 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 92
+2024-12-30 08:56:30,682 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:56:45,493 - INFO - Received a request to /chat_support with query: Hello my name is Dan
+2024-12-30 08:56:45,494 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 08:56:45,496 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 08:56:45,506 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 92
+2024-12-30 08:56:45,508 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:00:15,930 - INFO - Received a request to /chat_support with query: Hello my name is jeff
+2024-12-30 09:00:15,932 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:00:15,937 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:00:17,565 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 87
+2024-12-30 09:00:17,566 - INFO - Successfully received response from RAG bot: {'query': 'Hello my name is jeff', 'response': 'Hello Jeff! How can I assist you today?'}
+2024-12-30 09:00:24,618 - INFO - Received a request to /chat_support with query: What is my name again?
+2024-12-30 09:00:24,618 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:00:24,620 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:00:25,789 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 67
+2024-12-30 09:00:25,790 - INFO - Successfully received response from RAG bot: {'query': 'What is my name again?', 'response': 'Your name is Jeff.'}
+2024-12-30 09:01:29,919 - INFO - Received a request to /chat_support with query: please give me 1 ticket from JFK to HNd
+2024-12-30 09:01:29,919 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:01:29,921 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:01:35,501 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 285
+2024-12-30 09:01:35,503 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:05:20,332 - INFO - Received a request to /chat_support with query: Hello 1 flight from JFK to HND please
+2024-12-30 09:05:20,333 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:05:20,340 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:05:50,786 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 141
+2024-12-30 09:05:50,793 - ERROR - Failed to reach RAG bot: 500 Server Error: Internal Server Error for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:06:15,340 - INFO - Received a request to /chat_support with query: Hello 1 flight from JFK to HND please
+2024-12-30 09:06:15,340 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:06:15,342 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:06:22,245 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 422
+2024-12-30 09:06:22,246 - INFO - Successfully received response from RAG bot: {'response': 'Your flight AA205 from JFK to HND is scheduled to depart on December 1, 2024, at 14:00.', 'results': 'Flight AA205 departs JFK at 2024-12-01 14:00:00.', 'sql_query': "SELECT *\nFROM flight f\nJOIN airline a ON f.name_airline = a.name\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.name = 'JFK' AND a_arrive.name = 'HND'\nLIMIT 1;"}
+2024-12-30 09:07:03,644 - INFO - Received a request to /chat_support with query: My name is Jeff
+2024-12-30 09:07:03,644 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:07:03,647 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:07:05,678 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 118
+2024-12-30 09:07:05,680 - INFO - Successfully received response from RAG bot: {'query': 'My name is Jeff', 'response': 'Nice to meet you, Jeff! How can I assist you further with your travel plans?'}
+2024-12-30 09:07:12,331 - INFO - Received a request to /chat_support with query: What is my name again?
+2024-12-30 09:07:12,331 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:07:12,332 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:07:14,043 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 120
+2024-12-30 09:07:14,044 - INFO - Successfully received response from RAG bot: {'query': 'What is my name again?', 'response': 'Your name is Jeff. How can I assist you further with your travel plans?'}
+2024-12-30 09:07:28,179 - INFO - Received a request to /chat_support with query: I want 1 flight from JFK to HND
+2024-12-30 09:07:28,179 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:07:28,181 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:07:30,805 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 261
+2024-12-30 09:07:30,808 - INFO - Successfully received response from RAG bot: {'response': 'Your flight AA205 from JFK to HND is scheduled to depart on December 1, 2024, at 14:00.', 'results': 'Flight AA205 departs JFK at 2024-12-01 14:00:00.', 'sql_query': "SELECT *\nFROM flight\nWHERE name_depart = 'JFK' AND name_arrive = 'HND'\nLIMIT 1;"}
+2024-12-30 09:07:41,143 - INFO - Received a request to /chat_support with query: What is the price of that flight?
+2024-12-30 09:07:41,143 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:07:41,145 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:07:43,174 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 62
+2024-12-30 09:07:43,175 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:14:28,990 - INFO - Received a request to /chat_support with query: Can you try again?
+2024-12-30 09:14:28,993 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:14:29,008 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:14:31,620 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 170
+2024-12-30 09:14:31,622 - INFO - Successfully received response from RAG bot: {'query': 'Can you try again?', 'response': 'Of course, I apologize for any confusion. Could you please specify which information you would like me to provide or clarify?'}
+2024-12-30 09:14:43,362 - INFO - Received a request to /chat_support with query: Can you fetch the price for the flight?
+2024-12-30 09:14:43,363 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:14:43,364 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:14:44,999 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 62
+2024-12-30 09:14:45,004 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:18:23,610 - INFO - Received a request to /chat_support with query: Hello my name is Jeff
+2024-12-30 09:18:23,613 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:18:23,634 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:18:25,257 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 87
+2024-12-30 09:18:25,258 - INFO - Successfully received response from RAG bot: {'query': 'Hello my name is Jeff', 'response': 'Hello Jeff! How can I assist you today?'}
+2024-12-30 09:18:41,955 - INFO - Received a request to /chat_support with query: Can I get a fligth from NYC to Tokyo?
+2024-12-30 09:18:41,955 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:18:41,957 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:18:44,631 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 331
+2024-12-30 09:18:44,631 - INFO - Successfully received response from RAG bot: {'query': 'Can I get a fligth from NYC to Tokyo?', 'response': "Of course, I can help you with that. However, as an AI, I don't have real-time capabilities to check flight availability. I recommend using flight booking websites or apps like Expedia, Skyscanner, or directly checking with airlines for the most accurate information."}
+2024-12-30 09:19:06,565 - INFO - Received a request to /chat_support with query: Can I get a fligth from JFK to HND
+2024-12-30 09:19:06,565 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:19:06,567 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:19:09,257 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 440
+2024-12-30 09:19:09,258 - INFO - Successfully received response from RAG bot: {'query': 'Can I get a fligth from JFK to HND', 'response': "Sure, you can definitely find flights from JFK (John F. Kennedy International Airport) in New York to HND (Haneda Airport) in Tokyo. However, as an AI, I don't have real-time access to flight schedules or availability. I recommend using flight booking websites or apps like Expedia, Skyscanner, or directly checking with airlines for the most accurate and up-to-date information."}
+2024-12-30 09:25:47,902 - INFO - Received a request to /chat_support with query: what is my name?
+2024-12-30 09:25:47,904 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:25:47,909 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:25:51,420 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 235
+2024-12-30 09:25:51,422 - INFO - Successfully received response from RAG bot: {'query': 'what is my name?', 'response': "As an AI, I don't have access to personal data about individuals unless it has been shared with me in the course of our conversation. I am designed to respect user privacy and confidentiality."}
+2024-12-30 09:26:54,141 - INFO - Received a request to /chat_support with query: Hello my name is Jeff
+2024-12-30 09:26:54,144 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:26:54,167 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:26:55,822 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 87
+2024-12-30 09:26:55,823 - INFO - Successfully received response from RAG bot: {'query': 'Hello my name is Jeff', 'response': 'Hello Jeff! How can I assist you today?'}
+2024-12-30 09:27:04,180 - INFO - Received a request to /chat_support with query: Where is Shanghai?
+2024-12-30 09:27:04,180 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:27:04,182 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:27:06,006 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 193
+2024-12-30 09:27:06,009 - INFO - Successfully received response from RAG bot: {'query': 'Where is Shanghai?', 'response': "Shanghai is located on the southern estuary of the Yangtze River in the eastern part of China. It's China's largest city and a global financial hub."}
+2024-12-30 09:27:27,234 - INFO - Received a request to /chat_support with query: What is my name
+2024-12-30 09:27:27,234 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:27:27,237 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:27:28,676 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 116
+2024-12-30 09:27:28,680 - INFO - Successfully received response from RAG bot: {'query': 'What is my name', 'response': 'Your name is Jeff, as you mentioned earlier. How can I assist you further?'}
+2024-12-30 09:27:53,285 - INFO - Received a request to /chat_support with query: I want fligths from JFK to HND
+2024-12-30 09:27:53,285 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:27:53,287 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:27:55,492 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 269
+2024-12-30 09:27:55,493 - INFO - Successfully received response from RAG bot: {'query': 'I want fligths from JFK to HND', 'response': "I'm sorry for any confusion, but as an AI, I don't have the ability to search for flights. I recommend using a travel booking website or contacting your preferred airline directly to find flights from JFK to HND."}
+2024-12-30 09:28:07,940 - INFO - Received a request to /chat_support with query: I want flights from JFK to HND
+2024-12-30 09:28:07,940 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:28:07,941 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:28:32,584 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 2721
+2024-12-30 09:28:32,585 - INFO - Successfully received response from RAG bot: {'response': 'Here are some flights from JFK to HND:\n\n1. Flight AA205 on 2024-12-01 at 14:00 for $800\n2. Flight AA405 on 2024-12-12 at 12:43 for $1400\n3. Flight AA707 on 2024-12-12 at 14:33 for $2000\n4. Flight AA206 on 2024-12-13 at 15:14 for $2002\n5. Flight NH2 on 2024-12-25 at 13:05 for $989\n6. Flight UA9 on 2024-12-25 at 13:05 for $1204\n7. Flight JL10 on 2024-12-25 at 00:35 for $1208\n8. Flight JL11 on 2024-12-25 at 12:40 for $1208\n9. Flight NH18 on 2024-12-25 at 00:50 for $1429\n10. Flight UA31 on 2024-12-25 at 00:50 for $2210\n\nPlease note that prices and availability are subject to change. I recommend booking as soon as possible to secure these rates.', 'results': 'Flight AA205 departs JFK at 2024-12-01 14:00:00. Price: 800\nFlight AA405 departs JFK at 2024-12-12 12:43:00. Price: 1400\nFlight AA707 departs JFK at 2024-12-12 14:33:00. Price: 2000\nFlight AA206 departs JFK  at 2024-12-13 15:14:00. Price: 2002\nFlight NH2 departs JFK at 2024-12-25 13:05:00. Price: 989\nFlight UA9 departs JFK at 2024-12-25 13:05:00. Price: 1204\nFlight JL10 departs JFK at 2024-12-25 00:35:00. Price: 1208\nFlight JL11 departs JFK at 2024-12-25 12:40:00. Price: 1208\nFlight NH18 departs JFK at 2024-12-25 00:50:00. Price: 1429\nFlight UA31 departs JFK at 2024-12-25 00:50:00. Price: 2210\nFlight NH1 departs JFK at 2024-12-24 13:05:00. Price: 989\nFlight JL29 departs JFK at 2024-12-24 00:35:00. Price: 1787\nFlight JL30 departs JFK at 2024-12-24 12:40:00. Price: 1787\nFlight NH7 departs JFK at 2024-12-26 13:05:00. Price: 1118\nFlight UA14 departs JFK at 2024-12-26 13:05:00. Price: 1204\nFlight NH15 departs JFK at 2024-12-26 00:50:00. Price: 1207\nFlight JL16 departs JFK at 2024-12-26 00:35:00. Price: 1208\nFlight JL17 departs JFK at 2024-12-26 12:40:00. Price: 1208\nFlight UA27 departs JFK at 2024-12-26 00:50:00. Price: 1495\nFlight NH7 departs JFK at 2024-12-27 00:50:00. Price: 1118\nFlight NH8 departs JFK at 2024-12-27 13:05:00. Price: 1118\nFlight UA14 departs JFK at 2024-12-27 00:50:00. Price: 1204\nFlight UA15 departs JFK at 2024-12-27 13:05:00. Price: 1204\nFlight JL16 departs JFK at 2024-12-27 00:35:00. Price: 1208\nFlight JL17 departs JFK at 2024-12-27 12:40:00. Price: 1208\nFlight NH11 departs JFK at 2024-12-28 00:50:00. Price: 1118\nFlight NH12 departs JFK at 2024-12-28 13:05:00. Price: 1118\nFlight UA18 departs JFK at 2024-12-28 00:50:00. Price: 1204\nFlight JL19 departs JFK at 2024-12-28 00:35:00. Price: 1208\nFlight JL20 departs JFK at 2024-12-28 12:40:00. Price: 1208', 'sql_query': "SELECT * \nFROM flight f\nJOIN airport a_depart ON f.name_depart = a_depart.name\nJOIN airport a_arrive ON f.name_arrive = a_arrive.name\nWHERE a_depart.name = 'JFK' AND a_arrive.name = 'HND';"}
+2024-12-30 09:29:41,594 - INFO - Received a request to /chat_support with query: What is the day today?
+2024-12-30 09:29:41,594 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:29:41,604 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:29:43,739 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 201
+2024-12-30 09:29:43,741 - INFO - Successfully received response from RAG bot: {'query': 'What is the day today?', 'response': "Today's date is based on the current local time of your device or computer. I'm an AI and don't have real-time capabilities to provide the current date."}
+2024-12-30 09:30:48,898 - INFO - Received a request to /chat_support with query: Can you check the address of customer Dan Huynh?
+2024-12-30 09:30:48,898 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2024-12-30 09:30:48,903 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2024-12-30 09:30:53,390 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 317
+2024-12-30 09:30:53,391 - INFO - Successfully received response from RAG bot: {'response': "I'm sorry, but I can't assist with that.", 'results': 'Flight Unknown Flight departs Unknown Depart at Unknown Time. Price: N/A\nFlight Unknown Flight departs Unknown Depart at Unknown Time. Price: N/A', 'sql_query': "SELECT building_number, street, city, state \nFROM customer \nWHERE name = 'Dan Huynh';"}

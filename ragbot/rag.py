@@ -10,31 +10,41 @@ import pymysql
 import os
 import logging
 
-# Initialize Flask
+# ---------------------------
+# 1) Flask App & Logging
+# ---------------------------
 app = Flask(__name__)
-
-# Logging config
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-# Conversation memory: each user/assistant message is stored for multi-turn context
+# ---------------------------
+# 2) Conversation Memory
+# ---------------------------
+# Stores multi-turn messages from user & assistant
 memory = ConversationBufferMemory(return_messages=True)
 
-# LLM: GPT-4 chat model
+# ---------------------------
+# 3) GPT-4 Chat Model
+# ---------------------------
 llm = ChatOpenAI(model="gpt-4", temperature=0)
 
-# Database connection
+# ---------------------------
+# 4) Database Connection
+# ---------------------------
 def get_db_connection():
     return pymysql.connect(
-        host=os.getenv('MYSQL_HOST', 'localhost'),
-        user=os.getenv('MYSQL_USER', 'root'),
-        password=os.getenv('MYSQL_PASSWORD', 'my-secret-pw'),
-        database=os.getenv('MYSQL_DB', 'airticketingsystem'),
-        port=int(os.getenv('MYSQL_PORT', 3306)),
+        host=os.getenv("MYSQL_HOST", "localhost"),
+        user=os.getenv("MYSQL_USER", "root"),
+        password=os.getenv("MYSQL_PASSWORD", "my-secret-pw"),
+        database=os.getenv("MYSQL_DB", "airticketingsystem"),
+        port=int(os.getenv("MYSQL_PORT", 3306)),
         cursorclass=pymysql.cursors.DictCursor
     )
 
 def execute_query(sql_query: str):
+    """
+    Execute the given SQL query in MySQL and return results.
+    """
     logger.info("Executing SQL query: %s", sql_query)
     conn = get_db_connection()
     try:
@@ -48,7 +58,9 @@ def execute_query(sql_query: str):
     finally:
         conn.close()
 
-# Prompt templates for SQL generation, summarization, fallback
+# ---------------------------
+# 5) Prompt Templates & Chains
+# ---------------------------
 sql_prompt = PromptTemplate(
     input_variables=["conversation_history", "query"],
     template="""
@@ -68,11 +80,11 @@ When you join the same table multiple times (e.g., airport for depart and arriva
 use distinct aliases like a_depart and a_arrive. Avoid reusing `airport` as the same alias twice.
 Avoid T-SQL or other dialect features like 'TOP'. Use `LIMIT` instead.
 
-
 User Query: "{query}"
 Only generate the SQL query. No explanations.
 """
 )
+sql_chain = sql_prompt | llm
 
 response_prompt = PromptTemplate(
     input_variables=["conversation_history", "query", "results"],
@@ -85,6 +97,7 @@ SQL Results: "{results}"
 Give a concise summary for the user.
 """
 )
+response_chain = response_prompt | llm
 
 fallback_prompt = PromptTemplate(
     input_variables=["conversation_history", "query"],
@@ -97,31 +110,48 @@ The user query is not DB-related:
 Please respond helpfully:
 """
 )
-
-# Build chain from prompt + LLM
-sql_chain = sql_prompt | llm
-response_chain = response_prompt | llm
 fallback_chain = fallback_prompt | llm
 
-# Classification for DB-related queries
+# ---------------------------
+# 6) Classification Logic
+# ---------------------------
+classification_prompt = PromptTemplate(
+    input_variables=["query"],
+    template="""
+User Query: "{query}"
+
+Decide if the above query is about flights, tickets, customers, or any database operation. 
+If yes, respond with exactly "true".
+If no, respond with exactly "false".
+"""
+)
+
+# Create a chain from the prompt and your LLM
+classification_chain = classification_prompt | llm
+
 class UserQuery(BaseModel):
+    """Simple Pydantic model for the JSON payload."""
     query: str
 
 def classify_query(query: str) -> bool:
-    # Potential keywords
-    target_keywords = ["flight", "ticket", "customer", "database", "query"]
-    words_in_query = query.lower().split()
+    """
+    Ask the LLM if the query is 'database-related' 
+    (e.g. flights, tickets, customers).
+    Returns True if LLM says "true", otherwise False.
+    """
+    # 1) Invoke the classification chain
+    classification_result = classification_chain.invoke({"query": query})
+    
+    # 2) Extract the text from AIMessage or fallback to string
+    if isinstance(classification_result, AIMessage):
+        answer = classification_result.content.strip().lower()
+    else:
+        answer = str(classification_result).strip().lower()
 
-    # If any word in `words_in_query` is close to any of the `target_keywords`, return True
-    for word in words_in_query:
-        # e.g., look for words that have a close match with a ratio > 0.8
-        matches = get_close_matches(word, target_keywords, n=1, cutoff=0.8)
-        if matches:
-            return True
-    return False
+    # 3) Return True if LLM answered "true", otherwise False
+    return (answer == "true")
 
-
-# Helper to map HumanMessage, AIMessage, or SystemMessage to user/assistant/system
+# Helper to map message classes (Human, AI, System) to role strings
 def get_message_role(msg):
     if isinstance(msg, HumanMessage):
         return "user"
@@ -131,15 +161,19 @@ def get_message_role(msg):
         return "system"
     return "unknown"
 
-@app.route('/rag_query', methods=['POST'])
+# ---------------------------
+# 7) Endpoint
+# ---------------------------
+@app.route("/rag_query", methods=["POST"])
 def rag_query():
     """
     Endpoint for multi-turn conversation with memory. 
-    Database queries get SQL generation + summarization. 
-    Non-database queries get a fallback response, but both see the entire conversation.
+    - If classify_query() => True, it calls SQL chain & executes the query, then uses the response chain.
+    - Else, it calls fallback chain.
+    - Both see conversation_history for context (like 'My name is Dan').
     """
     try:
-        # 1) Parse input
+        # 1) Parse Input
         data = request.json
         logger.debug("Raw input data: %s", data)
         user_query = UserQuery(**data)
@@ -148,8 +182,7 @@ def rag_query():
         # 2) Add user message to memory
         memory.chat_memory.add_user_message(user_query.query)
 
-        # 3) Build conversation text from all stored messages
-        #    We check if each message is HumanMessage, AIMessage, etc.
+        # 3) Build conversation text from stored messages
         conversation_text = "\n".join(
             f"{get_message_role(msg)}: {msg.content}"
             for msg in memory.chat_memory.messages
@@ -157,13 +190,13 @@ def rag_query():
 
         # 4) Classification
         if classify_query(user_query.query):
-            # a) Generate SQL, passing full conversation
+            # a) Generate SQL with conversation history
             sql_result = sql_chain.invoke({
                 "conversation_history": conversation_text,
                 "query": user_query.query
             })
 
-            # b) Extract SQL from chain result
+            # b) Extract SQL
             if isinstance(sql_result, AIMessage):
                 sql_query = sql_result.content.strip()
             else:
@@ -174,22 +207,18 @@ def rag_query():
             db_results = execute_query(sql_query)
             logger.info("Executed SQL successfully.")
 
-            # d) Format for summarization
-            db_results = execute_query(sql_query)  # returns a list of dictionaries
-
-            if isinstance(db_results, list):
-                formatted_results = "\n".join(
-                    # Use r.get(...) with a default value 
-                    # (e.g. 'Unknown Flight', 'Unknown Depart', or 'Unknown Time')
-                    f"Flight {r.get('flight_number', 'Unknown Flight')} "
-                    f"departs {r.get('name_depart', 'Unknown Depart')} at {r.get('depart_time', 'Unknown Time')}. "
-                    f"Price: {r.get('price', 'N/A')}"
-                    for r in db_results
-                ) or "No flights found."
-            else:
-                formatted_results = db_results
-
-            # e) Summarize with response_chain
+            # d) Format results with .get(...) to avoid KeyErrors
+            # if isinstance(db_results, list):
+            #     formatted_results = "\n".join(
+            #         f"Flight {row.get('flight_number', 'Unknown Flight')} "
+            #         f"departs {row.get('name_depart', 'Unknown Depart')} at {row.get('depart_time', 'Unknown Time')}. "
+            #         f"Price: {row.get('price', 'N/A')}"
+            #         for row in db_results
+            #     ) or "No flights found."
+            # else:
+            #     formatted_results = db_results
+            formatted_results = db_results
+            # e) Summarize
             summary_out = response_chain.invoke({
                 "conversation_history": conversation_text,
                 "query": user_query.query,
@@ -211,7 +240,7 @@ def rag_query():
             }), 200
 
         else:
-            # Fallback path, also passing conversation history
+            # Fallback path
             fallback_out = fallback_chain.invoke({
                 "conversation_history": conversation_text,
                 "query": user_query.query
@@ -222,6 +251,7 @@ def rag_query():
             else:
                 fallback_response = str(fallback_out).strip()
 
+            # Add fallback response to memory
             memory.chat_memory.add_ai_message(fallback_response)
 
             return jsonify({
@@ -236,3 +266,10 @@ def rag_query():
     except Exception as e:
         logger.exception("Internal Server Error")
         return jsonify({"error": "Internal Server Error", "details": str(e)}), 500
+
+
+# ---------------------------
+# 8) Run Flask
+# ---------------------------
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5001)

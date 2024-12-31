@@ -1,5 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for, session, flash, jsonify
 from flask_mail import Mail,Message
+from amadeus import Client, ResponseError
+
 import pymysql
 import hashlib
 import secrets
@@ -8,9 +10,16 @@ import pandas as pd
 import math
 from datetime import datetime,timedelta
 import os 
+import logging
+from bs4 import BeautifulSoup
+from flask_cors import CORS
+
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'  # Use a strong, secret value in production
+CORS(app, resources={r"/api/*": {"origins": "*"}})
+
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'your_default_secret_key')
+app.logger.debug(f"Secret Key: {app.secret_key}")
 
 # Session configuration
 app.config['SESSION_TYPE'] = 'filesystem'
@@ -141,6 +150,281 @@ def check_permission(required_permission):
         connection.close()
 
 
+def fetch_airline_logo_from_wikipedia(airline_name):
+    try:
+        # Replace spaces with underscores for the Wikipedia URL
+        search_url = f"https://en.wikipedia.org/wiki/{airline_name.replace(' ', '_')}"
+        response = requests.get(search_url, timeout=10)
+        
+        if response.status_code != 200:
+            logging.error(f"Failed to fetch Wikipedia page for {airline_name}. Status code: {response.status_code}")
+            return None
+        
+        # Parse the HTML using BeautifulSoup
+        soup = BeautifulSoup(response.text, "html.parser")
+        
+        # Find the link to the "File:" page for the logo
+        file_link = soup.find("a", href=lambda x: x and "File:" in x)
+        if not file_link:
+            logging.warning(f"No 'File:' link found on Wikipedia page for {airline_name}.")
+            return None
+        
+        file_page_url = f"https://en.wikipedia.org{file_link['href']}"
+        logging.info(f"Found 'File:' page for {airline_name}: {file_page_url}")
+        
+        # Fetch the "File:" page
+        file_response = requests.get(file_page_url, timeout=10)
+        if file_response.status_code != 200:
+            logging.error(f"Failed to fetch 'File:' page for {airline_name}. Status code: {file_response.status_code}")
+            return None
+        
+        # Parse the "File:" page to get the image URL
+        file_soup = BeautifulSoup(file_response.text, "html.parser")
+        logo_img = file_soup.find("a", class_="internal")
+        if not logo_img:
+            logging.warning(f"No logo image found on 'File:' page for {airline_name}.")
+            return None
+        
+        logo_url = "https:" + logo_img["href"]
+        logging.info(f"Fetched logo URL for {airline_name}: {logo_url}")
+
+        # Adjust headers to mimic a browser request
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
+        }
+
+        # Download the logo
+        response = requests.get(logo_url, stream=True, headers=headers, timeout=10)
+        if response.status_code == 200:
+            # Save the logo locally
+            local_logo_dir = "wikipedia_airline_logos"
+            os.makedirs(local_logo_dir, exist_ok=True)
+            extension = os.path.splitext(logo_url)[-1] or ".svg"
+            logo_path = os.path.join(local_logo_dir, f"{airline_name.replace(' ', '_').lower()}{extension}")
+            with open(logo_path, "wb") as file:
+                for chunk in response.iter_content(1024):
+                    file.write(chunk)
+            logging.info(f"Logo for airline {airline_name} saved locally at {logo_path}.")
+            return logo_path
+        else:
+            logging.warning(f"Failed to download logo for {airline_name}. Status code: {response.status_code}")
+            return None
+    except requests.exceptions.RequestException as e:
+        logging.error(f"Request error for airline {airline_name}: {e}")
+        return None
+    except Exception as e:
+        logging.error(f"Unexpected error for airline {airline_name}: {e}")
+        return None
+
+# Initialize the Amadeus client with your API credentials
+amadeus = Client(
+    client_id=os.getenv('AMADEUS_CLIENT_ID'),
+    client_secret=os.getenv('AMADEUS_CLIENT_SECRET')
+)
+
+# Configure logging
+logging.basicConfig(
+    level=logging.DEBUG,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("flight_sync.log"),
+        logging.StreamHandler()
+    ]
+)
+
+
+def fetch_airline_name_from_api(airline_code):
+    try:
+        # Fetch the airline information from the Amadeus API
+        response = amadeus.reference_data.airlines.get(airlineCodes=airline_code)
+        
+        # Check if the response is valid and contains data
+        if response.status_code == 200 and response.data:
+            # Extract airline name using fallback fields
+            airline_data = response.data[0]
+            airline_name = (
+                airline_data.get('commonName') or 
+                airline_data.get('businessName') or 
+                airline_data.get('name')
+            )
+            
+            if airline_name:
+                return airline_name
+            else:
+                logging.warning(f"Airline code {airline_code} found, but no name available in the response.")
+                return None
+        else:
+            logging.warning(f"No airline information found for code: {airline_code}")
+            return None
+    except ResponseError as e:
+        logging.error(f"Error fetching airline name from Amadeus API for code {airline_code}: {e}")
+        return None
+
+
+def resolve_airline_name(airline_code): 
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            # Check if the airline code exists
+            cursor.execute("SELECT name FROM airline WHERE airline_code = %s", (airline_code,))
+            result = cursor.fetchone()
+            if result:
+                return result['name']  # Return the existing airline name
+            else:
+                # Fetch airline name from the API
+                unformatted_airline_name = fetch_airline_name_from_api(airline_code)
+                airline_name = format_airline_name(unformatted_airline_name)
+                
+                if airline_name:
+                    # Insert the airline into the airline table
+                    cursor.execute("""
+                        INSERT INTO airline (name, airline_code)
+                        VALUES (%s, %s)
+                    """, (airline_name, airline_code))
+                    connection.commit()
+                    logging.info(f"Airline code {airline_code} for {airline_name} inserted successfully.")
+                    return airline_name
+                else:
+                    logging.warning(f"Could not resolve name for airline code: {airline_code}")
+                    return None
+    except Exception as e:
+        logging.error(f"Database error while processing airline {airline_code}: {e}")
+        return None
+    finally:
+        connection.close()
+
+
+# Fetch flights using Amadeus API
+def fetch_flights(origin, destination, departure_date):
+    logging.debug(f"Fetching flights: origin={origin}, destination={destination}, departure_date={departure_date}")
+    try:
+        response = amadeus.shopping.flight_offers_search.get(
+            originLocationCode=origin,
+            destinationLocationCode=destination,
+            departureDate=departure_date,
+            adults=1
+        )
+        logging.info(f"Fetched {len(response.data)} flights from Amadeus API.")
+        return response.data
+    except ResponseError as error:
+        logging.error(f"Error fetching flights: {error}")
+        return []
+
+# Prepare and log the SQL statement
+def prepare_sql_statement(flight):
+    sql_statement = f"""
+    INSERT INTO flight (flight_number,name_airline, name_depart, name_arrive, depart_time, arrive_time, price)
+    VALUES (
+        '{flight['flight_number']}', 
+        '{flight['name_airline']}',
+        '{flight['origin']}', 
+        '{flight['destination']}', 
+        '{flight['departure_time'].strftime('%Y-%m-%d %H:%M:%S')}', 
+        '{flight['arrival_time'].strftime('%Y-%m-%d %H:%M:%S')}', 
+        {flight['price']}
+    );
+    """
+    logging.debug(f"Prepared SQL statement: {sql_statement.strip()}")
+
+# Get or create airline code
+def get_or_create_airline_code(airline_name, airline_code):
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            # Check if the airline code exists
+            cursor.execute("SELECT airline_code FROM airline WHERE airline_code = %s", (airline_code,))
+            result = cursor.fetchone()
+            if result:
+                return result['airline_code']
+            else:
+                # Insert the airline if not found
+                logging.info(f"Airline code {airline_code} for {airline_name} not found. Inserting into database.")
+                cursor.execute("""
+                    INSERT INTO airline (name, airline_code)
+                    VALUES (%s, %s)
+                """, (airline_name, airline_code))
+                connection.commit()
+                logging.info(f"Airline code {airline_code} for {airline_name} inserted successfully.")
+                return airline_code
+    except Exception as e:
+        logging.error(f"Database error while processing airline {airline_name}: {e}")
+        return None
+    finally:
+        connection.close()
+
+# Insert flight into the database with SQL statement logging
+# Insert flight into the database
+def insert_flight_into_db(flight,insert=False):
+    connection = get_db_connection()
+    try:
+        with connection.cursor() as cursor:
+            sql_statement = f"""
+            INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                '{flight['flight_number']}', 
+                '{flight['name_airline']}', 
+                '{flight['origin']}', 
+                '{flight['destination']}', 
+                '{flight['departure_time'].strftime('%Y-%m-%d %H:%M:%S')}', 
+                '{flight['arrival_time'].strftime('%Y-%m-%d %H:%M:%S')}', 
+                {flight['price']}, 
+                'Scheduled'
+            )
+            """
+            logging.debug(f"Prepared SQL statement: {sql_statement.strip()}")
+            if insert: 
+                cursor.execute(sql_statement)
+                connection.commit()
+                logging.info(f"Flight {flight['flight_number']} inserted successfully into the database.")
+
+            else: 
+                logging.info("Not inserting cause mode is FALSE")
+    except Exception as e:
+        logging.error(f"Error inserting flight into database: {e}")
+    finally:
+        connection.close()
+
+def format_airline_name(name):
+    # Convert to title case (handles cases like "JETBLUE AIRWAYS" -> "Jetblue Airways")
+    return name.title() if name else "Unknown Airline (Format Error)"
+
+# Sync flights and log SQL statements
+def sync_flights_to_db(origin, destination, departure_date):
+    flights = fetch_flights(origin, destination, departure_date)
+
+    # Step 1: Resolve all airline names
+    airline_name_map = {}
+    for flight_data in flights:
+        airline_code = flight_data.get('validatingAirlineCodes', [None])[0]
+        if airline_code not in airline_name_map:
+            airline_name = resolve_airline_name(airline_code)
+            airline_name_map[airline_code] = format_airline_name(airline_name)
+
+    # Step 2: Process flights with resolved and formatted airline names
+    for flight_data in flights:
+        try:
+            airline_code = flight_data.get('validatingAirlineCodes', [None])[0]
+            airline_name = airline_name_map.get(airline_code, "Unknown Airline")
+            
+            # Prepare flight details
+            flight = {
+                'flight_number': f"{airline_code}{flight_data['id'][-3:]}",
+                'name_airline': airline_name,  # Add formatted airline name here
+                'origin': flight_data['itineraries'][0]['segments'][0]['departure']['iataCode'],
+                'destination': flight_data['itineraries'][0]['segments'][0]['arrival']['iataCode'],
+                'departure_time': datetime.fromisoformat(flight_data['itineraries'][0]['segments'][0]['departure']['at']),
+                'arrival_time': datetime.fromisoformat(flight_data['itineraries'][0]['segments'][0]['arrival']['at']),
+                'price': float(flight_data['price']['total'])
+            }
+
+            # Insert into the database
+            insert_flight_into_db(flight,insert=True)
+
+        except Exception as e:
+            logging.error(f"Error processing flight data: {e}")
+            logging.debug(f"Flight data: {flight_data}")
+
+
 @app.route('/manage_flights', methods=['GET', 'POST'])
 def manage_flights():
     if not check_permission('manage_flights'):
@@ -148,6 +432,14 @@ def manage_flights():
     
     # Flight management logic here
     return render_template('manage_flights.html')
+
+@app.route('/api/manage_flights', methods=['GET', 'POST'])
+def manage_flights():
+    if not check_permission('manage_flights'):
+        return redirect(url_for('dashboard'))
+    
+    # Flight management logic here
+    return jsonify()
 
 @app.route('/')
 def home():
@@ -159,7 +451,22 @@ def home():
         return render_template('index.html', logged_in=logged_in, user_type=user_type, user=user,name=user)
     else: 
         return render_template('index.html', logged_in=logged_in, user_type=user_type, user=user,name=name)
-    
+
+@app.route('/api/home', methods=['GET'])
+def api_home():
+    logged_in = 'user' in session 
+    user_type = session.get('user_type')  # Optional: pass user type if you need it in the header
+    user = session.get('user')
+    name = session.get('name')
+
+    response = {
+        "logged_in": logged_in,
+        "user_type": user_type,
+        "user": user,
+        "name": name
+    }
+    return jsonify(response)
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     next_url = request.args.get('next')  # Capture the next URL
@@ -193,6 +500,7 @@ def login():
         if user:
             session.clear()
             # print(user['name'])
+            app.logger.debug(f"User found: {user}")
             if user_type=="booking_agent":
                 session['name']=user['booking_agent_id']
             else:
@@ -202,7 +510,8 @@ def login():
             session['session_id'] = secrets.token_hex(16)
             session.permanent = True
             flash('Login successful', 'success')
-
+            app.logger.debug(f"Session data after login: {dict(session)}")
+    
             # Redirect to the user-specific dashboard or the next URL if provided
             dashboard_route = {
                 'customer': 'customer_dashboard',
@@ -215,9 +524,85 @@ def login():
             return redirect(next_url or url_for(dashboard_route))
         else:
             flash('Invalid credentials', 'error')
+            app.logger.debug("No user found")
             return redirect(url_for('login', next=next_url))
 
     return render_template('login.html', next=next_url)
+
+@app.route('/api/login', methods=['POST'])
+def api_login():
+    data = request.json
+    user_type = data.get('user_type')
+    login_field = data.get('login_field')
+    password = data.get('password')
+    hashed_password = hashlib.sha256(password.encode()).hexdigest()
+
+    # Determine table based on user type
+    table_name = {
+        'customer': 'customer',
+        'booking_agent': 'booking_agent',
+        'airline_staff': 'airline_staff'
+    }.get(user_type)
+
+    if not table_name:
+        return jsonify({"error": "Invalid user type"}), 400
+
+    # Execute the query based on user type
+    connection = get_db_connection()
+    with connection:
+        cursor = connection.cursor()
+        query = f"SELECT * FROM {table_name} WHERE password=%s AND "
+        query += "username=%s" if user_type == 'airline_staff' else "email=%s"
+        cursor.execute(query, (hashed_password, login_field))
+        user = cursor.fetchone()
+
+    if user:
+        session.clear()
+        if user_type == "booking_agent":
+            session['name'] = user['booking_agent_id']
+        else:
+            session['name'] = user['name']
+        session['user'] = login_field
+        session['user_type'] = user_type
+        session['session_id'] = secrets.token_hex(16)
+        session.permanent = True
+
+        response = {
+            "message": "Login successful",
+            "user_type": user_type,
+            "default_origin": get_default_origin()
+        }
+        return jsonify(response)
+    else:
+        return jsonify({"error": "Invalid credentials"}), 401
+
+
+@app.route('/test-table/<table_name>')
+def test_table(table_name):
+    try:
+        connection = get_db_connection()  # Replace with your database connection function
+        with connection:
+            cursor = connection.cursor()
+            
+            # Check if the table exists
+            cursor.execute(f"SHOW TABLES LIKE '{table_name}';")
+            result = cursor.fetchone()
+            
+            if not result:
+                return f"Table '{table_name}' does not exist in the database."
+            
+            # Retrieve the first few rows of the table
+            cursor.execute(f"SELECT * FROM {table_name} LIMIT 5;")
+            rows = cursor.fetchall()
+            if rows:
+                return f"Table '{table_name}' exists. Sample rows: {rows}"
+            else:
+                return f"Table '{table_name}' exists but is empty."
+    except Exception as e:
+        return f"Error checking table '{table_name}': {str(e)}"
+
+
+
 
 @app.route('/update_profile', methods=['GET', 'POST'])
 def update_profile():
@@ -298,6 +683,11 @@ import sqlite3
 
 
 from random import randint
+from flask import g
+
+# Cache to store last sync timestamps for each query
+last_sync_cache = {}
+CACHE_EXPIRY = timedelta(hours=1)  # Cache expiry time
 
 @app.route('/show_flights', methods=['GET'])
 def show_flights():
@@ -333,6 +723,17 @@ def show_flights():
     if not origin:
         flash(f"Departure location is required, defaulting to { session.get('default_origin')} .", "error")
         return redirect(url_for('home'))
+    
+    # Check if we need to sync flights
+
+    cache_key = (origin, destination, depart_date_obj.strftime('%Y-%m-%d'))
+    last_sync = last_sync_cache.get(cache_key)
+    now = datetime.now()
+
+    if not last_sync or now - last_sync > CACHE_EXPIRY:
+        sync_flights_to_db(origin, destination, depart_date)
+        last_sync_cache[cache_key] = now
+        logging.info(f"Synced flights for {cache_key}.")
 
     # Connect to the database
     connection = get_db_connection()
@@ -343,13 +744,16 @@ def show_flights():
         flights = []
         date_prices = {}
         for date in date_options:
+
             date_str = date.strftime('%Y-%m-%d')
+
             if destination:
                 query = """
-                SELECT f.*, dep_airport.city AS origin_city, arr_airport.city AS destination_city
+                SELECT f.*, dep_airport.city AS origin_city, arr_airport.city AS destination_city, a.logo_path
                 FROM flight f
                 JOIN airport dep_airport ON f.name_depart = dep_airport.name
                 JOIN airport arr_airport ON f.name_arrive = arr_airport.name
+                JOIN airline a ON f.name_airline = a.name
                 WHERE f.name_depart = %s AND f.name_arrive = %s AND DATE(f.depart_time) = %s
                 """
                 cursor.execute(query, [origin, destination, date_str])
@@ -2002,6 +2406,34 @@ def view_top_customers():
         commission_chart_data=commission_chart_data
     )
 
+@app.route('/chat_support', methods=['POST'])
+def chat_support():
+    data = request.json
+    user_query = data.get('query', '')
+    logging.info("Received a request to /chat_support with query: %s", user_query)
+
+    if not user_query:
+        logging.warning("Query is missing in the request")
+        return jsonify({"error": "Query is required"}), 400
+
+    try:
+        # Forward the query to the RAG bot container
+        import requests
+        rag_bot_url = "http://project-part-3-rag-bot-1:5001/rag_query"  # Correct URL
+        logging.info("Forwarding query to RAG bot at URL: %s", rag_bot_url)
+
+        response = requests.post(rag_bot_url, json={"query": user_query})
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        response_data = response.json()
+
+        logging.info("Successfully received response from RAG bot: %s", response_data)
+        return jsonify(response_data)
+    except requests.exceptions.RequestException as e:
+        logging.error("Failed to reach RAG bot: %s", e)
+        return jsonify({"error": f"Failed to reach RAG bot: {e}"}), 500
+    except Exception as e:
+        logging.error("An unexpected error occurred: %s", e)
+        return jsonify({"error": str(e)}), 500
 
 
 @app.route('/logout')

@@ -36387,3 +36387,22 @@
 2024-12-30 14:55:09,513 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
 2024-12-30 14:55:12,068 - DEBUG - http://project-part-3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
 2024-12-30 14:55:12,070 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-06 07:31:38,825 - INFO - Received a request to /chat_support with query: Hello
+2025-01-06 07:31:38,826 - INFO - Forwarding query to RAG bot at URL: http://project-part-3-rag-bot-1:5001/rag_query
+2025-01-06 07:31:38,829 - DEBUG - Starting new HTTP connection (1): project-part-3-rag-bot-1:5001
+2025-01-06 07:31:40,757 - ERROR - Failed to reach RAG bot: HTTPConnectionPool(host='project-part-3-rag-bot-1', port=5001): Max retries exceeded with url: /rag_query (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fba3e29e850>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2025-01-06 07:33:24,908 - INFO - Received a request to /chat_support with query: Hewwo
+2025-01-06 07:33:24,909 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-06 07:33:24,912 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-06 07:33:28,077 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-06 07:33:28,079 - INFO - Successfully received response from RAG bot: {'query': 'Hewwo', 'response': 'Hello! How can I assist you today?'}
+2025-01-06 08:21:45,605 - INFO - Received a request to /chat_support with query: Hello
+2025-01-06 08:21:45,606 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-06 08:21:45,608 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-06 08:21:47,506 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-06 08:21:47,506 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-06 08:25:05,145 - INFO - Received a request to /chat_support with query: Hello
+2025-01-06 08:25:05,146 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-06 08:25:05,149 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-06 08:25:07,335 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-06 08:25:07,335 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}

@@ -434,7 +434,7 @@ def manage_flights():
     return render_template('manage_flights.html')
 
 @app.route('/api/manage_flights', methods=['GET', 'POST'])
-def manage_flights():
+def api_manage_flights():
     if not check_permission('manage_flights'):
         return redirect(url_for('dashboard'))
     
@@ -2419,7 +2419,7 @@ def chat_support():
     try:
         # Forward the query to the RAG bot container
         import requests
-        rag_bot_url = "http://project-part-3-rag-bot-1:5001/rag_query"  # Correct URL
+        rag_bot_url = "http://projectpart3-rag-bot-1:5001/rag_query"  # Correct URL
         logging.info("Forwarding query to RAG bot at URL: %s", rag_bot_url)
 
         response = requests.post(rag_bot_url, json={"query": user_query})

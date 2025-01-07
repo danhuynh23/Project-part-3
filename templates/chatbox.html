@@ -1,22 +1,33 @@
 <div id="chatbox-container">
+    <!-- Chat Support Button -->
     <div class="chat-support">
-        <a href="#" onclick="toggleChatbox()">💬 Chat Support</a>
+        <button class="chat-support-button" aria-label="Open Chat Support" onclick="toggleChatbox()">
+            <i class="fas fa-comments"></i> Chat Support
+        </button>
     </div>
 
-    <div id="chatbox-modal" class="chatbox-modal hidden">
+    <!-- Chatbox Modal -->
+    <div id="chatbox-modal" class="chatbox-modal hidden" role="dialog" aria-labelledby="chatbox-header" aria-hidden="true">
+        <!-- Chatbox Header -->
         <div class="chatbox-header">
-            <h3>Customer Support</h3>
-            <button class="close-button" onclick="toggleChatbox()">×</button>
+            <h3 id="chatbox-header">Chat Support</h3>
+            <button class="chatbox-close" aria-label="Close Chat Support" onclick="toggleChatbox()">×</button>
         </div>
-        <div id="chatbox-messages" class="chatbox-messages"></div>
+
+        <!-- Chatbox Messages -->
+        <div id="chatbox-messages" class="chatbox-messages" aria-live="polite" aria-relevant="additions"></div>
+
+        <!-- Chatbox Input -->
         <div class="chatbox-input">
             <input
                 type="text"
                 id="chatbox-input"
+                class="chatbox-text-input"
                 placeholder="Type your message..."
+                aria-label="Message Input"
                 onkeydown="handleInput(event)"
             />
-            <button onclick="sendMessage()">Send</button>
+            <button class="chatbox-send-button" onclick="sendMessage()">Send</button>
         </div>
     </div>
 </div>

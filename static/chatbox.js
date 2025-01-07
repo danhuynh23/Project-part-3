@@ -1,6 +1,9 @@
 function toggleChatbox() {
     const chatboxModal = document.getElementById("chatbox-modal");
-    chatboxModal.classList.toggle("hidden");
+    const isVisible = chatboxModal.classList.contains("active");
+
+    chatboxModal.classList.toggle("active");
+    chatboxModal.setAttribute("aria-hidden", isVisible);
 }
 
 function handleInput(event) {
@@ -46,5 +49,5 @@ function addMessage(sender, message) {
     messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
     messagesContainer.appendChild(messageElement);
 
-    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to the latest message
 }

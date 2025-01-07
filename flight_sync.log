@@ -36406,3 +36406,97 @@
 2025-01-06 08:25:05,149 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
 2025-01-06 08:25:07,335 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
 2025-01-06 08:25:07,335 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 13:16:54,152 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 13:16:54,153 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:16:54,156 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:16:57,605 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 98
+2025-01-07 13:16:57,608 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! Is there something specific you need assistance with today?'}
+2025-01-07 13:19:22,970 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 13:19:22,970 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:19:22,974 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:19:22,981 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 84
+2025-01-07 13:19:22,982 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:20:50,658 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 13:20:50,659 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:20:50,662 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:20:53,627 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-07 13:20:53,628 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 13:23:40,372 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 13:23:40,373 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:23:40,376 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:23:49,425 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-07 13:23:49,426 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 13:23:58,520 - INFO - Received a request to /chat_support with query: what is my name?
+2025-01-07 13:23:58,520 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:23:58,522 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:24:00,890 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 158
+2025-01-07 13:24:00,890 - INFO - Successfully received response from RAG bot: {'query': 'what is my name?', 'response': "I'm sorry, but I don't have access to your personal information, including your name. How can I assist you further?"}
+2025-01-07 13:24:08,142 - DEBUG - User found: {'email': 'dsh400@nyu.edu', 'name': 'Dan Huynh', 'password': '53bc3911362cda98b1014b8566f6800c72f6be0688961274130bd6a3fcfee8b9', 'building_number': '', 'street': '65 Duong 51 Binh Trung Dong, Quan 2', 'city': 'Ho Chi Minh', 'state': 'HCM', 'phone_number': '0901663700', 'passport_number': '123', 'passport_expiration': datetime.date(2024, 11, 1), 'passport_country': 'VN', 'date_of_birth': datetime.date(2024, 11, 30)}
+2025-01-07 13:24:08,143 - DEBUG - Session data after login: {'name': 'Dan Huynh', 'user': 'dsh400@nyu.edu', 'user_type': 'customer', 'session_id': '8a5ef2f4dbfa24df885c9efff319ec6d', '_permanent': True, '_flashes': [('success', 'Login successful')]}
+2025-01-07 13:24:08,144 - DEBUG - Starting new HTTP connection (1): ip-api.com:80
+2025-01-07 13:24:08,608 - DEBUG - http://ip-api.com:80 "GET /json HTTP/1.1" 200 290
+2025-01-07 13:24:32,336 - INFO - Received a request to /chat_support with query: hello
+2025-01-07 13:24:32,337 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:24:32,338 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:24:35,301 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 82
+2025-01-07 13:24:35,302 - INFO - Successfully received response from RAG bot: {'query': 'hello', 'response': 'Hello! How can I assist you today, dsh400@nyu.edu?'}
+2025-01-07 13:24:42,836 - INFO - Received a request to /chat_support with query: What is my user type
+2025-01-07 13:24:42,836 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:24:42,838 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:24:46,151 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 124
+2025-01-07 13:24:46,152 - INFO - Successfully received response from RAG bot: {'query': 'What is my user type', 'response': 'Your user type is listed as "customer". How can I assist you further today?'}
+2025-01-07 13:28:24,798 - INFO - Received a request to /chat_support with query: What is my name?
+2025-01-07 13:28:24,799 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:28:24,800 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:28:27,596 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 190
+2025-01-07 13:28:27,597 - INFO - Successfully received response from RAG bot: {'query': 'What is my name?', 'response': "I'm sorry, but I don't have access to your personal name. I can only see your email address, which is dsh400@nyu.edu. How can I assist you further?"}
+2025-01-07 13:45:52,897 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 13:45:52,897 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:45:52,901 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:45:54,414 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 100
+2025-01-07 13:45:54,415 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:47:37,472 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 13:47:37,473 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:47:37,476 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:47:39,875 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-07 13:47:39,876 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 13:47:57,698 - INFO - Received a request to /chat_support with query: What is my name?
+2025-01-07 13:47:57,698 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:47:57,700 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:48:01,188 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 248
+2025-01-07 13:48:01,189 - INFO - Successfully received response from RAG bot: {'query': 'What is my name?', 'response': 'Based on the email address you\'ve provided, your username appears to be "dsh400". If you\'re asking for your full name, I\'m afraid I don\'t have that information. Is there anything else you need help with?'}
+2025-01-07 13:49:20,195 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 13:49:20,196 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:49:20,198 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:49:22,308 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-07 13:49:22,309 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 13:49:25,809 - INFO - Received a request to /chat_support with query: What is my name
+2025-01-07 13:49:25,810 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:49:25,811 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:49:29,705 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 231
+2025-01-07 13:49:29,706 - INFO - Successfully received response from RAG bot: {'query': 'What is my name', 'response': "Based on the email address you've provided, your username appears to be 'dsh400'. However, I'm sorry, I don't have access to your full name. Is there anything else you need assistance with?"}
+2025-01-07 13:49:41,477 - INFO - Received a request to /chat_support with query: What is my current address?
+2025-01-07 13:49:41,477 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:49:41,479 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:49:48,727 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 435
+2025-01-07 13:49:48,728 - INFO - Successfully received response from RAG bot: {'response': 'Based on the information I have, your current address is 65 Duong 51 Binh Trung Dong, Quan 2, Ho Chi Minh, HCM. Is there anything else you need help with, perhaps related to travel arrangements?', 'results': [{'building_number': '', 'city': 'Ho Chi Minh', 'state': 'HCM', 'street': '65 Duong 51 Binh Trung Dong, Quan 2'}], 'sql_query': "SELECT building_number, street, city, state \nFROM customer \nWHERE email = 'dsh400@nyu.edu';"}
+2025-01-07 13:51:23,476 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 13:51:23,476 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:51:23,480 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:51:26,412 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-07 13:51:26,413 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 13:51:31,142 - INFO - Received a request to /chat_support with query: What is my name
+2025-01-07 13:51:31,142 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:51:31,144 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:51:35,201 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 188
+2025-01-07 13:51:35,202 - INFO - Successfully received response from RAG bot: {'response': 'Hello Dan Huynh! How can I assist you with your travel needs today?', 'results': [{'name': 'Dan Huynh'}], 'sql_query': "SELECT name FROM customer WHERE email = 'dsh400@nyu.edu';"}
+2025-01-07 13:51:51,832 - INFO - Received a request to /chat_support with query: I want to see my latest ticket?
+2025-01-07 13:51:51,833 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:51:51,834 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:51:58,285 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 658
+2025-01-07 13:51:58,286 - INFO - Successfully received response from RAG bot: {'response': 'Your latest ticket is with American Airlines, flight number 9999. The flight departed on December 12, 2024, at 13:13. The ticket ID for this flight is 100. Is there anything else you would like to know?', 'results': [{'depart_time': 'Thu, 12 Dec 2024 13:13:00 GMT', 'flight_id': 104, 'flight_number': '9999', 'name_airline': 'American Airlines', 'ticket_id': 100}], 'sql_query': "SELECT ticket.ticket_id, ticket.name_airline, ticket.flight_number, ticket.depart_time, ticket.flight_id\nFROM ticket\nJOIN purchases ON ticket.ticket_id = purchases.ticket_id\nWHERE purchases.customer_email = 'dsh400@nyu.edu'\nORDER BY purchases.purchase_date DESC\nLIMIT 1;"}
+2025-01-07 13:52:20,610 - INFO - Received a request to /chat_support with query: What was that airline?
+2025-01-07 13:52:20,611 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 13:52:20,612 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 13:52:24,890 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 108
+2025-01-07 13:52:24,891 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://projectpart3-rag-bot-1:5001/rag_query

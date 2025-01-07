@@ -2417,12 +2417,21 @@ def chat_support():
         return jsonify({"error": "Query is required"}), 400
 
     try:
-        # Forward the query to the RAG bot container
-        import requests
-        rag_bot_url = "http://projectpart3-rag-bot-1:5001/rag_query"  # Correct URL
+        # Forward the query to the RAG bot container with session info
+        rag_bot_url = "http://projectpart3-rag-bot-1:5001/rag_query"
         logging.info("Forwarding query to RAG bot at URL: %s", rag_bot_url)
 
-        response = requests.post(rag_bot_url, json={"query": user_query})
+        # Include session information in the payload if available
+        payload = {
+            "query": user_query,
+            "session": {
+                "user": session.get("user"),  # May be None
+                "user_type": session.get("user_type"),  # May be None
+                "session_id": session.get("session_id"),  # May be None
+            }
+        }
+
+        response = requests.post(rag_bot_url, json=payload)
         response.raise_for_status()  # Raise an exception for HTTP errors
         response_data = response.json()
 
@@ -2434,6 +2443,7 @@ def chat_support():
     except Exception as e:
         logging.error("An unexpected error occurred: %s", e)
         return jsonify({"error": str(e)}), 500
+
 
 
 @app.route('/logout')

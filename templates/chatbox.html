@@ -1,0 +1,22 @@
+<div id="chatbox-container">
+    <div class="chat-support">
+        <a href="#" onclick="toggleChatbox()">💬 Chat Support</a>
+    </div>
+
+    <div id="chatbox-modal" class="chatbox-modal hidden">
+        <div class="chatbox-header">
+            <h3>Customer Support</h3>
+            <button class="close-button" onclick="toggleChatbox()">×</button>
+        </div>
+        <div id="chatbox-messages" class="chatbox-messages"></div>
+        <div class="chatbox-input">
+            <input
+                type="text"
+                id="chatbox-input"
+                placeholder="Type your message..."
+                onkeydown="handleInput(event)"
+            />
+            <button onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+</div>

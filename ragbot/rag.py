@@ -46,7 +46,7 @@ memory.chat_memory.add_message(system_msg)
 llm = ChatOpenAI(model="gpt-4", temperature=0)
 
 # ---------------------------
-# 4) Database Connection
+# 4) Database Connection and context retrieval functions
 # ---------------------------
 def get_db_connection():
     return pymysql.connect(
@@ -74,6 +74,47 @@ def execute_query(sql_query: str):
         raise
     finally:
         conn.close()
+
+
+def get_conversation_history(user_id=None, session_id=None):
+    """
+    Retrieve conversation history for a user or session.
+    """
+    query = """
+        SELECT role, content
+        FROM conversation_context
+        WHERE user_id = %s OR session_id = %s
+        ORDER BY timestamp ASC
+    """
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(query, (user_id, session_id))
+            return [{"role": row["role"], "content": row["content"]} for row in cursor.fetchall()]
+    except Exception as e:
+        logger.error(f"Error retrieving conversation history: {e}")
+        return []
+    finally:
+        connection.close()
+
+
+def save_message_to_db(user_id, session_id, role, content):
+    """
+    Save a message to the conversation_context table.
+    """
+    query = """
+        INSERT INTO conversation_context (user_id, session_id, role, content)
+        VALUES (%s, %s, %s, %s)
+    """
+    try:
+        connection = get_db_connection()
+        with connection.cursor() as cursor:
+            cursor.execute(query, (user_id, session_id, role, content))
+            connection.commit()
+    except Exception as e:
+        logger.error(f"Error saving message to DB: {e}")
+    finally:
+        connection.close()
 
 # ---------------------------
 # 5) Prompt Templates & Chains
@@ -140,7 +181,15 @@ classification_prompt = PromptTemplate(
 
 User Query: "{query}"
 
-Determine if the user's query is related to flights, tickets, customers, or any database operation. 
+Determine if the user's query is related to flights, tickets, customers detail , or any database operation. Here is the schema: 
+- airline(name)
+- airline_staff(username, name, password, first_name, last_name, date_of_birth)
+- flight(id, flight_number, name_depart, name_arrive, name_airline, depart_time, arrive_time, price, status, seats)
+- airport(name, city)
+- customer(email, name, password, building_number, street, city, state, phone_number, passport_number, passport_expiration, passport_country, date_of_birth)
+- ticket(ticket_id, name_airline, flight_number, depart_time, flight_id)
+- purchases(ticket_id, customer_email, booking_agent_id, purchase_date)
+
 If it is, respond with exactly "true".
 If it is not, respond with exactly "false".
 """
@@ -202,10 +251,29 @@ def rag_query():
         data = request.json
         logger.debug("Raw input data: %s", data)
         user_query = UserQuery(**data)
+        session_info = data.get("session", {})  # Extract session info
         logger.info("User query validated: %s", user_query.query)
+        logger.info("Session info: %s", session_info) # Log session info if available
+
+         # Extract session details
+        user = session_info.get("user", "Anonymous")
+        user_type = session_info.get("user_type", "guest")
+        session_id = session_info.get("session_id", "unknown")
+
+        # Log session details for debugging
+        logger.info(f"Session Info: User: {user}, User Type: {user_type}, Session ID: {session_id}")
 
         # 2) Add user message to memory
         memory.chat_memory.add_user_message(user_query.query)
+
+        # 2b) Add session info as a system message
+        system_message = SystemMessage(
+            content=(
+                f"User Info: {user} (Type: {user_type}, Session ID: {session_id}). "
+                "Use this information to personalize responses where relevant. You can also user info (the email) to querry more details about the user."
+            )
+        )
+        memory.chat_memory.add_message(system_message)
 
         # 3) Build conversation text from stored messages
         conversation_text = "\n".join(

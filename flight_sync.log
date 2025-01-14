@@ -36545,3 +36545,184 @@
 2025-01-07 14:18:37,643 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
 2025-01-07 14:18:40,437 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 195
 2025-01-07 14:18:40,438 - INFO - Successfully received response from RAG bot: {'query': 'No I just like saying hello', 'response': "That's perfectly fine! It's always nice to exchange greetings. If you have any questions or need assistance with something, feel free to ask."}
+2025-01-07 14:20:08,755 - INFO - Received a request to /chat_support with query: UwW
+2025-01-07 14:20:08,755 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:20:08,757 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:20:12,277 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 152
+2025-01-07 14:20:12,277 - INFO - Successfully received response from RAG bot: {'query': 'UwW', 'response': 'I\'m here to help! However, I\'m not sure what "UwW" means. Could you please provide more details or clarify your request?'}
+2025-01-07 14:20:16,196 - INFO - Received a request to /chat_support with query: UwU
+2025-01-07 14:20:16,196 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:20:16,198 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:20:19,274 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 211
+2025-01-07 14:20:19,275 - INFO - Successfully received response from RAG bot: {'query': 'UwU', 'response': '"UwU" is a popular emoticon often used in online messaging to express happiness or excitement. If you have any other questions or need assistance with something, feel free to ask!'}
+2025-01-07 14:21:42,673 - INFO - Received a request to /chat_support with query: What is my address
+2025-01-07 14:21:42,673 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:21:42,676 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:21:48,643 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 366
+2025-01-07 14:21:48,644 - INFO - Successfully received response from RAG bot: {'response': 'Your current address is 65 Duong 51 Binh Trung Dong, Quan 2, Ho Chi Minh, HCM. Is there anything else you need assistance with?', 'results': [{'building_number': '', 'city': 'Ho Chi Minh', 'state': 'HCM', 'street': '65 Duong 51 Binh Trung Dong, Quan 2'}], 'sql_query': "SELECT building_number, street, city, state\nFROM customer\nWHERE email = 'dsh400@nyu.edu';"}
+2025-01-07 14:22:33,758 - INFO - Received a request to /chat_support with query: What is up?
+2025-01-07 14:22:33,759 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:22:33,761 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:22:39,850 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 87
+2025-01-07 14:22:39,851 - INFO - Successfully received response from RAG bot: {'query': 'What is up?', 'response': "I'm here to assist you! How can I help you today?"}
+2025-01-07 14:24:49,555 - INFO - Received a request to /chat_support with query: testing testing
+2025-01-07 14:24:49,555 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:24:49,557 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:24:52,578 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 146
+2025-01-07 14:24:52,578 - INFO - Successfully received response from RAG bot: {'query': 'testing testing', 'response': "I'm here and ready to assist you! Your test message was received successfully. How can I help you today?"}
+2025-01-07 14:25:17,851 - INFO - Received a request to /chat_support with query: Testing testing
+2025-01-07 14:25:17,851 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:25:17,853 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:25:22,130 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 146
+2025-01-07 14:25:22,131 - INFO - Successfully received response from RAG bot: {'query': 'Testing testing', 'response': "I'm here and ready to assist you! Your test message was received successfully. How can I help you today?"}
+2025-01-07 14:26:17,014 - INFO - Received a request to /chat_support with query: testing again
+2025-01-07 14:26:17,015 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:26:17,016 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:26:20,025 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 162
+2025-01-07 14:26:20,026 - INFO - Successfully received response from RAG bot: {'query': 'testing again', 'response': 'I\'m here and ready to assist you! Your test message "testing again" was received successfully. How can I help you today?'}
+2025-01-07 14:26:51,377 - INFO - Received a request to /chat_support with query: Testing testing
+2025-01-07 14:26:51,377 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:26:51,379 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:26:54,361 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 146
+2025-01-07 14:26:54,362 - INFO - Successfully received response from RAG bot: {'query': 'Testing testing', 'response': "I'm here and ready to assist you! Your test message was received successfully. How can I help you today?"}
+2025-01-07 14:27:01,626 - INFO - Received a request to /chat_support with query: Testing testing
+2025-01-07 14:27:01,627 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:27:01,628 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:27:05,410 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 146
+2025-01-07 14:27:05,411 - INFO - Successfully received response from RAG bot: {'query': 'Testing testing', 'response': "I'm here and ready to assist you! Your test message was received successfully. How can I help you today?"}
+2025-01-07 14:28:13,086 - INFO - Received a request to /chat_support with query: Testing
+2025-01-07 14:28:13,087 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:28:13,088 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:28:20,132 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 150
+2025-01-07 14:28:20,133 - INFO - Successfully received response from RAG bot: {'query': 'Testing', 'response': 'I\'m here and ready to assist you! Your test message "Testing" was received successfully. How can I help you today?'}
+2025-01-07 14:28:27,260 - INFO - Received a request to /chat_support with query: hello
+2025-01-07 14:28:27,261 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:28:27,262 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:28:29,976 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-07 14:28:29,977 - INFO - Successfully received response from RAG bot: {'query': 'hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 14:29:38,984 - INFO - Received a request to /chat_support with query: checl
+2025-01-07 14:29:38,984 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:29:38,986 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:29:42,154 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 134
+2025-01-07 14:29:42,155 - INFO - Successfully received response from RAG bot: {'query': 'checl', 'response': "I'm sorry, but I didn't understand your request. Could you please provide more details or rephrase it?"}
+2025-01-07 14:30:05,000 - INFO - Received a request to /chat_support with query: sup
+2025-01-07 14:30:05,000 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:30:05,002 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:30:07,660 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 86
+2025-01-07 14:30:07,662 - INFO - Successfully received response from RAG bot: {'query': 'sup', 'response': "Hello! I'm here to assist you. How can I help you today?"}
+2025-01-07 14:30:16,623 - INFO - Received a request to /chat_support with query: sup
+2025-01-07 14:30:16,624 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:30:16,626 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:30:23,870 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 86
+2025-01-07 14:30:23,871 - INFO - Successfully received response from RAG bot: {'query': 'sup', 'response': "Hello! I'm here to assist you. How can I help you today?"}
+2025-01-07 14:31:06,404 - INFO - Received a request to /chat_support with query: sup
+2025-01-07 14:31:06,404 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:31:06,406 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:31:09,814 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 86
+2025-01-07 14:31:09,815 - INFO - Successfully received response from RAG bot: {'query': 'sup', 'response': "Hello! I'm here to assist you. How can I help you today?"}
+2025-01-07 14:31:29,984 - INFO - Received a request to /chat_support with query: sup
+2025-01-07 14:31:29,984 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:31:29,986 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:31:34,320 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 86
+2025-01-07 14:31:34,321 - INFO - Successfully received response from RAG bot: {'query': 'sup', 'response': "Hello! I'm here to assist you. How can I help you today?"}
+2025-01-07 14:32:02,365 - INFO - Received a request to /chat_support with query: Hey
+2025-01-07 14:32:02,365 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:32:02,367 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:32:05,062 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 64
+2025-01-07 14:32:05,063 - INFO - Successfully received response from RAG bot: {'query': 'Hey', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 14:32:21,225 - INFO - Received a request to /chat_support with query: hey
+2025-01-07 14:32:21,225 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:32:21,227 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:32:24,154 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 64
+2025-01-07 14:32:24,155 - INFO - Successfully received response from RAG bot: {'query': 'hey', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 14:32:31,052 - INFO - Received a request to /chat_support with query: sup gang
+2025-01-07 14:32:31,053 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:32:31,054 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:32:34,636 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 91
+2025-01-07 14:32:34,637 - INFO - Successfully received response from RAG bot: {'query': 'sup gang', 'response': "Hello! I'm here to assist you. How can I help you today?"}
+2025-01-07 14:32:46,954 - INFO - Received a request to /chat_support with query: What is the latest flight today
+2025-01-07 14:32:46,954 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:32:46,956 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:32:54,981 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 281
+2025-01-07 14:32:54,981 - INFO - Successfully received response from RAG bot: {'response': "I'm sorry, but there are no flights available for the rest of today. Would you like to check for flights on another date?", 'results': 'No results found.', 'sql_query': "SELECT * FROM flight \nWHERE DATE(depart_time) = '2025-01-07' \nORDER BY depart_time DESC \nLIMIT 1"}
+2025-01-07 14:33:00,943 - INFO - Received a request to /chat_support with query: What is my name
+2025-01-07 14:33:00,943 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:33:00,945 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:33:15,774 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 174
+2025-01-07 14:33:15,775 - INFO - Successfully received response from RAG bot: {'response': 'Your name is Dan Huynh. How can I assist you further?', 'results': [{'name': 'Dan Huynh'}], 'sql_query': "SELECT name FROM customer WHERE email = 'dsh400@nyu.edu';"}
+2025-01-07 14:33:46,992 - INFO - Received a request to /chat_support with query: what uP
+2025-01-07 14:33:46,992 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:33:46,993 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:33:49,324 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 90
+2025-01-07 14:33:49,325 - INFO - Successfully received response from RAG bot: {'query': 'what uP', 'response': "Hello! I'm here to assist you. How can I help you today?"}
+2025-01-07 14:34:12,722 - INFO - Received a request to /chat_support with query: hey there
+2025-01-07 14:34:12,722 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:34:12,724 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:34:15,071 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 70
+2025-01-07 14:34:15,073 - INFO - Successfully received response from RAG bot: {'query': 'hey there', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 14:34:36,427 - INFO - Received a request to /chat_support with query: Hey
+2025-01-07 14:34:36,427 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:34:36,429 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:34:38,585 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 64
+2025-01-07 14:34:38,586 - INFO - Successfully received response from RAG bot: {'query': 'Hey', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 14:34:50,139 - INFO - Received a request to /chat_support with query: Where do I live
+2025-01-07 14:34:50,139 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:34:50,141 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:35:18,811 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 345
+2025-01-07 14:35:18,812 - INFO - Successfully received response from RAG bot: {'response': 'Your current address is 65 Duong 51 Binh Trung Dong, Quan 2, Ho Chi Minh, HCM. How can I assist you further?', 'results': [{'building_number': '', 'city': 'Ho Chi Minh', 'state': 'HCM', 'street': '65 Duong 51 Binh Trung Dong, Quan 2'}], 'sql_query': "SELECT building_number, street, city, state FROM customer WHERE email = 'dsh400@nyu.edu';"}
+2025-01-07 14:36:08,323 - INFO - Received a request to /chat_support with query: What is up
+2025-01-07 14:36:08,324 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:36:08,325 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:36:11,280 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 86
+2025-01-07 14:36:11,281 - INFO - Successfully received response from RAG bot: {'query': 'What is up', 'response': "I'm here to assist you! How can I help you today?"}
+2025-01-07 14:36:18,046 - INFO - Received a request to /chat_support with query: What is up
+2025-01-07 14:36:18,046 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:36:18,047 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:36:22,911 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 86
+2025-01-07 14:36:22,911 - INFO - Successfully received response from RAG bot: {'query': 'What is up', 'response': "I'm here to assist you! How can I help you today?"}
+2025-01-07 14:36:31,007 - INFO - Received a request to /chat_support with query: What is up
+2025-01-07 14:36:31,007 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:36:31,009 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:36:50,410 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 86
+2025-01-07 14:36:50,410 - INFO - Successfully received response from RAG bot: {'query': 'What is up', 'response': "I'm here to assist you! How can I help you today?"}
+2025-01-07 14:40:04,412 - INFO - Received a request to /chat_support with query: Sup
+2025-01-07 14:40:04,412 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:40:04,414 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:40:11,099 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 86
+2025-01-07 14:40:11,100 - INFO - Successfully received response from RAG bot: {'query': 'Sup', 'response': "Hello! I'm here to assist you. How can I help you today?"}
+2025-01-07 14:40:34,687 - INFO - Received a request to /chat_support with query: Hewll
+2025-01-07 14:40:34,687 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:40:34,688 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:40:42,471 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 134
+2025-01-07 14:40:42,473 - INFO - Successfully received response from RAG bot: {'query': 'Hewll', 'response': "I'm sorry, but I didn't understand your request. Could you please provide more details or rephrase it?"}
+2025-01-07 14:48:27,610 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 14:48:27,610 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:48:27,611 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:48:32,978 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 357
+2025-01-07 14:48:32,979 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:51:06,094 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 14:51:06,094 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:51:06,096 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:51:11,232 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 357
+2025-01-07 14:51:11,232 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:52:31,811 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 14:52:31,812 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:52:31,813 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:52:37,341 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 357
+2025-01-07 14:52:37,342 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:53:21,027 - INFO - Received a request to /chat_support with query: Hewwo
+2025-01-07 14:53:21,027 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 14:53:21,029 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 14:53:26,617 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 500 357
+2025-01-07 14:53:26,618 - ERROR - Failed to reach RAG bot: 500 Server Error: INTERNAL SERVER ERROR for url: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 15:25:16,840 - INFO - Received a request to /chat_support with query: Hello
+2025-01-07 15:25:16,840 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-07 15:25:16,842 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-07 15:25:21,403 - DEBUG - http://projectpart3-rag-bot-1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-07 15:25:21,404 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-07 15:35:38,029 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=1
+2025-01-07 15:35:41,310 - ERROR - Error fetching flights: [400]
+
+
+
+2025-01-07 15:35:41,311 - INFO - Synced flights for ('1', '1', '2025-01-07').

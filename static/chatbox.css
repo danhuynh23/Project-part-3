@@ -71,12 +71,54 @@
 }
 
 /* Chat Messages */
+/* Chat Messages */
 .chatbox-messages {
     flex-grow: 1;
     padding: 10px;
     overflow-y: auto;
     background-color: #f8f8f8;
     font-size: 14px;
+    display: flex;
+    flex-direction: column; /* Stack messages vertically */
+    align-items: flex-start; /* Align all messages to the left initially */
+}
+
+/* Base Message Style */
+.chatbox-messages .message {
+    /* border: 1px solid red; Debug: Identify message boundaries */
+
+    display: inline-block; /* Bubble wraps tightly around the text */
+    max-width: 60%; /* Optional: Limits the width for long messages */
+    padding: 10px; /* Space inside the bubble */
+    margin-bottom: 10px; /* Space between messages */
+    border-radius: 15px; /* Smooth rounded corners for a bubble-like look */
+    word-wrap: break-word; /* Handles long words or URLs */
+    overflow-wrap: break-word;
+    position: relative; /* To allow alignment tweaks without breaking layout */
+}
+
+/* User Messages */
+.chatbox-messages .message.user {
+    display: inline-block;       /* Ensure the bubble wraps tightly around the text */
+    background-color: #4a0575;  /* Purple background for user messages */
+    color: white;               /* White text */
+    text-align: left;           /* Keep the text inside the bubble left-aligned */
+    margin-left: auto;          /* Push the bubble to the right */
+    margin-right: 10px;         /* Add a small gap from the right edge */
+    padding: 10px;              /* Inner padding for the bubble */
+    border-radius: 15px 15px 0 15px; /* Rounded corners with a tail on the left */
+    max-width: 60%;             /* Prevent the bubble from becoming too wide */
+    word-wrap: break-word;      /* Ensure long text breaks properly */
+}
+
+/* Assistant Messages */
+.chatbox-messages .message.assistant {
+    background-color: #ddd; /* Light gray for assistant messages */
+    color: black; /* Black text */
+    text-align: left; /* Align text inside the bubble */
+    margin-right: auto; /* Align bubble to the left */
+    margin-left: 10px; /* Add small space from the left boundary */
+    border-radius: 15px 15px 15px 0; /* Left-aligned corner effect */
 }
 
 /* Chat Input */
@@ -108,4 +150,23 @@
 
 .chatbox-send-button:hover {
     background-color: #37004c;
+}
+
+.hidden {
+    display: none; /* Hidden by default */
+}
+
+#typing-indicator {
+    display: inline-block;
+    background-color: #ddd;
+    color: black;
+    font-style: italic;
+    text-align: left;
+    margin-right: auto;
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: 15px 15px 15px 0;
+    max-width: 60%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
 }

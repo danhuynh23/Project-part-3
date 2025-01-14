@@ -15,8 +15,13 @@
         </div>
 
         <!-- Chatbox Messages -->
-        <div id="chatbox-messages" class="chatbox-messages" aria-live="polite" aria-relevant="additions"></div>
-
+        <div id="chatbox-messages" class="chatbox-messages">
+            <!-- Existing user and assistant messages will be appended here -->
+            <div id="typing-indicator" class="message assistant hidden">
+                <em>Support is typing...</em>
+            </div>
+        </div>
+        
         <!-- Chatbox Input -->
         <div class="chatbox-input">
             <input

@@ -1,3 +1,16 @@
+// Show the typing indicator
+function showTypingIndicator() {
+    const typingIndicator = document.getElementById("typing-indicator");
+    typingIndicator.classList.remove("hidden");
+}
+
+// Hide the typing indicator
+function hideTypingIndicator() {
+    const typingIndicator = document.getElementById("typing-indicator");
+    typingIndicator.classList.add("hidden");
+}
+
+
 function toggleChatbox() {
     const chatboxModal = document.getElementById("chatbox-modal");
     const isVisible = chatboxModal.classList.contains("active");
@@ -20,14 +33,21 @@ function sendMessage() {
     // Add user message to chatbox
     addMessage("You", userMessage);
 
+    // Show the typing indicator
+    showTypingIndicator();
+
     // Send message to backend
     fetch("/chat_support", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: userMessage }),
     })
+
         .then((response) => response.json())
         .then((data) => {
+            // Hide the typing indicator once a response is received
+            hideTypingIndicator();
+
             if (data.error) {
                 addMessage("Support", "Sorry, we couldn't process your request.");
             } else {
@@ -45,9 +65,22 @@ function sendMessage() {
 function addMessage(sender, message) {
     const messagesContainer = document.getElementById("chatbox-messages");
     const messageElement = document.createElement("div");
+
+    // Add a class for the message type (user/assistant)
     messageElement.classList.add("message");
+    if (sender === "You") {
+        messageElement.classList.add("user");
+    } else {
+        messageElement.classList.add("assistant");
+    }
+
+    // Set the message content
     messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+
+    // Append the message to the container
     messagesContainer.appendChild(messageElement);
 
-    messagesContainer.scrollTop = messagesContainer.scrollHeight; // Scroll to the latest message
+    // Scroll to the latest message
+    messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
+

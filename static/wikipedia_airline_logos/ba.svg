@@ -59,7 +59,7 @@
  <stop offset="0.1854" style="stop-color:#85A9D8"/>
  <stop offset="0.2796" style="stop-color:#5D8FCF"/>
  <stop offset="0.3543" style="stop-color:#457EC9"/>
- <sto offset="0.4" style="stop-color:#3C78C7"/>
+ <stop offset="0.4" style="stop-color:#3C78C7"/>
  <stop offset="0.9" style="stop-color:#2E5C99"/>
 </linearGradient>
 <path fill="url(#SVGID_1_)" d="M235.014,9.296c-2.764,2.747-8.752,5.105-11.698,6.209c-4.025,1.512-5.811,2.047-8.063,2.78

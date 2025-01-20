@@ -25,7 +25,7 @@ app.logger.debug(f"Secret Key: {app.secret_key}")
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_PERMANENT'] = True
 app.config['SESSION_USE_SIGNER'] = True
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=30)
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=60)
 app.config['SESSION_COOKIE_SECURE'] = True  # Use HTTPS in production
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
@@ -324,7 +324,7 @@ def prepare_sql_statement(flight):
         {flight['price']}
     );
     """
-    logging.debug(f"Prepared SQL statement: {sql_statement.strip()}")
+    # logging.debug(f"Prepared SQL statement: {sql_statement.strip()}")
 
 # Get or create airline code
 def get_or_create_airline_code(airline_name, airline_code):
@@ -386,6 +386,7 @@ def insert_flight_into_db(flight,insert=False):
 
 def format_airline_name(name):
     # Convert to title case (handles cases like "JETBLUE AIRWAYS" -> "Jetblue Airways")
+    logging.debug(f"Formatting airline name: {name}")
     return name.title() if name else "Unknown Airline (Format Error)"
 
 # Sync flights and log SQL statements
@@ -689,6 +690,11 @@ from flask import g
 last_sync_cache = {}
 CACHE_EXPIRY = timedelta(hours=1)  # Cache expiry time
 
+def ensure_airline_exists(cursor, airline_name):
+    cursor.execute("SELECT COUNT(*) FROM airline WHERE name = %s", (airline_name,))
+    if cursor.fetchone()[0] == 0:
+        cursor.execute("INSERT INTO airline (name) VALUES (%s)", (airline_name,))
+
 @app.route('/show_flights', methods=['GET'])
 def show_flights():
     # Get parameters
@@ -759,7 +765,7 @@ def show_flights():
                 cursor.execute(query, [origin, destination, date_str])
             else:
                 query = """
-                SELECT f.*, dep_airport.city AS origin_city, arr_airport.city AS destination_city
+                SELECT f.*, dep_airport.city AS origin_city, arr_airport.city AS destination_city,a.logo_path
                 FROM flight f
                 JOIN airport dep_airport ON f.name_depart = dep_airport.name
                 JOIN airport arr_airport ON f.name_arrive = arr_airport.name
@@ -2418,7 +2424,7 @@ def chat_support():
 
     try:
         # Forward the query to the RAG bot container with session info
-        rag_bot_url = "http://flight_rag-bot_1:5001/rag_query"
+        rag_bot_url = "http://projectpart3-rag-bot-1:5001/rag_query"
         logging.info("Forwarding query to RAG bot at URL: %s", rag_bot_url)
 
         # Include session information in the payload if available

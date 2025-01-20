@@ -1,1 +1,2 @@
 docker exec -i mysql-container mysql -u root -pmy-secret-pw airticketingsystem < dumpfile.sql
+docker exec -it mysql-container mysql -u root -p

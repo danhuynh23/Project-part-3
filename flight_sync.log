@@ -51082,3 +51082,1956 @@
             )
 2025-01-20 14:48:46,431 - INFO - Flight AZ94 inserted successfully into the database.
 2025-01-20 14:48:46,433 - INFO - Synced flights for ('JFK', 'LHR', '2025-01-20').
+2025-01-20 15:27:23,808 - DEBUG - Fetching flights: origin=JFK, destination=LAX, departure_date=2025-02-02
+2025-01-20 15:27:29,555 - INFO - Fetched 34 flights from Amadeus API.
+2025-01-20 15:27:29,590 - ERROR - Database error while processing airline F9: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 15:27:29,590 - DEBUG - Formatting airline name: None
+2025-01-20 15:27:29,592 - ERROR - Database error while processing airline AS: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 15:27:29,592 - DEBUG - Formatting airline name: None
+2025-01-20 15:27:29,594 - ERROR - Database error while processing airline B6: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 15:27:29,594 - DEBUG - Formatting airline name: None
+2025-01-20 15:27:29,596 - ERROR - Database error while processing airline 6X: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 15:27:29,596 - DEBUG - Formatting airline name: None
+2025-01-20 15:27:29,598 - ERROR - Database error while processing airline TK: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 15:27:29,598 - DEBUG - Formatting airline name: None
+2025-01-20 15:27:29,600 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'F91', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAS', 
+                '2025-02-02 06:59:00', 
+                '2025-02-02 09:28:00', 
+                157.65, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,603 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,605 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'F92', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAS', 
+                '2025-02-02 06:59:00', 
+                '2025-02-02 09:28:00', 
+                157.65, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,606 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,608 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'F93', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAS', 
+                '2025-02-02 06:59:00', 
+                '2025-02-02 09:28:00', 
+                157.65, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,609 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,611 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AS4', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SEA', 
+                '2025-02-02 16:00:00', 
+                '2025-02-02 19:27:00', 
+                266.16, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,612 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,613 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AS5', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SFO', 
+                '2025-02-02 16:00:00', 
+                '2025-02-02 19:46:00', 
+                270.52, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,614 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,617 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AS6', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SEA', 
+                '2025-02-02 16:00:00', 
+                '2025-02-02 19:27:00', 
+                298.41, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,619 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,621 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AS7', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'PDX', 
+                '2025-02-02 17:29:00', 
+                '2025-02-02 21:07:00', 
+                323.2, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,623 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,625 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AS8', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'PDX', 
+                '2025-02-02 17:29:00', 
+                '2025-02-02 21:07:00', 
+                323.2, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,626 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,628 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B69', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'BOS', 
+                '2025-02-02 22:59:00', 
+                '2025-02-03 00:17:00', 
+                327.5, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,629 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,631 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B610', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FLL', 
+                '2025-02-02 20:51:00', 
+                '2025-02-02 23:59:00', 
+                327.5, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,632 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,634 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B611', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FLL', 
+                '2025-02-02 15:45:00', 
+                '2025-02-02 18:54:00', 
+                327.5, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,636 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,637 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B612', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-02-02 14:00:00', 
+                '2025-02-02 17:09:00', 
+                328.76, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,639 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,641 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B613', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-02-02 07:00:00', 
+                '2025-02-02 10:20:00', 
+                328.76, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,642 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,644 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B614', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-02-02 07:30:00', 
+                '2025-02-02 10:50:00', 
+                328.76, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,645 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,646 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B615', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-02-02 11:00:00', 
+                '2025-02-02 14:20:00', 
+                328.76, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,647 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,649 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B616', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-02-02 18:40:00', 
+                '2025-02-02 22:00:00', 
+                328.76, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,651 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,653 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B617', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-02-02 08:55:00', 
+                '2025-02-02 12:16:00', 
+                328.76, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,654 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,657 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B618', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-02-02 09:59:00', 
+                '2025-02-02 13:21:00', 
+                328.76, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,659 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,661 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B619', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FLL', 
+                '2025-02-02 15:45:00', 
+                '2025-02-02 18:54:00', 
+                351.08, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,662 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,665 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B620', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FLL', 
+                '2025-02-02 12:45:00', 
+                '2025-02-02 15:54:00', 
+                356.52, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,667 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,669 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                '6X21', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-02-02 19:00:00', 
+                '2025-02-02 22:30:00', 
+                433.04, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,669 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,672 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                '6X22', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-02-02 19:00:00', 
+                '2025-02-02 22:30:00', 
+                433.04, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,673 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,675 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AS23', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SEA', 
+                '2025-02-02 16:00:00', 
+                '2025-02-02 19:27:00', 
+                464.02, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,677 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,679 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                '6X24', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SFO', 
+                '2025-02-02 14:55:00', 
+                '2025-02-02 18:00:00', 
+                466.73, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,679 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,681 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B625', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FLL', 
+                '2025-02-02 07:30:00', 
+                '2025-02-02 10:49:00', 
+                530.61, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,683 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,687 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B626', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FLL', 
+                '2025-02-02 06:00:00', 
+                '2025-02-02 08:59:00', 
+                530.61, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,689 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,693 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AS27', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SFO', 
+                '2025-02-02 16:00:00', 
+                '2025-02-02 19:46:00', 
+                544.58, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,694 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,696 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B628', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'BOS', 
+                '2025-02-02 15:00:00', 
+                '2025-02-02 16:22:00', 
+                560.71, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,697 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,699 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B629', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'BOS', 
+                '2025-02-02 13:00:00', 
+                '2025-02-02 14:10:00', 
+                560.71, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,700 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,702 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B630', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FLL', 
+                '2025-02-02 12:45:00', 
+                '2025-02-02 15:54:00', 
+                573.61, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,703 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,705 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'B631', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FLL', 
+                '2025-02-02 09:01:00', 
+                '2025-02-02 12:14:00', 
+                579.05, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,706 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,708 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AS32', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SAN', 
+                '2025-02-02 16:30:00', 
+                '2025-02-02 19:51:00', 
+                687.56, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,709 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,711 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK33', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'IAH', 
+                '2025-02-02 08:00:00', 
+                '2025-02-02 11:14:00', 
+                1552.93, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,713 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,715 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK34', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SAN', 
+                '2025-02-02 16:30:00', 
+                '2025-02-02 19:36:00', 
+                1637.86, 
+                'Scheduled'
+            )
+2025-01-20 15:27:29,716 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 15:27:29,717 - INFO - Synced flights for ('JFK', 'LAX', '2025-02-02').
+2025-01-20 15:39:29,092 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=1
+2025-01-20 15:39:32,739 - ERROR - Error fetching flights: [400]
+
+
+
+2025-01-20 15:39:32,740 - INFO - Synced flights for ('1', '1', '2025-01-20').
+2025-01-20 16:12:57,151 - DEBUG - Fetching flights: origin=JFK, destination=HND, departure_date=2025-01-24
+2025-01-20 16:13:13,941 - INFO - Fetched 53 flights from Amadeus API.
+2025-01-20 16:18:04,056 - DEBUG - Fetching flights: origin=JFK, destination=LAX , departure_date=2025-02-01
+2025-01-20 16:18:07,607 - ERROR - Error fetching flights: [400]
+
+2025-01-20 16:18:07,607 - INFO - Synced flights for ('JFK', 'LAX ', '2025-02-01').
+2025-01-20 18:06:43,274 - DEBUG - Fetching flights: origin=JFK, destination=LAX , departure_date=2025-02-20
+2025-01-20 18:06:46,354 - ERROR - Error fetching flights: [400]
+
+2025-01-20 18:06:46,354 - INFO - Synced flights for ('JFK', 'LAX ', '2025-02-20').
+2025-01-20 18:12:35,613 - DEBUG - Fetching flights: origin=JFK, destination=LAX , departure_date=2025-02-20
+2025-01-20 18:12:39,218 - ERROR - Error fetching flights: [400]
+
+2025-01-20 18:12:39,219 - INFO - Synced flights for ('JFK', 'LAX ', '2025-02-20').
+2025-01-20 18:24:05,404 - DEBUG - User found: {'email': 'dsh400@nyu.edu', 'name': 'Dan Huynh', 'password': '53bc3911362cda98b1014b8566f6800c72f6be0688961274130bd6a3fcfee8b9', 'building_number': '', 'street': '65 Duong 51 Binh Trung Dong, Quan 2', 'city': 'Ho Chi Minh', 'state': 'HCM', 'phone_number': '0901663700', 'passport_number': '123', 'passport_expiration': datetime.date(2024, 11, 1), 'passport_country': 'VN', 'date_of_birth': datetime.date(2024, 11, 30)}
+2025-01-20 18:24:05,405 - DEBUG - Session data after login: {'name': 'Dan Huynh', 'user': 'dsh400@nyu.edu', 'user_type': 'customer', 'session_id': 'b7ffdfbfa1c0c196231dd16548db3286', '_permanent': True, '_flashes': [('success', 'Login successful')]}
+2025-01-20 18:24:05,411 - DEBUG - Starting new HTTP connection (1): ip-api.com:80
+2025-01-20 18:24:05,812 - DEBUG - http://ip-api.com:80 "GET /json HTTP/1.1" 200 345
+2025-01-20 18:24:08,583 - DEBUG - Fetching flights: origin=SGN, destination=None, departure_date=2025-01-20
+2025-01-20 18:24:11,705 - ERROR - Error fetching flights: [400]
+
+2025-01-20 18:24:11,705 - INFO - Synced flights for ('SGN', None, '2025-01-20').
+2025-01-20 18:24:27,856 - DEBUG - Fetching flights: origin=JFK, destination=HND, departure_date=2025-02-20
+2025-01-20 18:24:43,966 - INFO - Fetched 64 flights from Amadeus API.
+2025-01-20 18:24:43,982 - DEBUG - Formatting airline name: Cathaypacific
+2025-01-20 18:24:43,986 - DEBUG - Formatting airline name: Korean Air
+2025-01-20 18:24:43,988 - DEBUG - Formatting airline name: Asiana
+2025-01-20 18:24:43,990 - DEBUG - Formatting airline name: Eva Airways
+2025-01-20 18:24:43,992 - DEBUG - Formatting airline name: All Nippon
+2025-01-20 18:24:43,996 - DEBUG - Formatting airline name: Japan Airlines
+2025-01-20 18:24:43,999 - DEBUG - Formatting airline name: United Airlines
+2025-01-20 18:24:44,002 - DEBUG - Formatting airline name: Hawaiian Airlines
+2025-01-20 18:24:44,004 - DEBUG - Formatting airline name: Air China
+2025-01-20 18:24:44,006 - DEBUG - Formatting airline name: Air France
+2025-01-20 18:24:44,008 - DEBUG - Formatting airline name: Turkish Airlines
+2025-01-20 18:24:44,012 - DEBUG - Formatting airline name: Qatar Airways
+2025-01-20 18:24:44,015 - DEBUG - Formatting airline name: Unknown Airline (Format Error)
+2025-01-20 18:24:44,019 - DEBUG - Formatting airline name: Air Canada
+2025-01-20 18:24:44,021 - DEBUG - Formatting airline name: Qantas
+2025-01-20 18:24:44,023 - DEBUG - Formatting airline name: Austrianair
+2025-01-20 18:24:44,025 - DEBUG - Formatting airline name: Lufthansa
+2025-01-20 18:24:44,028 - DEBUG - Formatting airline name: Ita Airways
+2025-01-20 18:24:44,031 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX1', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2025-02-20 09:00:00', 
+                '2025-02-21 14:15:00', 
+                620.37, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,035 - INFO - Flight CX1 inserted successfully into the database.
+2025-01-20 18:24:44,037 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX2', 
+                'Cathaypacific', 
+                'JFK', 
+                'SFO', 
+                '2025-02-20 13:00:00', 
+                '2025-02-20 16:45:00', 
+                624.37, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,039 - INFO - Flight CX2 inserted successfully into the database.
+2025-01-20 18:24:44,041 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX3', 
+                'Cathaypacific', 
+                'JFK', 
+                'SFO', 
+                '2025-02-20 13:00:00', 
+                '2025-02-20 16:45:00', 
+                624.37, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,043 - INFO - Flight CX3 inserted successfully into the database.
+2025-01-20 18:24:44,048 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX4', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2025-02-20 13:50:00', 
+                '2025-02-21 19:05:00', 
+                635.34, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,051 - INFO - Flight CX4 inserted successfully into the database.
+2025-01-20 18:24:44,053 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE5', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-20 12:00:00', 
+                '2025-02-21 17:50:00', 
+                774.66, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,055 - INFO - Flight KE5 inserted successfully into the database.
+2025-01-20 18:24:44,057 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE6', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-20 00:50:00', 
+                '2025-02-21 06:30:00', 
+                774.66, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,060 - INFO - Flight KE6 inserted successfully into the database.
+2025-01-20 18:24:44,063 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE7', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-20 00:50:00', 
+                '2025-02-21 06:30:00', 
+                783.98, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,067 - INFO - Flight KE7 inserted successfully into the database.
+2025-01-20 18:24:44,069 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE8', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-20 12:00:00', 
+                '2025-02-21 17:50:00', 
+                783.98, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,072 - INFO - Flight KE8 inserted successfully into the database.
+2025-01-20 18:24:44,074 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ9', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2025-02-20 11:30:00', 
+                '2025-02-21 17:25:00', 
+                792.66, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,076 - INFO - Flight OZ9 inserted successfully into the database.
+2025-01-20 18:24:44,079 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ10', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-02-20 11:00:00', 
+                '2025-02-20 14:20:00', 
+                792.66, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,083 - INFO - Flight OZ10 inserted successfully into the database.
+2025-01-20 18:24:44,086 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ11', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2025-02-20 11:30:00', 
+                '2025-02-21 17:25:00', 
+                801.98, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,089 - INFO - Flight OZ11 inserted successfully into the database.
+2025-01-20 18:24:44,090 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ12', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-02-20 11:00:00', 
+                '2025-02-20 14:20:00', 
+                801.98, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,092 - INFO - Flight OZ12 inserted successfully into the database.
+2025-01-20 18:24:44,095 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ13', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-02-20 06:00:00', 
+                '2025-02-20 09:39:00', 
+                807.42, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,098 - INFO - Flight OZ13 inserted successfully into the database.
+2025-01-20 18:24:44,101 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX14', 
+                'Cathaypacific', 
+                'JFK', 
+                'BOS', 
+                '2025-02-20 17:05:00', 
+                '2025-02-20 18:22:00', 
+                828.37, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,104 - INFO - Flight CX14 inserted successfully into the database.
+2025-01-20 18:24:44,106 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX15', 
+                'Cathaypacific', 
+                'JFK', 
+                'BOS', 
+                '2025-02-20 13:45:00', 
+                '2025-02-20 14:57:00', 
+                828.37, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,108 - INFO - Flight CX15 inserted successfully into the database.
+2025-01-20 18:24:44,110 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'BR16', 
+                'Eva Airways', 
+                'JFK', 
+                'TPE', 
+                '2025-02-20 00:05:00', 
+                '2025-02-21 06:20:00', 
+                851.15, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,115 - INFO - Flight BR16 inserted successfully into the database.
+2025-01-20 18:24:44,117 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX17', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2025-02-20 01:35:00', 
+                '2025-02-21 06:35:00', 
+                862.37, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,120 - INFO - Flight CX17 inserted successfully into the database.
+2025-01-20 18:24:44,122 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH18', 
+                'All Nippon', 
+                'JFK', 
+                'DCA', 
+                '2025-02-20 05:59:00', 
+                '2025-02-20 07:24:00', 
+                898.84, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,124 - INFO - Flight NH18 inserted successfully into the database.
+2025-01-20 18:24:44,125 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH19', 
+                'All Nippon', 
+                'JFK', 
+                'DCA', 
+                '2025-02-20 05:59:00', 
+                '2025-02-20 07:24:00', 
+                898.84, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,128 - INFO - Flight NH19 inserted successfully into the database.
+2025-01-20 18:24:44,131 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL20', 
+                'Japan Airlines', 
+                'JFK', 
+                'LAX', 
+                '2025-02-20 07:00:00', 
+                '2025-02-20 10:28:00', 
+                901.0, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,134 - INFO - Flight JL20 inserted successfully into the database.
+2025-01-20 18:24:44,136 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'UA21', 
+                'United Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-02-20 13:05:00', 
+                '2025-02-21 17:40:00', 
+                945.24, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,138 - INFO - Flight UA21 inserted successfully into the database.
+2025-01-20 18:24:44,139 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH22', 
+                'All Nippon', 
+                'JFK', 
+                'HND', 
+                '2025-02-20 00:50:00', 
+                '2025-02-21 05:25:00', 
+                946.84, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,141 - INFO - Flight NH22 inserted successfully into the database.
+2025-01-20 18:24:44,143 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH23', 
+                'All Nippon', 
+                'JFK', 
+                'HND', 
+                '2025-02-20 13:05:00', 
+                '2025-02-21 17:40:00', 
+                946.84, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,147 - INFO - Flight NH23 inserted successfully into the database.
+2025-01-20 18:24:44,150 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA24', 
+                'Hawaiian Airlines', 
+                'JFK', 
+                'HNL', 
+                '2025-02-20 10:00:00', 
+                '2025-02-20 16:10:00', 
+                948.75, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,153 - INFO - Flight HA24 inserted successfully into the database.
+2025-01-20 18:24:44,155 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL25', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-02-20 00:35:00', 
+                '2025-02-21 05:10:00', 
+                949.0, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,157 - INFO - Flight JL25 inserted successfully into the database.
+2025-01-20 18:24:44,158 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL26', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-02-20 12:40:00', 
+                '2025-02-21 17:15:00', 
+                949.0, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,161 - INFO - Flight JL26 inserted successfully into the database.
+2025-01-20 18:24:44,164 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA27', 
+                'Hawaiian Airlines', 
+                'JFK', 
+                'LAS', 
+                '2025-02-20 18:10:00', 
+                '2025-02-20 21:01:00', 
+                990.24, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,167 - INFO - Flight HA27 inserted successfully into the database.
+2025-01-20 18:24:44,169 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CA28', 
+                'Air China', 
+                'JFK', 
+                'PEK', 
+                '2025-02-20 01:05:00', 
+                '2025-02-21 07:15:00', 
+                1001.79, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,171 - INFO - Flight CA28 inserted successfully into the database.
+2025-01-20 18:24:44,173 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX29', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2025-02-20 01:35:00', 
+                '2025-02-21 06:35:00', 
+                1037.37, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,176 - INFO - Flight CX29 inserted successfully into the database.
+2025-01-20 18:24:44,179 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX30', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2025-02-20 13:50:00', 
+                '2025-02-21 19:05:00', 
+                1052.34, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,185 - INFO - Flight CX30 inserted successfully into the database.
+2025-01-20 18:24:44,187 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA31', 
+                'Hawaiian Airlines', 
+                'JFK', 
+                'LAS', 
+                '2025-02-20 18:10:00', 
+                '2025-02-20 21:01:00', 
+                1089.24, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,189 - INFO - Flight HA31 inserted successfully into the database.
+2025-01-20 18:24:44,190 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF32', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2025-02-20 17:30:00', 
+                '2025-02-21 06:30:00', 
+                1132.23, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,193 - INFO - Flight AF32 inserted successfully into the database.
+2025-01-20 18:24:44,196 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF33', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2025-02-20 01:00:00', 
+                '2025-02-20 14:05:00', 
+                1132.23, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,199 - INFO - Flight AF33 inserted successfully into the database.
+2025-01-20 18:24:44,202 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF34', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2025-02-20 23:30:00', 
+                '2025-02-21 12:45:00', 
+                1132.23, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,204 - INFO - Flight AF34 inserted successfully into the database.
+2025-01-20 18:24:44,205 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK35', 
+                'Turkish Airlines', 
+                'JFK', 
+                'IST', 
+                '2025-02-20 00:10:00', 
+                '2025-02-20 17:55:00', 
+                1164.38, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,207 - INFO - Flight TK35 inserted successfully into the database.
+2025-01-20 18:24:44,209 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK36', 
+                'Turkish Airlines', 
+                'JFK', 
+                'IST', 
+                '2025-02-20 19:45:00', 
+                '2025-02-21 13:45:00', 
+                1164.38, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,212 - INFO - Flight TK36 inserted successfully into the database.
+2025-01-20 18:24:44,214 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF37', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2025-02-20 18:30:00', 
+                '2025-02-21 07:50:00', 
+                1229.23, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,217 - INFO - Flight AF37 inserted successfully into the database.
+2025-01-20 18:24:44,219 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CA38', 
+                'Air China', 
+                'JFK', 
+                'PEK', 
+                '2025-02-20 01:05:00', 
+                '2025-02-21 07:15:00', 
+                1230.79, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,221 - INFO - Flight CA38 inserted successfully into the database.
+2025-01-20 18:24:44,222 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QR39', 
+                'Qatar Airways', 
+                'JFK', 
+                'DOH', 
+                '2025-02-20 00:20:00', 
+                '2025-02-20 20:45:00', 
+                1272.47, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,225 - INFO - Flight QR39 inserted successfully into the database.
+2025-01-20 18:24:44,226 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QR40', 
+                'Qatar Airways', 
+                'JFK', 
+                'DOH', 
+                '2025-02-20 21:30:00', 
+                '2025-02-21 17:45:00', 
+                1274.99, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,229 - INFO - Flight QR40 inserted successfully into the database.
+2025-01-20 18:24:44,232 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AY41', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HEL', 
+                '2025-02-20 22:45:00', 
+                '2025-02-21 13:55:00', 
+                1317.96, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,235 - INFO - Flight AY41 inserted successfully into the database.
+2025-01-20 18:24:44,237 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC42', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2025-02-20 09:45:00', 
+                '2025-02-20 11:29:00', 
+                1333.37, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,239 - INFO - Flight AC42 inserted successfully into the database.
+2025-01-20 18:24:44,240 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC43', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2025-02-20 15:55:00', 
+                '2025-02-20 17:39:00', 
+                1391.37, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,242 - INFO - Flight AC43 inserted successfully into the database.
+2025-01-20 18:24:44,245 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QF44', 
+                'Qantas', 
+                'JFK', 
+                'SYD', 
+                '2025-02-20 17:30:00', 
+                '2025-02-22 08:15:00', 
+                1625.96, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,249 - INFO - Flight QF44 inserted successfully into the database.
+2025-01-20 18:24:44,251 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QF45', 
+                'Qantas', 
+                'JFK', 
+                'SYD', 
+                '2025-02-20 17:30:00', 
+                '2025-02-22 08:15:00', 
+                1625.96, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,254 - INFO - Flight QF45 inserted successfully into the database.
+2025-01-20 18:24:44,256 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE46', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-20 00:50:00', 
+                '2025-02-21 06:30:00', 
+                1721.98, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,258 - INFO - Flight KE46 inserted successfully into the database.
+2025-01-20 18:24:44,259 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OS47', 
+                'Austrianair', 
+                'JFK', 
+                'VIE', 
+                '2025-02-20 18:10:00', 
+                '2025-02-21 08:25:00', 
+                2536.4, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,264 - INFO - Flight OS47 inserted successfully into the database.
+2025-01-20 18:24:44,267 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH48', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2025-02-20 17:30:00', 
+                '2025-02-21 07:20:00', 
+                2536.75, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,270 - INFO - Flight LH48 inserted successfully into the database.
+2025-01-20 18:24:44,272 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH49', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2025-02-20 17:30:00', 
+                '2025-02-21 07:20:00', 
+                2536.75, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,274 - INFO - Flight LH49 inserted successfully into the database.
+2025-01-20 18:24:44,275 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH50', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-02-20 22:10:00', 
+                '2025-02-21 12:05:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,278 - INFO - Flight LH50 inserted successfully into the database.
+2025-01-20 18:24:44,281 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH51', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-02-20 15:45:00', 
+                '2025-02-21 05:25:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,285 - INFO - Flight LH51 inserted successfully into the database.
+2025-01-20 18:24:44,286 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH52', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-02-20 15:45:00', 
+                '2025-02-21 05:25:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,288 - INFO - Flight LH52 inserted successfully into the database.
+2025-01-20 18:24:44,290 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH53', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-02-20 22:10:00', 
+                '2025-02-21 12:05:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,292 - INFO - Flight LH53 inserted successfully into the database.
+2025-01-20 18:24:44,295 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH54', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2025-02-20 17:30:00', 
+                '2025-02-21 07:20:00', 
+                2562.89, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,298 - INFO - Flight LH54 inserted successfully into the database.
+2025-01-20 18:24:44,300 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH55', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2025-02-20 17:30:00', 
+                '2025-02-21 07:20:00', 
+                2562.89, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,304 - INFO - Flight LH55 inserted successfully into the database.
+2025-01-20 18:24:44,305 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH56', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2025-02-20 17:30:00', 
+                '2025-02-21 07:20:00', 
+                2562.89, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,307 - INFO - Flight LH56 inserted successfully into the database.
+2025-01-20 18:24:44,308 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ57', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2025-02-20 11:30:00', 
+                '2025-02-21 17:25:00', 
+                5363.94, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,311 - INFO - Flight OZ57 inserted successfully into the database.
+2025-01-20 18:24:44,314 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE58', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-20 12:00:00', 
+                '2025-02-21 17:50:00', 
+                6675.66, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,317 - INFO - Flight KE58 inserted successfully into the database.
+2025-01-20 18:24:44,319 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH59', 
+                'All Nippon', 
+                'JFK', 
+                'YYZ', 
+                '2025-02-20 09:45:00', 
+                '2025-02-20 11:29:00', 
+                6684.15, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,321 - INFO - Flight NH59 inserted successfully into the database.
+2025-01-20 18:24:44,322 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH60', 
+                'All Nippon', 
+                'JFK', 
+                'LAX', 
+                '2025-02-20 10:00:00', 
+                '2025-02-20 13:22:00', 
+                6777.84, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,324 - INFO - Flight NH60 inserted successfully into the database.
+2025-01-20 18:24:44,326 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH61', 
+                'All Nippon', 
+                'JFK', 
+                'LAX', 
+                '2025-02-20 06:00:00', 
+                '2025-02-20 09:41:00', 
+                6919.4, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,330 - INFO - Flight NH61 inserted successfully into the database.
+2025-01-20 18:24:44,332 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH62', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-02-20 07:00:00', 
+                '2025-02-20 15:00:00', 
+                7341.83, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,335 - INFO - Flight LH62 inserted successfully into the database.
+2025-01-20 18:24:44,337 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ63', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2025-02-20 21:15:00', 
+                '2025-02-21 11:45:00', 
+                8712.76, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,339 - INFO - Flight AZ63 inserted successfully into the database.
+2025-01-20 18:24:44,341 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ64', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2025-02-20 16:45:00', 
+                '2025-02-21 07:05:00', 
+                8712.76, 
+                'Scheduled'
+            )
+2025-01-20 18:24:44,343 - INFO - Flight AZ64 inserted successfully into the database.
+2025-01-20 18:24:44,344 - INFO - Synced flights for ('JFK', 'HND', '2025-02-20').
+2025-01-20 18:24:50,601 - DEBUG - Fetching flights: origin=JFK, destination=HND, departure_date=2025-02-21
+2025-01-20 18:25:12,165 - INFO - Fetched 58 flights from Amadeus API.
+2025-01-20 18:25:12,168 - DEBUG - Formatting airline name: Cathaypacific
+2025-01-20 18:25:12,170 - DEBUG - Formatting airline name: Philippine Al
+2025-01-20 18:25:12,172 - DEBUG - Formatting airline name: Korean Air
+2025-01-20 18:25:12,173 - DEBUG - Formatting airline name: Asiana
+2025-01-20 18:25:12,175 - DEBUG - Formatting airline name: Hawaiian Airlines
+2025-01-20 18:25:12,179 - DEBUG - Formatting airline name: Eva Airways
+2025-01-20 18:25:12,182 - DEBUG - Formatting airline name: All Nippon
+2025-01-20 18:25:12,185 - DEBUG - Formatting airline name: Japan Airlines
+2025-01-20 18:25:12,186 - DEBUG - Formatting airline name: United Airlines
+2025-01-20 18:25:12,188 - DEBUG - Formatting airline name: Air France
+2025-01-20 18:25:12,189 - DEBUG - Formatting airline name: Turkish Airlines
+2025-01-20 18:25:12,191 - DEBUG - Formatting airline name: Unknown Airline (Format Error)
+2025-01-20 18:25:12,195 - DEBUG - Formatting airline name: Air Canada
+2025-01-20 18:25:12,197 - DEBUG - Formatting airline name: Qantas
+2025-01-20 18:25:12,200 - DEBUG - Formatting airline name: Lufthansa
+2025-01-20 18:25:12,202 - DEBUG - Formatting airline name: Ita Airways
+2025-01-20 18:25:12,203 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX1', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2025-02-21 09:00:00', 
+                '2025-02-22 14:15:00', 
+                679.37, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,209 - INFO - Flight CX1 inserted successfully into the database.
+2025-01-20 18:25:12,212 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX2', 
+                'Cathaypacific', 
+                'JFK', 
+                'SFO', 
+                '2025-02-21 13:00:00', 
+                '2025-02-21 16:45:00', 
+                682.37, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,215 - INFO - Flight CX2 inserted successfully into the database.
+2025-01-20 18:25:12,217 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'PR3', 
+                'Philippine Al', 
+                'JFK', 
+                'MNL', 
+                '2025-02-21 01:40:00', 
+                '2025-02-22 07:45:00', 
+                756.62, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,222 - INFO - Flight PR3 inserted successfully into the database.
+2025-01-20 18:25:12,224 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE4', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-21 12:00:00', 
+                '2025-02-22 17:50:00', 
+                774.66, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,227 - INFO - Flight KE4 inserted successfully into the database.
+2025-01-20 18:25:12,230 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE5', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-21 00:50:00', 
+                '2025-02-22 06:30:00', 
+                774.66, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,232 - INFO - Flight KE5 inserted successfully into the database.
+2025-01-20 18:25:12,234 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE6', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-21 00:50:00', 
+                '2025-02-22 06:30:00', 
+                783.98, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,237 - INFO - Flight KE6 inserted successfully into the database.
+2025-01-20 18:25:12,238 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ7', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2025-02-21 11:30:00', 
+                '2025-02-22 17:25:00', 
+                792.66, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,240 - INFO - Flight OZ7 inserted successfully into the database.
+2025-01-20 18:25:12,241 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ8', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-02-21 16:30:00', 
+                '2025-02-21 19:55:00', 
+                792.66, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,244 - INFO - Flight OZ8 inserted successfully into the database.
+2025-01-20 18:25:12,247 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA9', 
+                'Hawaiian Airlines', 
+                'JFK', 
+                'HNL', 
+                '2025-02-21 10:00:00', 
+                '2025-02-21 16:10:00', 
+                796.75, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,250 - INFO - Flight HA9 inserted successfully into the database.
+2025-01-20 18:25:12,252 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ10', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-02-21 16:30:00', 
+                '2025-02-21 19:55:00', 
+                801.98, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,254 - INFO - Flight OZ10 inserted successfully into the database.
+2025-01-20 18:25:12,255 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ11', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2025-02-21 11:30:00', 
+                '2025-02-22 17:25:00', 
+                801.98, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,257 - INFO - Flight OZ11 inserted successfully into the database.
+2025-01-20 18:25:12,259 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX12', 
+                'Cathaypacific', 
+                'JFK', 
+                'BOS', 
+                '2025-02-21 17:05:00', 
+                '2025-02-21 18:22:00', 
+                842.37, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,263 - INFO - Flight CX12 inserted successfully into the database.
+2025-01-20 18:25:12,265 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX13', 
+                'Cathaypacific', 
+                'JFK', 
+                'BOS', 
+                '2025-02-21 13:45:00', 
+                '2025-02-21 14:57:00', 
+                842.37, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,268 - INFO - Flight CX13 inserted successfully into the database.
+2025-01-20 18:25:12,270 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ14', 
+                'Asiana', 
+                'JFK', 
+                'LAX', 
+                '2025-02-21 16:30:00', 
+                '2025-02-21 19:55:00', 
+                879.98, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,272 - INFO - Flight OZ14 inserted successfully into the database.
+2025-01-20 18:25:12,273 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'BR15', 
+                'Eva Airways', 
+                'JFK', 
+                'TPE', 
+                '2025-02-21 00:05:00', 
+                '2025-02-22 06:20:00', 
+                889.15, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,275 - INFO - Flight BR15 inserted successfully into the database.
+2025-01-20 18:25:12,279 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH16', 
+                'All Nippon', 
+                'JFK', 
+                'DCA', 
+                '2025-02-21 05:59:00', 
+                '2025-02-21 07:24:00', 
+                898.84, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,281 - INFO - Flight NH16 inserted successfully into the database.
+2025-01-20 18:25:12,284 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH17', 
+                'All Nippon', 
+                'JFK', 
+                'DCA', 
+                '2025-02-21 05:59:00', 
+                '2025-02-21 07:24:00', 
+                898.84, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,286 - INFO - Flight NH17 inserted successfully into the database.
+2025-01-20 18:25:12,287 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL18', 
+                'Japan Airlines', 
+                'JFK', 
+                'SFO', 
+                '2025-02-21 06:50:00', 
+                '2025-02-21 10:33:00', 
+                901.0, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,289 - INFO - Flight JL18 inserted successfully into the database.
+2025-01-20 18:25:12,291 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL19', 
+                'Japan Airlines', 
+                'JFK', 
+                'LAX', 
+                '2025-02-21 07:00:00', 
+                '2025-02-21 10:44:00', 
+                901.0, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,294 - INFO - Flight JL19 inserted successfully into the database.
+2025-01-20 18:25:12,297 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL20', 
+                'Japan Airlines', 
+                'JFK', 
+                'SFO', 
+                '2025-02-21 06:00:00', 
+                '2025-02-21 09:57:00', 
+                901.0, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,300 - INFO - Flight JL20 inserted successfully into the database.
+2025-01-20 18:25:12,301 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL21', 
+                'Japan Airlines', 
+                'JFK', 
+                'SFO', 
+                '2025-02-21 21:00:00', 
+                '2025-02-22 00:59:00', 
+                901.0, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,303 - INFO - Flight JL21 inserted successfully into the database.
+2025-01-20 18:25:12,305 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL22', 
+                'Japan Airlines', 
+                'JFK', 
+                'LAX', 
+                '2025-02-21 07:00:00', 
+                '2025-02-21 10:28:00', 
+                901.0, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,308 - INFO - Flight JL22 inserted successfully into the database.
+2025-01-20 18:25:12,311 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX23', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2025-02-21 01:35:00', 
+                '2025-02-22 06:35:00', 
+                920.37, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,315 - INFO - Flight CX23 inserted successfully into the database.
+2025-01-20 18:25:12,317 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'UA24', 
+                'United Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-02-21 00:50:00', 
+                '2025-02-22 05:25:00', 
+                945.24, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,319 - INFO - Flight UA24 inserted successfully into the database.
+2025-01-20 18:25:12,321 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'UA25', 
+                'United Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-02-21 13:05:00', 
+                '2025-02-22 17:40:00', 
+                945.24, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,323 - INFO - Flight UA25 inserted successfully into the database.
+2025-01-20 18:25:12,324 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH26', 
+                'All Nippon', 
+                'JFK', 
+                'HND', 
+                '2025-02-21 00:50:00', 
+                '2025-02-22 05:25:00', 
+                946.84, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,327 - INFO - Flight NH26 inserted successfully into the database.
+2025-01-20 18:25:12,329 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH27', 
+                'All Nippon', 
+                'JFK', 
+                'HND', 
+                '2025-02-21 13:05:00', 
+                '2025-02-22 17:40:00', 
+                946.84, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,332 - INFO - Flight NH27 inserted successfully into the database.
+2025-01-20 18:25:12,334 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL28', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-02-21 00:35:00', 
+                '2025-02-22 05:10:00', 
+                949.0, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,336 - INFO - Flight JL28 inserted successfully into the database.
+2025-01-20 18:25:12,337 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL29', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-02-21 12:40:00', 
+                '2025-02-22 17:15:00', 
+                949.0, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,340 - INFO - Flight JL29 inserted successfully into the database.
+2025-01-20 18:25:12,341 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX30', 
+                'Cathaypacific', 
+                'JFK', 
+                'SFO', 
+                '2025-02-21 16:29:00', 
+                '2025-02-21 20:15:00', 
+                961.37, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,345 - INFO - Flight CX30 inserted successfully into the database.
+2025-01-20 18:25:12,347 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL31', 
+                'Japan Airlines', 
+                'JFK', 
+                'HND', 
+                '2025-02-21 10:00:00', 
+                '2025-02-22 14:35:00', 
+                979.0, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,351 - INFO - Flight JL31 inserted successfully into the database.
+2025-01-20 18:25:12,352 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL32', 
+                'Japan Airlines', 
+                'JFK', 
+                'LAX', 
+                '2025-02-21 07:00:00', 
+                '2025-02-21 10:44:00', 
+                984.44, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,355 - INFO - Flight JL32 inserted successfully into the database.
+2025-01-20 18:25:12,356 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX33', 
+                'Cathaypacific', 
+                'JFK', 
+                'HKG', 
+                '2025-02-21 01:35:00', 
+                '2025-02-22 06:35:00', 
+                1095.37, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,358 - INFO - Flight CX33 inserted successfully into the database.
+2025-01-20 18:25:12,362 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF34', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2025-02-21 17:30:00', 
+                '2025-02-22 06:30:00', 
+                1132.23, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,365 - INFO - Flight AF34 inserted successfully into the database.
+2025-01-20 18:25:12,367 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF35', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2025-02-21 01:00:00', 
+                '2025-02-21 14:05:00', 
+                1132.23, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,369 - INFO - Flight AF35 inserted successfully into the database.
+2025-01-20 18:25:12,371 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF36', 
+                'Air France', 
+                'JFK', 
+                'CDG', 
+                '2025-02-21 23:30:00', 
+                '2025-02-22 12:45:00', 
+                1132.23, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,373 - INFO - Flight AF36 inserted successfully into the database.
+2025-01-20 18:25:12,374 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK37', 
+                'Turkish Airlines', 
+                'JFK', 
+                'IST', 
+                '2025-02-21 19:45:00', 
+                '2025-02-22 13:45:00', 
+                1174.38, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,378 - INFO - Flight TK37 inserted successfully into the database.
+2025-01-20 18:25:12,380 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK38', 
+                'Turkish Airlines', 
+                'JFK', 
+                'IST', 
+                '2025-02-21 13:00:00', 
+                '2025-02-22 06:50:00', 
+                1174.38, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,383 - INFO - Flight TK38 inserted successfully into the database.
+2025-01-20 18:25:12,385 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA39', 
+                'Hawaiian Airlines', 
+                'JFK', 
+                'LAS', 
+                '2025-02-21 12:00:00', 
+                '2025-02-21 14:50:00', 
+                1188.24, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,387 - INFO - Flight HA39 inserted successfully into the database.
+2025-01-20 18:25:12,388 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AY40', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HEL', 
+                '2025-02-21 22:45:00', 
+                '2025-02-22 13:55:00', 
+                1317.96, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,390 - INFO - Flight AY40 inserted successfully into the database.
+2025-01-20 18:25:12,394 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC41', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2025-02-21 09:45:00', 
+                '2025-02-21 11:29:00', 
+                1391.37, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,397 - INFO - Flight AC41 inserted successfully into the database.
+2025-01-20 18:25:12,399 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC42', 
+                'Air Canada', 
+                'JFK', 
+                'YYZ', 
+                '2025-02-21 15:55:00', 
+                '2025-02-21 17:39:00', 
+                1391.37, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,401 - INFO - Flight AC42 inserted successfully into the database.
+2025-01-20 18:25:12,403 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QF43', 
+                'Qantas', 
+                'JFK', 
+                'SYD', 
+                '2025-02-21 17:30:00', 
+                '2025-02-23 08:15:00', 
+                1688.96, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,405 - INFO - Flight QF43 inserted successfully into the database.
+2025-01-20 18:25:12,406 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QF44', 
+                'Qantas', 
+                'JFK', 
+                'SYD', 
+                '2025-02-21 17:30:00', 
+                '2025-02-23 08:15:00', 
+                1688.96, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,408 - INFO - Flight QF44 inserted successfully into the database.
+2025-01-20 18:25:12,411 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH45', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2025-02-21 17:30:00', 
+                '2025-02-22 07:20:00', 
+                2536.75, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,415 - INFO - Flight LH45 inserted successfully into the database.
+2025-01-20 18:25:12,417 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH46', 
+                'Lufthansa', 
+                'JFK', 
+                'MUC', 
+                '2025-02-21 17:30:00', 
+                '2025-02-22 07:20:00', 
+                2536.75, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,420 - INFO - Flight LH46 inserted successfully into the database.
+2025-01-20 18:25:12,421 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH47', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-02-21 22:10:00', 
+                '2025-02-22 12:05:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,423 - INFO - Flight LH47 inserted successfully into the database.
+2025-01-20 18:25:12,424 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH48', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-02-21 15:45:00', 
+                '2025-02-22 05:25:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,428 - INFO - Flight LH48 inserted successfully into the database.
+2025-01-20 18:25:12,431 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH49', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-02-21 15:45:00', 
+                '2025-02-22 05:25:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,433 - INFO - Flight LH49 inserted successfully into the database.
+2025-01-20 18:25:12,435 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH50', 
+                'Lufthansa', 
+                'JFK', 
+                'FRA', 
+                '2025-02-21 22:10:00', 
+                '2025-02-22 12:05:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,437 - INFO - Flight LH50 inserted successfully into the database.
+2025-01-20 18:25:12,439 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ51', 
+                'Asiana', 
+                'JFK', 
+                'ICN', 
+                '2025-02-21 11:30:00', 
+                '2025-02-22 17:25:00', 
+                5363.94, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,441 - INFO - Flight OZ51 inserted successfully into the database.
+2025-01-20 18:25:12,444 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH52', 
+                'All Nippon', 
+                'JFK', 
+                'YYZ', 
+                '2025-02-21 09:45:00', 
+                '2025-02-21 11:29:00', 
+                6625.15, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,447 - INFO - Flight NH52 inserted successfully into the database.
+2025-01-20 18:25:12,449 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE53', 
+                'Korean Air', 
+                'JFK', 
+                'ICN', 
+                '2025-02-21 12:00:00', 
+                '2025-02-22 17:50:00', 
+                6675.66, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,452 - INFO - Flight KE53 inserted successfully into the database.
+2025-01-20 18:25:12,453 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH54', 
+                'All Nippon', 
+                'JFK', 
+                'LAX', 
+                '2025-02-21 10:00:00', 
+                '2025-02-21 13:22:00', 
+                6777.84, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,455 - INFO - Flight NH54 inserted successfully into the database.
+2025-01-20 18:25:12,457 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH55', 
+                'All Nippon', 
+                'JFK', 
+                'LAX', 
+                '2025-02-21 06:00:00', 
+                '2025-02-21 09:41:00', 
+                6919.4, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,460 - INFO - Flight NH55 inserted successfully into the database.
+2025-01-20 18:25:12,463 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH56', 
+                'All Nippon', 
+                'JFK', 
+                'LAX', 
+                '2025-02-21 09:30:00', 
+                '2025-02-21 13:32:00', 
+                6919.4, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,466 - INFO - Flight NH56 inserted successfully into the database.
+2025-01-20 18:25:12,467 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ57', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2025-02-21 21:15:00', 
+                '2025-02-22 11:45:00', 
+                8712.76, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,469 - INFO - Flight AZ57 inserted successfully into the database.
+2025-01-20 18:25:12,471 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ58', 
+                'Ita Airways', 
+                'JFK', 
+                'FCO', 
+                '2025-02-21 16:45:00', 
+                '2025-02-22 07:05:00', 
+                8712.76, 
+                'Scheduled'
+            )
+2025-01-20 18:25:12,473 - INFO - Flight AZ58 inserted successfully into the database.
+2025-01-20 18:25:12,473 - INFO - Synced flights for ('JFK', 'HND', '2025-02-21').

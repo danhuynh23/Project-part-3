@@ -36726,3 +36726,836 @@
 
 
 2025-01-07 15:35:41,311 - INFO - Synced flights for ('1', '1', '2025-01-07').
+2025-01-14 09:49:10,825 - INFO - Received a request to /chat_support with query: uwu
+2025-01-14 09:49:10,826 - INFO - Forwarding query to RAG bot at URL: http://projectpart3-rag-bot-1:5001/rag_query
+2025-01-14 09:49:10,829 - DEBUG - Starting new HTTP connection (1): projectpart3-rag-bot-1:5001
+2025-01-14 09:49:10,911 - ERROR - Failed to reach RAG bot: HTTPConnectionPool(host='projectpart3-rag-bot-1', port=5001): Max retries exceeded with url: /rag_query (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x7fff53085dd0>: Failed to establish a new connection: [Errno -2] Name or service not known'))
+2025-01-14 09:50:54,501 - INFO - Received a request to /chat_support with query: Hello
+2025-01-14 09:50:54,501 - INFO - Forwarding query to RAG bot at URL: http://flight_rag-bot_1:5001/rag_query
+2025-01-14 09:50:54,504 - DEBUG - Starting new HTTP connection (1): flight_rag-bot_1:5001
+2025-01-14 09:50:56,775 - DEBUG - http://flight_rag-bot_1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-14 09:50:56,776 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-14 15:36:58,044 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=1
+2025-01-14 15:37:01,737 - ERROR - Error fetching flights: [400]
+
+
+
+2025-01-14 15:37:01,738 - INFO - Synced flights for ('1', '1', '2025-01-14').
+2025-01-16 15:37:43,251 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=1
+2025-01-16 15:37:47,089 - ERROR - Error fetching flights: [400]
+
+
+
+2025-01-16 15:37:47,089 - INFO - Synced flights for ('1', '1', '2025-01-16').
+2025-01-17 15:37:47,085 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=1
+2025-01-17 15:37:50,080 - ERROR - Error fetching flights: [400]
+
+
+
+2025-01-17 15:37:50,080 - INFO - Synced flights for ('1', '1', '2025-01-17').
+2025-01-18 15:38:22,178 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=1
+2025-01-18 15:38:25,405 - ERROR - Error fetching flights: [400]
+
+
+
+2025-01-18 15:38:25,406 - INFO - Synced flights for ('1', '1', '2025-01-18').
+2025-01-19 15:38:31,476 - DEBUG - Fetching flights: origin=1, destination=1, departure_date=1
+2025-01-19 15:38:35,171 - ERROR - Error fetching flights: [400]
+
+
+
+2025-01-19 15:38:35,171 - INFO - Synced flights for ('1', '1', '2025-01-19').
+2025-01-20 13:09:49,232 - INFO - Received a request to /chat_support with query: Hello
+2025-01-20 13:09:49,235 - INFO - Forwarding query to RAG bot at URL: http://flight_rag-bot_1:5001/rag_query
+2025-01-20 13:09:49,237 - DEBUG - Starting new HTTP connection (1): flight_rag-bot_1:5001
+2025-01-20 13:09:52,037 - DEBUG - http://flight_rag-bot_1:5001 "POST /rag_query HTTP/1.1" 200 66
+2025-01-20 13:09:52,038 - INFO - Successfully received response from RAG bot: {'query': 'Hello', 'response': 'Hello! How can I assist you today?'}
+2025-01-20 13:10:14,116 - DEBUG - Fetching flights: origin=JFK, destination=HND, departure_date=2025-01-21
+2025-01-20 13:10:24,133 - INFO - Fetched 64 flights from Amadeus API.
+2025-01-20 13:10:24,179 - ERROR - Database error while processing airline CX: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,181 - ERROR - Database error while processing airline HA: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,183 - ERROR - Database error while processing airline OZ: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,186 - ERROR - Database error while processing airline BR: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,188 - ERROR - Database error while processing airline KE: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,190 - ERROR - Database error while processing airline TK: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,192 - ERROR - Database error while processing airline JL: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,194 - ERROR - Database error while processing airline UA: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,196 - ERROR - Database error while processing airline NH: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,198 - ERROR - Database error while processing airline CA: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,199 - ERROR - Database error while processing airline QR: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,201 - ERROR - Database error while processing airline AY: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,203 - ERROR - Database error while processing airline AC: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,204 - ERROR - Database error while processing airline LH: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,206 - ERROR - Database error while processing airline AF: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,208 - ERROR - Database error while processing airline SQ: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,209 - ERROR - Database error while processing airline AZ: (1054, "Unknown column 'airline_code' in 'where clause'")
+2025-01-20 13:10:24,211 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX1', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HKG', 
+                '2025-01-21 09:00:00', 
+                '2025-01-22 14:15:00', 
+                620.37, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,214 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,216 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX2', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HKG', 
+                '2025-01-21 13:50:00', 
+                '2025-01-22 19:05:00', 
+                635.34, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,217 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,219 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA3', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HNL', 
+                '2025-01-21 10:00:00', 
+                '2025-01-21 16:15:00', 
+                738.75, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,219 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,221 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ4', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'ICN', 
+                '2025-01-21 11:30:00', 
+                '2025-01-22 17:25:00', 
+                792.66, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,222 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,224 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ5', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-01-21 09:59:00', 
+                '2025-01-21 13:21:00', 
+                792.66, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,224 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,226 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ6', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'ICN', 
+                '2025-01-21 11:30:00', 
+                '2025-01-22 17:25:00', 
+                801.98, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,227 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,228 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ7', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-01-21 09:59:00', 
+                '2025-01-21 13:21:00', 
+                801.98, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,229 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,230 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ8', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-01-21 07:30:00', 
+                '2025-01-21 10:50:00', 
+                807.42, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,231 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,232 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX9', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HKG', 
+                '2025-01-21 01:35:00', 
+                '2025-01-22 06:35:00', 
+                862.37, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,233 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,234 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX10', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SFO', 
+                '2025-01-21 16:00:00', 
+                '2025-01-21 19:46:00', 
+                912.37, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,235 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,236 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX11', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SFO', 
+                '2025-01-21 13:00:00', 
+                '2025-01-21 16:45:00', 
+                912.37, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,237 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,238 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX12', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SFO', 
+                '2025-01-21 13:00:00', 
+                '2025-01-21 16:45:00', 
+                912.37, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,239 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,241 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX13', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'BOS', 
+                '2025-01-21 13:00:00', 
+                '2025-01-21 14:10:00', 
+                933.37, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,242 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,243 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'BR14', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'TPE', 
+                '2025-01-21 00:05:00', 
+                '2025-01-22 06:20:00', 
+                939.15, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,244 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,245 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE15', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'ICN', 
+                '2025-01-21 12:00:00', 
+                '2025-01-22 17:50:00', 
+                971.66, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,246 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,247 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE16', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'ICN', 
+                '2025-01-21 00:50:00', 
+                '2025-01-22 06:30:00', 
+                971.66, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,248 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,249 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE17', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'ICN', 
+                '2025-01-21 00:50:00', 
+                '2025-01-22 06:30:00', 
+                980.98, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,250 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,251 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE18', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'ICN', 
+                '2025-01-21 12:00:00', 
+                '2025-01-22 17:50:00', 
+                980.98, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,252 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,253 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ19', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'ICN', 
+                '2025-01-21 11:30:00', 
+                '2025-01-22 17:25:00', 
+                989.98, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,254 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,255 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX20', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HKG', 
+                '2025-01-21 01:35:00', 
+                '2025-01-22 06:35:00', 
+                1037.37, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,256 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,257 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX21', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HKG', 
+                '2025-01-21 13:50:00', 
+                '2025-01-22 19:05:00', 
+                1052.34, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,258 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,259 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA22', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAS', 
+                '2025-01-21 09:59:00', 
+                '2025-01-21 12:50:00', 
+                1081.68, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,260 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,261 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HA23', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HNL', 
+                '2025-01-21 10:00:00', 
+                '2025-01-21 16:15:00', 
+                1094.75, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,262 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,263 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK24', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'IST', 
+                '2025-01-21 19:45:00', 
+                '2025-01-22 13:45:00', 
+                1135.38, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,264 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,265 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL25', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SFO', 
+                '2025-01-21 08:00:00', 
+                '2025-01-21 11:34:00', 
+                1182.0, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,266 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,267 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL26', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-01-21 07:00:00', 
+                '2025-01-21 10:20:00', 
+                1182.0, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,268 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,269 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'UA27', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HND', 
+                '2025-01-21 00:50:00', 
+                '2025-01-22 05:25:00', 
+                1227.24, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,270 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,271 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'UA28', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HND', 
+                '2025-01-21 13:05:00', 
+                '2025-01-22 17:40:00', 
+                1227.24, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,272 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,273 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH29', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HND', 
+                '2025-01-21 00:50:00', 
+                '2025-01-22 05:25:00', 
+                1228.84, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,274 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,275 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH30', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HND', 
+                '2025-01-21 13:05:00', 
+                '2025-01-22 17:40:00', 
+                1228.84, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,276 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,277 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL31', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HND', 
+                '2025-01-21 00:35:00', 
+                '2025-01-22 05:10:00', 
+                1231.0, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,278 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,279 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL32', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HND', 
+                '2025-01-21 12:40:00', 
+                '2025-01-22 17:15:00', 
+                1231.0, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,280 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,281 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CA33', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'PEK', 
+                '2025-01-21 01:05:00', 
+                '2025-01-22 07:15:00', 
+                1265.79, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,282 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,283 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'QR34', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'DOH', 
+                '2025-01-21 21:30:00', 
+                '2025-01-22 17:45:00', 
+                1274.99, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,284 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,285 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AY35', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'HEL', 
+                '2025-01-21 22:45:00', 
+                '2025-01-22 13:55:00', 
+                1317.96, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,286 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,287 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC36', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'YYZ', 
+                '2025-01-21 09:45:00', 
+                '2025-01-21 11:29:00', 
+                1333.37, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,288 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,289 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AC37', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'YYZ', 
+                '2025-01-21 15:55:00', 
+                '2025-01-21 17:39:00', 
+                1333.37, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,290 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,291 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH38', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'DCA', 
+                '2025-01-21 06:00:00', 
+                '2025-01-21 07:24:00', 
+                1453.84, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,292 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,293 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH39', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'DCA', 
+                '2025-01-21 06:00:00', 
+                '2025-01-21 07:24:00', 
+                1453.84, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,294 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,295 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH40', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'MUC', 
+                '2025-01-21 17:30:00', 
+                '2025-01-22 07:20:00', 
+                2536.75, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,296 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,298 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH41', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'MUC', 
+                '2025-01-21 17:30:00', 
+                '2025-01-22 07:20:00', 
+                2536.75, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,298 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,300 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH42', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'MUC', 
+                '2025-01-21 17:30:00', 
+                '2025-01-22 07:20:00', 
+                2541.12, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,300 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,302 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH43', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'MUC', 
+                '2025-01-21 17:30:00', 
+                '2025-01-22 07:20:00', 
+                2541.74, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,302 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,304 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH44', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FRA', 
+                '2025-01-21 07:00:00', 
+                '2025-01-21 15:00:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,304 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,306 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH45', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FRA', 
+                '2025-01-21 15:45:00', 
+                '2025-01-22 05:25:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,306 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,308 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH46', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FRA', 
+                '2025-01-21 22:10:00', 
+                '2025-01-22 12:05:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,308 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,310 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH47', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FRA', 
+                '2025-01-21 22:10:00', 
+                '2025-01-22 12:05:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,310 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,312 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH48', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FRA', 
+                '2025-01-21 15:45:00', 
+                '2025-01-22 05:25:00', 
+                2555.61, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,312 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,314 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH49', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'MUC', 
+                '2025-01-21 17:30:00', 
+                '2025-01-22 07:20:00', 
+                2562.89, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,314 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,316 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH50', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'MUC', 
+                '2025-01-21 17:30:00', 
+                '2025-01-22 07:20:00', 
+                2562.89, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,316 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,318 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH51', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'MUC', 
+                '2025-01-21 17:30:00', 
+                '2025-01-22 07:20:00', 
+                2562.89, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,318 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,320 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF52', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'CDG', 
+                '2025-01-21 01:00:00', 
+                '2025-01-21 14:05:00', 
+                2985.23, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,320 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,322 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AF53', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'CDG', 
+                '2025-01-21 23:30:00', 
+                '2025-01-22 12:45:00', 
+                2985.23, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,322 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,324 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ54', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'ICN', 
+                '2025-01-21 11:30:00', 
+                '2025-01-22 17:25:00', 
+                5363.94, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,324 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,326 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'SQ55', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SIN', 
+                '2025-01-21 22:40:00', 
+                '2025-01-23 06:10:00', 
+                6615.84, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,326 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,327 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE56', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'ICN', 
+                '2025-01-21 12:00:00', 
+                '2025-01-22 17:50:00', 
+                6675.66, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,328 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,329 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH57', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'YYZ', 
+                '2025-01-21 09:45:00', 
+                '2025-01-21 11:29:00', 
+                6714.15, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,330 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,331 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH58', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'SFO', 
+                '2025-01-21 18:40:00', 
+                '2025-01-21 22:41:00', 
+                6777.84, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,332 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,333 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH59', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-01-21 09:59:00', 
+                '2025-01-21 13:21:00', 
+                6777.84, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,334 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,335 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH60', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'LAX', 
+                '2025-01-21 06:00:00', 
+                '2025-01-21 09:26:00', 
+                6919.4, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,335 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,336 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'LH61', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FRA', 
+                '2025-01-21 07:00:00', 
+                '2025-01-21 15:00:00', 
+                7341.83, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,337 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,338 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ62', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FCO', 
+                '2025-01-21 21:15:00', 
+                '2025-01-22 11:45:00', 
+                8712.76, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,339 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,340 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ63', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FCO', 
+                '2025-01-21 16:45:00', 
+                '2025-01-22 07:05:00', 
+                8712.76, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,341 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,342 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'AZ64', 
+                'Unknown Airline (Format Error)', 
+                'JFK', 
+                'FRA', 
+                '2025-01-21 23:10:00', 
+                '2025-01-22 12:05:00', 
+                8876.22, 
+                'Scheduled'
+            )
+2025-01-20 13:10:24,342 - ERROR - Error inserting flight into database: (1452, 'Cannot add or update a child row: a foreign key constraint fails (`airticketingsystem`.`flight`, CONSTRAINT `flight_ibfk_3` FOREIGN KEY (`name_airline`) REFERENCES `airline` (`name`))')
+2025-01-20 13:10:24,343 - INFO - Synced flights for ('JFK', 'HND', '2025-01-21').
+2025-01-20 13:15:21,080 - DEBUG - Fetching flights: origin=JFK, destination=HND, departure_date=2025-01-20

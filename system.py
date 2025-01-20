@@ -2418,7 +2418,7 @@ def chat_support():
 
     try:
         # Forward the query to the RAG bot container with session info
-        rag_bot_url = "http://projectpart3-rag-bot-1:5001/rag_query"
+        rag_bot_url = "http://flight_rag-bot_1:5001/rag_query"
         logging.info("Forwarding query to RAG bot at URL: %s", rag_bot_url)
 
         # Include session information in the payload if available

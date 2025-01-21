@@ -765,10 +765,11 @@ def show_flights():
                 cursor.execute(query, [origin, destination, date_str])
             else:
                 query = """
-                SELECT f.*, dep_airport.city AS origin_city, arr_airport.city AS destination_city,a.logo_path
+                SELECT f.*, dep_airport.city AS origin_city, arr_airport.city AS destination_city, a.logo_path
                 FROM flight f
                 JOIN airport dep_airport ON f.name_depart = dep_airport.name
                 JOIN airport arr_airport ON f.name_arrive = arr_airport.name
+                JOIN airline a ON f.name_airline = a.name
                 WHERE f.name_depart = %s AND DATE(f.depart_time) = %s
                 """
                 cursor.execute(query, [origin, date_str])

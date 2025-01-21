@@ -59577,3 +59577,766 @@
 
 2025-01-20 18:12:24,861 - INFO - Synced flights for ('JFK', 'LAX ', '2025-02-20').
 >>>>>>> 494157b4cda4ea92b9e746dec02e5356860a7279
+2025-01-21 06:45:07,878 - DEBUG - User found: {'email': 'dsh400@nyu.edu', 'name': 'Dan Huynh', 'password': '53bc3911362cda98b1014b8566f6800c72f6be0688961274130bd6a3fcfee8b9', 'building_number': '', 'street': '65 Duong 51 Binh Trung Dong, Quan 2', 'city': 'Ho Chi Minh', 'state': 'HCM', 'phone_number': '0901663700', 'passport_number': '123', 'passport_expiration': datetime.date(2024, 11, 1), 'passport_country': 'VN', 'date_of_birth': datetime.date(2024, 11, 30)}
+2025-01-21 06:45:07,879 - DEBUG - Session data after login: {'name': 'Dan Huynh', 'user': 'dsh400@nyu.edu', 'user_type': 'customer', 'session_id': '4eea2639ef7edcb9d06bedc6b394386a', '_permanent': True, '_flashes': [('success', 'Login successful')]}
+2025-01-21 06:45:07,883 - DEBUG - Starting new HTTP connection (1): ip-api.com:80
+2025-01-21 06:45:09,619 - DEBUG - http://ip-api.com:80 "GET /json HTTP/1.1" 200 345
+2025-01-21 06:45:09,803 - DEBUG - Fetching flights: origin=SGN, destination=None, departure_date=2025-01-21
+2025-01-21 06:45:12,202 - ERROR - Error fetching flights: [400]
+
+2025-01-21 06:45:12,203 - INFO - Synced flights for ('SGN', None, '2025-01-21').
+2025-01-21 06:51:01,532 - DEBUG - User found: {'email': 'dsh400@nyu.edu', 'name': 'Dan Huynh', 'password': '53bc3911362cda98b1014b8566f6800c72f6be0688961274130bd6a3fcfee8b9', 'building_number': '', 'street': '65 Duong 51 Binh Trung Dong, Quan 2', 'city': 'Ho Chi Minh', 'state': 'HCM', 'phone_number': '0901663700', 'passport_number': '123', 'passport_expiration': datetime.date(2024, 11, 1), 'passport_country': 'VN', 'date_of_birth': datetime.date(2024, 11, 30)}
+2025-01-21 06:51:01,533 - DEBUG - Session data after login: {'name': 'Dan Huynh', 'user': 'dsh400@nyu.edu', 'user_type': 'customer', 'session_id': '8097bd9c759423a1344fc8bb7eaed744', '_permanent': True, '_flashes': [('success', 'Login successful')]}
+2025-01-21 06:51:01,536 - DEBUG - Starting new HTTP connection (1): ip-api.com:80
+2025-01-21 06:51:05,127 - DEBUG - http://ip-api.com:80 "GET /json HTTP/1.1" 200 345
+2025-01-21 06:51:05,301 - DEBUG - Fetching flights: origin=SGN, destination=None, departure_date=2025-01-21
+2025-01-21 06:51:07,776 - ERROR - Error fetching flights: [400]
+
+2025-01-21 06:51:07,777 - INFO - Synced flights for ('SGN', None, '2025-01-21').
+2025-01-21 06:51:27,921 - DEBUG - Fetching flights: origin=SGN, destination=HND, departure_date=2025-01-22
+2025-01-21 06:51:43,938 - INFO - Fetched 60 flights from Amadeus API.
+2025-01-21 06:51:45,013 - DEBUG - Formatting airline name: APG AIRLINES
+2025-01-21 06:51:45,020 - INFO - Airline code GP for Apg Airlines inserted successfully.
+2025-01-21 06:51:45,020 - DEBUG - Formatting airline name: Apg Airlines
+2025-01-21 06:51:46,029 - DEBUG - Formatting airline name: HAHN AIR
+2025-01-21 06:51:46,034 - INFO - Airline code HR for Hahn Air inserted successfully.
+2025-01-21 06:51:46,035 - DEBUG - Formatting airline name: Hahn Air
+2025-01-21 06:51:46,037 - DEBUG - Formatting airline name: Asiana
+2025-01-21 06:51:47,103 - DEBUG - Formatting airline name: FLEXFLIGHT
+2025-01-21 06:51:47,108 - INFO - Airline code W2 for Flexflight inserted successfully.
+2025-01-21 06:51:47,108 - DEBUG - Formatting airline name: Flexflight
+2025-01-21 06:51:47,111 - DEBUG - Formatting airline name: Cathaypacific
+2025-01-21 06:51:47,113 - DEBUG - Formatting airline name: Eva Airways
+2025-01-21 06:51:47,115 - DEBUG - Formatting airline name: Philippine Al
+2025-01-21 06:51:47,116 - DEBUG - Formatting airline name: Vietnam Airl
+2025-01-21 06:51:47,119 - DEBUG - Formatting airline name: Korean Air
+2025-01-21 06:51:48,201 - DEBUG - Formatting airline name: CHINA SOUTHERN AIRLINES
+2025-01-21 06:51:48,207 - INFO - Airline code CZ for China Southern Airlines inserted successfully.
+2025-01-21 06:51:48,208 - DEBUG - Formatting airline name: China Southern Airlines
+2025-01-21 06:51:48,210 - DEBUG - Formatting airline name: All Nippon
+2025-01-21 06:51:48,212 - DEBUG - Formatting airline name: Japan Airlines
+2025-01-21 06:51:48,213 - DEBUG - Formatting airline name: China Eastern Airlines
+2025-01-21 06:51:48,215 - DEBUG - Formatting airline name: Turkish Airlines
+2025-01-21 06:51:48,217 - DEBUG - Formatting airline name: Air China
+2025-01-21 06:51:48,219 - DEBUG - Formatting airline name: Singapore
+2025-01-21 06:51:48,221 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'GP1', 
+                'Apg Airlines', 
+                'SGN', 
+                'HND', 
+                '2025-01-22 17:20:00', 
+                '2025-01-23 01:00:00', 
+                148.89, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,228 - INFO - Flight GP1 inserted successfully into the database.
+2025-01-21 06:51:48,229 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'HR2', 
+                'Hahn Air', 
+                'SGN', 
+                'HND', 
+                '2025-01-22 17:20:00', 
+                '2025-01-23 01:00:00', 
+                167.1, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,234 - INFO - Flight HR2 inserted successfully into the database.
+2025-01-21 06:51:48,235 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ3', 
+                'Asiana', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 12:10:00', 
+                '2025-01-22 19:20:00', 
+                181.37, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,240 - INFO - Flight OZ3 inserted successfully into the database.
+2025-01-21 06:51:48,242 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ4', 
+                'Asiana', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 06:55:00', 
+                181.37, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,246 - INFO - Flight OZ4 inserted successfully into the database.
+2025-01-21 06:51:48,248 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'W25', 
+                'Flexflight', 
+                'SGN', 
+                'HND', 
+                '2025-01-22 17:20:00', 
+                '2025-01-23 01:00:00', 
+                198.16, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,252 - INFO - Flight W25 inserted successfully into the database.
+2025-01-21 06:51:48,254 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX6', 
+                'Cathaypacific', 
+                'SGN', 
+                'HKG', 
+                '2025-01-22 11:35:00', 
+                '2025-01-22 15:20:00', 
+                268.2, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,258 - INFO - Flight CX6 inserted successfully into the database.
+2025-01-21 06:51:48,260 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX7', 
+                'Cathaypacific', 
+                'SGN', 
+                'HKG', 
+                '2025-01-22 19:35:00', 
+                '2025-01-22 23:15:00', 
+                283.17, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,264 - INFO - Flight CX7 inserted successfully into the database.
+2025-01-21 06:51:48,266 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CX8', 
+                'Cathaypacific', 
+                'SGN', 
+                'HKG', 
+                '2025-01-22 11:35:00', 
+                '2025-01-22 15:20:00', 
+                283.17, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,271 - INFO - Flight CX8 inserted successfully into the database.
+2025-01-21 06:51:48,273 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'BR9', 
+                'Eva Airways', 
+                'SGN', 
+                'TPE', 
+                '2025-01-22 01:55:00', 
+                '2025-01-22 06:10:00', 
+                351.04, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,278 - INFO - Flight BR9 inserted successfully into the database.
+2025-01-21 06:51:48,280 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'PR10', 
+                'Philippine Al', 
+                'SGN', 
+                'MNL', 
+                '2025-01-22 09:25:00', 
+                '2025-01-22 13:30:00', 
+                428.56, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,287 - INFO - Flight PR10 inserted successfully into the database.
+2025-01-21 06:51:48,290 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'PR11', 
+                'Philippine Al', 
+                'SGN', 
+                'MNL', 
+                '2025-01-22 15:30:00', 
+                '2025-01-22 19:35:00', 
+                428.56, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,295 - INFO - Flight PR11 inserted successfully into the database.
+2025-01-21 06:51:48,297 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN12', 
+                'Vietnam Airl', 
+                'SGN', 
+                'HAN', 
+                '2025-01-22 01:50:00', 
+                '2025-01-22 03:55:00', 
+                434.38, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,301 - INFO - Flight VN12 inserted successfully into the database.
+2025-01-21 06:51:48,304 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ13', 
+                'Asiana', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 06:55:00', 
+                435.69, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,308 - INFO - Flight OZ13 inserted successfully into the database.
+2025-01-21 06:51:48,311 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ14', 
+                'Asiana', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 12:10:00', 
+                '2025-01-22 19:20:00', 
+                435.69, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,315 - INFO - Flight OZ14 inserted successfully into the database.
+2025-01-21 06:51:48,317 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN15', 
+                'Vietnam Airl', 
+                'SGN', 
+                'NGO', 
+                '2025-01-22 00:15:00', 
+                '2025-01-22 07:35:00', 
+                462.95, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,321 - INFO - Flight VN15 inserted successfully into the database.
+2025-01-21 06:51:48,323 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN16', 
+                'Vietnam Airl', 
+                'SGN', 
+                'KIX', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 07:00:00', 
+                497.33, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,328 - INFO - Flight VN16 inserted successfully into the database.
+2025-01-21 06:51:48,331 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN17', 
+                'Vietnam Airl', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 09:20:00', 
+                '2025-01-22 16:25:00', 
+                499.85, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,335 - INFO - Flight VN17 inserted successfully into the database.
+2025-01-21 06:51:48,339 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN18', 
+                'Vietnam Airl', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 09:20:00', 
+                '2025-01-22 16:25:00', 
+                509.17, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,345 - INFO - Flight VN18 inserted successfully into the database.
+2025-01-21 06:51:48,348 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN19', 
+                'Vietnam Airl', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 23:35:00', 
+                '2025-01-23 06:30:00', 
+                509.17, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,352 - INFO - Flight VN19 inserted successfully into the database.
+2025-01-21 06:51:48,355 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN20', 
+                'Vietnam Airl', 
+                'SGN', 
+                'KIX', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 07:00:00', 
+                540.33, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,359 - INFO - Flight VN20 inserted successfully into the database.
+2025-01-21 06:51:48,362 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN21', 
+                'Vietnam Airl', 
+                'SGN', 
+                'KIX', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 07:00:00', 
+                540.95, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,366 - INFO - Flight VN21 inserted successfully into the database.
+2025-01-21 06:51:48,368 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'OZ22', 
+                'Asiana', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 06:55:00', 
+                541.69, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,373 - INFO - Flight OZ22 inserted successfully into the database.
+2025-01-21 06:51:48,375 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE23', 
+                'Korean Air', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 08:15:00', 
+                '2025-01-22 15:15:00', 
+                542.89, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,380 - INFO - Flight KE23 inserted successfully into the database.
+2025-01-21 06:51:48,382 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE24', 
+                'Korean Air', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 23:10:00', 
+                '2025-01-23 06:10:00', 
+                542.89, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,386 - INFO - Flight KE24 inserted successfully into the database.
+2025-01-21 06:51:48,389 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE25', 
+                'Korean Air', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 08:15:00', 
+                '2025-01-22 15:15:00', 
+                552.21, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,394 - INFO - Flight KE25 inserted successfully into the database.
+2025-01-21 06:51:48,398 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE26', 
+                'Korean Air', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 23:10:00', 
+                '2025-01-23 06:10:00', 
+                552.21, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,415 - INFO - Flight KE26 inserted successfully into the database.
+2025-01-21 06:51:48,418 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE27', 
+                'Korean Air', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 13:55:00', 
+                '2025-01-22 21:15:00', 
+                552.21, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,425 - INFO - Flight KE27 inserted successfully into the database.
+2025-01-21 06:51:48,429 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CZ28', 
+                'China Southern Airlines', 
+                'SGN', 
+                'CAN', 
+                '2025-01-22 02:25:00', 
+                '2025-01-22 06:10:00', 
+                556.77, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,437 - INFO - Flight CZ28 inserted successfully into the database.
+2025-01-21 06:51:48,441 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CZ29', 
+                'China Southern Airlines', 
+                'SGN', 
+                'CAN', 
+                '2025-01-22 08:00:00', 
+                '2025-01-22 11:50:00', 
+                556.77, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,445 - INFO - Flight CZ29 inserted successfully into the database.
+2025-01-21 06:51:48,450 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CZ30', 
+                'China Southern Airlines', 
+                'SGN', 
+                'CAN', 
+                '2025-01-22 02:25:00', 
+                '2025-01-22 06:10:00', 
+                556.77, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,457 - INFO - Flight CZ30 inserted successfully into the database.
+2025-01-21 06:51:48,460 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CZ31', 
+                'China Southern Airlines', 
+                'SGN', 
+                'CAN', 
+                '2025-01-22 15:55:00', 
+                '2025-01-22 19:55:00', 
+                556.77, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,464 - INFO - Flight CZ31 inserted successfully into the database.
+2025-01-21 06:51:48,468 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN32', 
+                'Vietnam Airl', 
+                'SGN', 
+                'FUK', 
+                '2025-01-22 00:25:00', 
+                '2025-01-22 07:35:00', 
+                609.92, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,474 - INFO - Flight VN32 inserted successfully into the database.
+2025-01-21 06:51:48,476 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN33', 
+                'Vietnam Airl', 
+                'SGN', 
+                'HAN', 
+                '2025-01-22 23:00:00', 
+                '2025-01-23 01:15:00', 
+                615.38, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,481 - INFO - Flight VN33 inserted successfully into the database.
+2025-01-21 06:51:48,483 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN34', 
+                'Vietnam Airl', 
+                'SGN', 
+                'FUK', 
+                '2025-01-22 00:25:00', 
+                '2025-01-22 07:35:00', 
+                664.92, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,487 - INFO - Flight VN34 inserted successfully into the database.
+2025-01-21 06:51:48,490 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH35', 
+                'All Nippon', 
+                'SGN', 
+                'HND', 
+                '2025-01-22 23:05:00', 
+                '2025-01-23 07:00:00', 
+                689.16, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,494 - INFO - Flight NH35 inserted successfully into the database.
+2025-01-21 06:51:48,496 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN36', 
+                'Vietnam Airl', 
+                'SGN', 
+                'HND', 
+                '2025-01-22 23:05:00', 
+                '2025-01-23 07:00:00', 
+                730.96, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,500 - INFO - Flight VN36 inserted successfully into the database.
+2025-01-21 06:51:48,503 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'KE37', 
+                'Korean Air', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 08:15:00', 
+                '2025-01-22 15:15:00', 
+                775.21, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,507 - INFO - Flight KE37 inserted successfully into the database.
+2025-01-21 06:51:48,509 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'JL38', 
+                'Japan Airlines', 
+                'SGN', 
+                'HND', 
+                '2025-01-22 23:40:00', 
+                '2025-01-23 06:50:00', 
+                790.74, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,514 - INFO - Flight JL38 inserted successfully into the database.
+2025-01-21 06:51:48,516 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN39', 
+                'Vietnam Airl', 
+                'SGN', 
+                'ICN', 
+                '2025-01-22 08:15:00', 
+                '2025-01-22 15:15:00', 
+                868.17, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,521 - INFO - Flight VN39 inserted successfully into the database.
+2025-01-21 06:51:48,523 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN40', 
+                'Vietnam Airl', 
+                'SGN', 
+                'MNL', 
+                '2025-01-22 00:50:00', 
+                '2025-01-22 04:20:00', 
+                1129.82, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,527 - INFO - Flight VN40 inserted successfully into the database.
+2025-01-21 06:51:48,529 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'VN41', 
+                'Vietnam Airl', 
+                'SGN', 
+                'BKK', 
+                '2025-01-22 11:30:00', 
+                '2025-01-22 13:10:00', 
+                1601.78, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,536 - INFO - Flight VN41 inserted successfully into the database.
+2025-01-21 06:51:48,538 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH42', 
+                'All Nippon', 
+                'SGN', 
+                'FUK', 
+                '2025-01-22 00:25:00', 
+                '2025-01-22 07:35:00', 
+                1610.12, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,543 - INFO - Flight NH42 inserted successfully into the database.
+2025-01-21 06:51:48,546 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH43', 
+                'All Nippon', 
+                'SGN', 
+                'FUK', 
+                '2025-01-22 00:25:00', 
+                '2025-01-22 07:35:00', 
+                1610.12, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,550 - INFO - Flight NH43 inserted successfully into the database.
+2025-01-21 06:51:48,552 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH44', 
+                'All Nippon', 
+                'SGN', 
+                'KIX', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 07:00:00', 
+                1611.53, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,557 - INFO - Flight NH44 inserted successfully into the database.
+2025-01-21 06:51:48,560 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH45', 
+                'All Nippon', 
+                'SGN', 
+                'KIX', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 07:00:00', 
+                1611.53, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,564 - INFO - Flight NH45 inserted successfully into the database.
+2025-01-21 06:51:48,567 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH46', 
+                'All Nippon', 
+                'SGN', 
+                'KIX', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 07:00:00', 
+                1612.15, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,571 - INFO - Flight NH46 inserted successfully into the database.
+2025-01-21 06:51:48,573 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH47', 
+                'All Nippon', 
+                'SGN', 
+                'KIX', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 07:00:00', 
+                1612.15, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,578 - INFO - Flight NH47 inserted successfully into the database.
+2025-01-21 06:51:48,581 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU48', 
+                'China Eastern Airlines', 
+                'SGN', 
+                'PVG', 
+                '2025-01-22 02:10:00', 
+                '2025-01-22 07:00:00', 
+                1704.5, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,586 - INFO - Flight MU48 inserted successfully into the database.
+2025-01-21 06:51:48,588 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU49', 
+                'China Eastern Airlines', 
+                'SGN', 
+                'PVG', 
+                '2025-01-22 02:10:00', 
+                '2025-01-22 07:00:00', 
+                1704.5, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,593 - INFO - Flight MU49 inserted successfully into the database.
+2025-01-21 06:51:48,595 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU50', 
+                'China Eastern Airlines', 
+                'SGN', 
+                'CAN', 
+                '2025-01-22 08:00:00', 
+                '2025-01-22 11:50:00', 
+                1741.17, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,599 - INFO - Flight MU50 inserted successfully into the database.
+2025-01-21 06:51:48,602 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'MU51', 
+                'China Eastern Airlines', 
+                'SGN', 
+                'PVG', 
+                '2025-01-22 02:10:00', 
+                '2025-01-22 07:00:00', 
+                1783.5, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,606 - INFO - Flight MU51 inserted successfully into the database.
+2025-01-21 06:51:48,609 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH52', 
+                'All Nippon', 
+                'SGN', 
+                'KIX', 
+                '2025-01-22 00:10:00', 
+                '2025-01-22 07:00:00', 
+                1789.53, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,614 - INFO - Flight NH52 inserted successfully into the database.
+2025-01-21 06:51:48,616 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'TK53', 
+                'Turkish Airlines', 
+                'SGN', 
+                'IST', 
+                '2025-01-22 22:15:00', 
+                '2025-01-23 05:30:00', 
+                1866.29, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,621 - INFO - Flight TK53 inserted successfully into the database.
+2025-01-21 06:51:48,624 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH54', 
+                'All Nippon', 
+                'SGN', 
+                'FUK', 
+                '2025-01-22 00:25:00', 
+                '2025-01-22 07:35:00', 
+                1902.12, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,628 - INFO - Flight NH54 inserted successfully into the database.
+2025-01-21 06:51:48,631 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH55', 
+                'All Nippon', 
+                'SGN', 
+                'FUK', 
+                '2025-01-22 00:25:00', 
+                '2025-01-22 07:35:00', 
+                1902.12, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,635 - INFO - Flight NH55 inserted successfully into the database.
+2025-01-21 06:51:48,637 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH56', 
+                'All Nippon', 
+                'SGN', 
+                'BKK', 
+                '2025-01-22 20:10:00', 
+                '2025-01-22 21:35:00', 
+                1952.97, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,647 - INFO - Flight NH56 inserted successfully into the database.
+2025-01-21 06:51:48,649 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'NH57', 
+                'All Nippon', 
+                'SGN', 
+                'BKK', 
+                '2025-01-22 20:10:00', 
+                '2025-01-22 21:35:00', 
+                1952.97, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,655 - INFO - Flight NH57 inserted successfully into the database.
+2025-01-21 06:51:48,658 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'CA58', 
+                'Air China', 
+                'SGN', 
+                'PEK', 
+                '2025-01-22 04:55:00', 
+                '2025-01-22 10:45:00', 
+                2904.58, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,663 - INFO - Flight CA58 inserted successfully into the database.
+2025-01-21 06:51:48,666 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'SQ59', 
+                'Singapore', 
+                'SGN', 
+                'SIN', 
+                '2025-01-22 16:15:00', 
+                '2025-01-22 19:30:00', 
+                2963.16, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,671 - INFO - Flight SQ59 inserted successfully into the database.
+2025-01-21 06:51:48,673 - DEBUG - Prepared SQL statement: INSERT INTO flight (flight_number, name_airline, name_depart, name_arrive, depart_time, arrive_time, price, status)
+            VALUES (
+                'SQ60', 
+                'Singapore', 
+                'SGN', 
+                'SIN', 
+                '2025-01-22 19:50:00', 
+                '2025-01-22 22:55:00', 
+                2963.16, 
+                'Scheduled'
+            )
+2025-01-21 06:51:48,678 - INFO - Flight SQ60 inserted successfully into the database.
+2025-01-21 06:51:48,679 - INFO - Synced flights for ('SGN', 'HND', '2025-01-22').

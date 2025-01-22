@@ -6,3 +6,5 @@ docker-compose.yml
 ragbot/Dockerfile
 my-nextjs-app/
 ticket-app/ 
+
+Dockerfile

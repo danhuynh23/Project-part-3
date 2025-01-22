@@ -15,6 +15,25 @@ from bs4 import BeautifulSoup
 from flask_cors import CORS
 
 
+from pymongo import MongoClient
+
+def get_mongo_connection():
+    mongo_host = os.getenv("MONGO_HOST", "localhost")
+    mongo_port = int(os.getenv("MONGO_PORT", 27017))
+    mongo_db = os.getenv("MONGO_DB", "flightdata")
+    mongo_user = os.getenv("MONGO_INITDB_ROOT_USERNAME", "root")
+    mongo_password = os.getenv("MONGO_PASSWORD", "rootpassword")
+
+    client = MongoClient(
+        host=mongo_host,
+        port=mongo_port,
+        username=mongo_user,
+        password=mongo_password,
+        authSource="admin"  # The authentication database is "admin" by default
+    )
+    db = client[mongo_db]
+    return db
+
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
@@ -305,6 +324,17 @@ def fetch_flights(origin, destination, departure_date):
             adults=1
         )
         logging.info(f"Fetched {len(response.data)} flights from Amadeus API.")
+        if response.data:
+            # Save raw data to MongoDB
+            db = get_mongo_connection()
+            db.raw_flight_data.insert_one({
+                "origin": origin,
+                "destination": destination,
+                "departure_date": departure_date,
+                "data": response.data,
+                "timestamp": datetime.utcnow()
+            })
+            logging.info(f"Fetched and saved {len(response.data)} flights to MongoDB.")
         return response.data
     except ResponseError as error:
         logging.error(f"Error fetching flights: {error}")
@@ -420,8 +450,19 @@ def sync_flights_to_db(origin, destination, departure_date):
 
             # Insert into the database
             insert_flight_into_db(flight,insert=True)
+            log_flight_sync_event(
+            "SUCCESS",
+            "Flight sync completed successfully.",
+            {"total_flights_synced": len(flights)}
+        )
+
 
         except Exception as e:
+            log_flight_sync_event(
+                "ERROR",
+                f"An error occurred during flight sync: {str(e)}",
+                {"origin": origin, "destination": destination, "depart_date": departure_date}
+            )
             logging.error(f"Error processing flight data: {e}")
             logging.debug(f"Flight data: {flight_data}")
 
@@ -694,6 +735,18 @@ def ensure_airline_exists(cursor, airline_name):
     cursor.execute("SELECT COUNT(*) FROM airline WHERE name = %s", (airline_name,))
     if cursor.fetchone()[0] == 0:
         cursor.execute("INSERT INTO airline (name) VALUES (%s)", (airline_name,))
+
+# Function to log flight sync events
+def log_flight_sync_event(event_type, message, data=None):
+    db = get_mongo_connection()
+    logs_collection = db["flight_sync_logs"]
+    log_entry = {
+        "event_type": event_type,
+        "message": message,
+        "data": data,
+        "timestamp": datetime.utcnow()
+    }
+    logs_collection.insert_one(log_entry)
 
 @app.route('/show_flights', methods=['GET'])
 def show_flights():
